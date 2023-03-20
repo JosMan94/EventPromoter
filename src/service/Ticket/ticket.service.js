@@ -2,7 +2,7 @@ import axios from 'axios'
 export const ticketService = {
     reenviarTicket(data) {
         let response
-        let url = 'http://ec2-3-18-103-143.us-east-2.compute.amazonaws.com/api/reenviar/ticket'
+        let url = 'https://backend.niiru.club/api/reenviar/ticket'
         response = axios
             .post(url, data)
             .then(response => {
@@ -15,7 +15,7 @@ export const ticketService = {
     },
     getTickets(data) {
         let response
-        let url = 'http://ec2-3-18-103-143.us-east-2.compute.amazonaws.com/api/ticket/list'
+        let url = 'https://backend.niiru.club/api/ticket/list'
         response = axios
             .post(url, data)
             .then(response => {
@@ -28,7 +28,7 @@ export const ticketService = {
     },
     detailTIcket(data) {
         let response
-        let url = 'http://ec2-3-18-103-143.us-east-2.compute.amazonaws.com/api/detail/ticket'
+        let url = 'https://backend.niiru.club/api/detail/ticket'
         response = axios
             .post(url, data)
             .then(response => {
