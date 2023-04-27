@@ -9,17 +9,17 @@ export default ({ mode }) => {
         ...loadEnv(mode, process.cwd()),
     };
     return defineConfig({
-        server: {
-            // port: process.env.VITE_PORT,
-            proxy: {
-                "/api": {
-                    changeOrigin: true,
-                    target: process.env.VITE_PROXY_URI,
-                    secure: true,
-                    ws: true,
-                },
-            },
-        },
-        plugins: [vue()],
+        // server: {
+        //     port: process.env.VITE_PORT,
+        //     proxy: {
+        //         "/api": {
+        //             changeOrigin: true,
+        //             target: process.env.VITE_PROXY_URI,
+        //             secure: true,
+        //             ws: true,
+        //         },
+        //     },
+        // },
+        // plugins: [vue()],
     });
 }
