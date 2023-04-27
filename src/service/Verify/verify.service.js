@@ -5,9 +5,9 @@ export const verifyService = {
         let response
         var url = "";
         if (data.promotor !== null) {
-            url = 'https://backend.niiru.club/api/ticket-asist/' + data.cliente + '/' + data.evento + '/' + data.promotor;
+            url = '/api/ticket-asist/' + data.cliente + '/' + data.evento + '/' + data.promotor;
         } else {
-            url = 'https://backend.niiru.club/api/ticket-asist/' + data.cliente + '/' + data.evento;
+            url = '/api/ticket-asist/' + data.cliente + '/' + data.evento;
         }
 
         response = axios
@@ -22,7 +22,7 @@ export const verifyService = {
     },
     searchTable(data) {
         let response
-        var url = 'https://backend.niiru.club/api/search';
+        var url = '/api/search';
         response = axios
             .post(url, data)
             .then(response => {
