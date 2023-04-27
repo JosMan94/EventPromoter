@@ -10,7 +10,7 @@ export default ({ mode }) => {
     };
     return defineConfig({
         server: {
-            port: process.env.VITE_PORT,
+            // port: process.env.VITE_PORT,
             proxy: {
                 "/api": {
                     changeOrigin: true,
