@@ -6,7 +6,7 @@
     <form class="grid xl:grid-cols-2 gap-6">
       <div>
         <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
-          >Documento de identidad:</label
+          >Documento de identidad: <span class="text-red-600"> ( * ) (único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -17,7 +17,7 @@
       </div>
       <div>
         <label for="tel" class="block mb-2 text-text-blue font-bold text-sm"
-          >Celular:</label
+          >Celular: <span class="text-red-600"> ( * ) (único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -28,7 +28,7 @@
       </div>
       <div>
         <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-          >Nombre y apellidos:</label
+          >Nombre y apellidos: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -39,7 +39,7 @@
       </div>
       <div>
         <label for="alias" class="block mb-2 text-text-blue font-bold text-sm"
-          >Alias:</label
+          >Alias: <span class="text-red-600"> ( * ) (único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -50,7 +50,7 @@
       </div>
       <div>
         <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
-          >Fecha de nacimiento:</label
+          >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -61,7 +61,7 @@
       </div>
       <div>
         <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
-          >E-mail:</label
+          >E-mail: <span class="text-red-600"> ( * ) (único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -84,6 +84,9 @@
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
       Crear nuevo promotor
     </h2>
+    <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
+      >Avatar: <span class="text-red-600"> ( * )</span></label
+    >
     <img
       :src="form.avatar.length === 0 ? imgDefault : form.avatar"
       alt="Event"

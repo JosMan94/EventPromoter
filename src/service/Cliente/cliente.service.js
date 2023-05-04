@@ -31,7 +31,8 @@ export const clientService = {
 
         let response
         var url = '';
-        if (codePromotor.length === 0) {
+
+        if (codePromotor) {
             url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent
         } else {
             url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent + '/' + codePromotor

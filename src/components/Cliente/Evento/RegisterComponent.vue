@@ -24,7 +24,7 @@
       <form class="grid xl:grid-cols-2 gap-6">
         <div>
           <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
-            >Documento de identidad:</label
+            >Documento de identidad: <span class="text-red-600"> ( * )</span></label
           >
           <input
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -35,7 +35,7 @@
         </div>
         <div>
           <label for="tel" class="block mb-2 text-text-blue font-bold text-sm"
-            >Celular:</label
+            >Celular: <span class="text-red-600"> ( * )</span></label
           >
           <input
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -46,7 +46,7 @@
         </div>
         <div>
           <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-            >Nombre y apellidos:</label
+            >Nombre y apellidos: <span class="text-red-600"> ( * )</span></label
           >
           <input
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -57,7 +57,7 @@
         </div>
         <div>
           <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
-            >Fecha de nacimiento:</label
+            >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
           >
           <input
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -68,7 +68,7 @@
         </div>
         <div class="xl:col-span-2 mb-5">
           <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
-            >E-mail:</label
+            >E-mail: <span class="text-red-600"> ( * )</span></label
           >
           <input
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -98,8 +98,8 @@ import { clientService } from "../../../service/Cliente/cliente.service";
 export default {
   data() {
     return {
-      codeEvent: this.$route.params.code,
-      codePromotor: this.$route.params.promotor,
+      codeEvent: this.$route.params.code ?? null,
+      codePromotor: this.$route.params.promotor ?? null,
       form: {
         documento: "",
         celular: "",
@@ -125,7 +125,7 @@ export default {
     async getDataEvents() {
       var result = await clientService.getDetailEnvet(this.codeEvent, this.codePromotor);
       if (result.success) {
-        if (this.codePromotor.length !== 0) {
+        if (this.codePromotor !== null) {
           this.portada = result.data.event.banner;
           this.form.idEvento = result.data.event.id;
           this.form.idPromotor = result.data.promoter.id;
@@ -144,6 +144,14 @@ export default {
     },
 
     async registerEvent() {
+      console.log(
+        this.form.documento.length !== 0,
+        this.form.celular.length !== 0,
+        this.form.name.length !== 0,
+        this.form.fecha.length !== 0,
+        this.form.email.length !== 0,
+        this.form.idEvento !== null
+      );
       if (
         this.form.documento.length !== 0 &&
         this.form.celular.length !== 0 &&
@@ -159,7 +167,7 @@ export default {
         ojb.date_of_brith = this.form.fecha;
         ojb.email = this.form.email;
         ojb.idEvent = this.form.idEvento;
-        if (this.codePromotor.length !== 0) {
+        if (this.codePromotor !== null) {
           ojb.idPromotor = this.form.idPromotor;
         }
 

@@ -6,8 +6,8 @@
     <form class="grid xl:grid-cols-2 gap-6">
       <div>
         <label for="name_event" class="block mb-2 text-text-blue font-bold text-sm"
-          >Nombre del evento:</label
-        >
+          >Nombre del evento: <span class="text-red-600"> ( * ) (único)</span>
+        </label>
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="name_event"
@@ -17,7 +17,7 @@
       </div>
       <div>
         <label for="fecha_event" class="block mb-2 text-text-blue font-bold text-sm"
-          >Fecha del evento:</label
+          >Fecha del evento: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -28,7 +28,7 @@
       </div>
       <div>
         <label for="entradas" class="block mb-2 text-text-blue font-bold text-sm"
-          >Cantidad de entradas</label
+          >Cantidad de entradas: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -39,7 +39,7 @@
       </div>
       <div>
         <label for="aforo" class="block mb-2 text-text-blue font-bold text-sm"
-          >Aforo permitido::</label
+          >Aforo permitido: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -50,7 +50,7 @@
       </div>
       <div class="xl:col-span-2 mb-5">
         <label for="direccion" class="block mb-2 text-text-blue font-bold text-sm"
-          >Dirección:</label
+          >Dirección: <span class="text-red-600"> ( * )</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -74,6 +74,9 @@
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
       Crear nuevo evento
     </h2>
+    <label for="direccion" class="block mb-2 text-text-blue font-bold text-sm"
+      >Foto del evento: <span class="text-red-600"> ( * )</span></label
+    >
     <img
       :src="form.banner.length === 0 ? imgDefault : form.banner"
       alt="Event"
