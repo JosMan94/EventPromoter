@@ -46,7 +46,7 @@
         </h3>
         <button
           type="button"
-          onclick="window.close();"
+          @click.prevent="homeView"
           class="block mx-auto py-4 px-12 xl:px-16 rounded-xl bg-main-green text-white font-bold"
         >
           ESCANEAR OTRO QR
@@ -113,6 +113,9 @@ export default {
   },
   mounted() {},
   methods: {
+    homeView() {
+      this.$router.push({ name: "Home" });
+    },
     verifyPIN() {
       if (this.pin === "123456789") {
         this.verifyTicket();
