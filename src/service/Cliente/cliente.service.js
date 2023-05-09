@@ -1,10 +1,11 @@
 import axios from 'axios'
 export const clientService = {
     getEvent(data) {
+
         let response
         let url = 'https://backend.niiru.club/api/list-events'
         response = axios
-            .post(url, data)
+            .post(url, { order_type: 'id' })
             .then(response => {
                 return { success: true, data: response.data.data }
             })
