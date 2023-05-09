@@ -147,6 +147,7 @@ export default {
         ojb.direction = this.form.direction;
         ojb.banner = this.form.banner;
         var result = await eventoService.createEvent(ojb);
+        console.log(result.data);
         if (result.success) {
           this.$refs.banner.value = null;
           this.form.name = "";
@@ -164,7 +165,7 @@ export default {
           this.form.aforo = "";
           this.form.direction = "";
           this.form.banner = "";
-          alert("Error al crear el evento");
+          alert(JSON.stringify(result.data));
         }
       } else {
         alert("Revisar datos ha enviar");

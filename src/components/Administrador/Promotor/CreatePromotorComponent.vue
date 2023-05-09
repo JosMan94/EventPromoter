@@ -183,7 +183,7 @@ export default {
           this.form.fecha = "";
           this.form.email = "";
           this.form.avatar = "";
-          alert("Error al crear al promotor");
+          alert(JSON.stringify(result.data));
         }
       } else {
         alert("Ingresar todos los datos");

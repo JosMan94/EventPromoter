@@ -88,7 +88,7 @@
       </form>
     </article>
     <aside class="hidden xl:block xl:col-span-1">
-      <img :src="portada" alt="Event" class="block w-full" />
+      <img :src="portada" alt="Foto de portada del evento" class="block w-full" />
     </aside>
   </section>
 </template>
@@ -144,14 +144,6 @@ export default {
     },
 
     async registerEvent() {
-      console.log(
-        this.form.documento.length !== 0,
-        this.form.celular.length !== 0,
-        this.form.name.length !== 0,
-        this.form.fecha.length !== 0,
-        this.form.email.length !== 0,
-        this.form.idEvento !== null
-      );
       if (
         this.form.documento.length !== 0 &&
         this.form.celular.length !== 0 &&
@@ -185,7 +177,7 @@ export default {
           this.form.name = "";
           this.form.fecha = "";
           this.form.email = "";
-          alert("Error al registrarse al evento");
+          alert(JSON.stringify(result.data));
         }
       } else {
         alert("Rellernar todos los campos");

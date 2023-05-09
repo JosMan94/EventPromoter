@@ -24,7 +24,7 @@ export const promotorService = {
             })
             .catch((error) => {
                 console.log(error);
-                return { success: false }
+                return { success: false, data: error.response.data.data }
             })
         return response
     },

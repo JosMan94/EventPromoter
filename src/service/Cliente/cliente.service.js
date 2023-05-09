@@ -40,6 +40,7 @@ export const clientService = {
         response = axios
             .post(url)
             .then(response => {
+
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
@@ -56,8 +57,8 @@ export const clientService = {
             .then(response => {
                 return { success: true, data: response.data.data }
             })
-            .catch(() => {
-                return { success: false }
+            .catch((error) => {
+                return { success: false, data: error.response.data.data }
             })
         return response
     },
