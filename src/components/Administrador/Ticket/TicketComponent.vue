@@ -123,8 +123,9 @@
               <span class="block xl:hidden text-text-blue mb-2">Promotor:</span>
               {{ data.alias }}
             </p>
+
             <button
-              @click.prevent="viewDetailTicket(data.id)"
+              @click.prevent="viewDetailTicket(data.idTicket)"
               class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
               type="button"
             >

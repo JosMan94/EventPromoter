@@ -101,6 +101,7 @@ export default {
       objPage.typeUser = length;
       var result = await ticketService.detailTIcket(objPage);
       if (result.success) {
+        console.log(result);
         this.email = result.data.email;
         this.ticket = result.data.idTicket;
         this.banner = result.data.banner;

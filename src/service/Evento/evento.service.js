@@ -2,7 +2,7 @@ import axios from 'axios'
 export const eventoService = {
     createEvent(data) {
         let response
-        let url = 'https://backend.niiru.club/api/create-event'
+        let url = 'http://localhost:8000/api/create-event'
         response = axios
             .post(url, data)
             .then(response => {

@@ -2,7 +2,7 @@ import axios from 'axios'
 export const promotorService = {
     getPromotor(data) {
         let response
-        let url = 'https://backend.niiru.club/api/list/user'
+        let url = 'http://localhost:8000/api/list/user'
         response = axios
             .post(url, data)
             .then(response => {
@@ -15,7 +15,7 @@ export const promotorService = {
     },
     createPromotor(data) {
         let response
-        let url = 'https://backend.niiru.club/api/create/user'
+        let url = 'http://localhost:8000/api/create/user'
         response = axios
             .post(url, data)
             .then(response => {
@@ -30,7 +30,7 @@ export const promotorService = {
     },
     ticketPromotor(data) {
         let response
-        let url = 'https://backend.niiru.club/api/promotor/ticket'
+        let url = 'http://localhost:8000/api/promotor/ticket'
         response = axios
             .post(url, data)
             .then(response => {
