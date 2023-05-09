@@ -52,27 +52,34 @@
             @change="deleteGroup(clientes, 'all')"
           />
           <p class="">NOMBRE Y APELLIDOS</p>
-          <img src="../../../assets/images/arrow-down.png" alt="down" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
         <p class="col-span-2 flex items-center gap-4">
           DOCUMENTO
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           TELÉFONO
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('date_of_brith')"
+        >
           F. NACIMIENTO
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'date_of_brith' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
         <p class="col-span-2 flex items-center gap-4">
           E-MAIL
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
       </header>
       <span v-for="data in clientes" :key="data">
@@ -152,6 +159,9 @@ export default {
       },
       clave: "",
       deleteList: [],
+      table: {
+        order_type: "id",
+      },
     };
   },
   mounted() {
@@ -207,6 +217,10 @@ export default {
         alert("Error en la búsqueda");
       }
     },
+    changeTableOrder(data) {
+      this.table.order_type = data;
+      this.getClients();
+    },
     async getClients(option, data) {
       var page = 0;
       var length = 10;
@@ -218,7 +232,7 @@ export default {
       var objPage = new Object();
       objPage.page = page;
       objPage.length = length;
-
+      objPage.order_type = this.table.order_type;
       var result = await clientService.getClient(objPage);
       if (result.success) {
         this.pagination.state = false;

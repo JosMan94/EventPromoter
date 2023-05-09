@@ -57,23 +57,30 @@
             @change="deleteGroup(clientes, 'all')"
           />
           <p class="">NOMBRE Y APELLIDOS</p>
-          <img src="../../../assets/images/arrow-down.png" alt="down" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('code_user')"
+        >
           Cód. promotor
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'code_user' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
         <p class="col-span-2 flex items-center gap-4">
           ALIAS
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           E-MAIL
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
       </header>
       <span v-for="data in promotores" :key="data">
@@ -147,6 +154,9 @@ export default {
       },
       clave: "",
       deleteList: [],
+      table: {
+        order_type: "id",
+      },
     };
   },
   mounted() {
@@ -202,6 +212,10 @@ export default {
         alert("Error en la búsqueda");
       }
     },
+    changeTableOrder(data) {
+      this.table.order_type = data;
+      this.getPromotor();
+    },
     async getPromotor(option, data) {
       var page = 0;
       var length = 10;
@@ -213,6 +227,7 @@ export default {
       var objPage = new Object();
       objPage.page = page;
       objPage.length = length;
+      objPage.order_type = this.table.order_type;
       var result = await promotorService.getPromotor(objPage);
       if (result.success) {
         this.pagination.state = false;

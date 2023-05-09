@@ -57,19 +57,26 @@
             @change="deleteGroup(clientes, 'all')"
           />
           <p class="">NOMBRE DE EVENTO</p>
-          <img src="../../../assets/images/arrow-down.png" alt="down" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('date')"
+        >
           FECHA DE EVENTO
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'date' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
         <p class="col-span-2 flex items-center gap-4">
           LUGAR
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
       </header>
       <span v-for="data in eventos" :key="data">
@@ -144,6 +151,9 @@ export default {
       },
       clave: "",
       deleteList: [],
+      table: {
+        order_type: "id",
+      },
     };
   },
   mounted() {
@@ -199,6 +209,10 @@ export default {
         alert("Error en la búsqueda");
       }
     },
+    changeTableOrder(data) {
+      this.table.order_type = data;
+      this.getEvents();
+    },
     async getEvents(option, data) {
       var page = 0;
       var length = 10;
@@ -210,6 +224,7 @@ export default {
       var objPage = new Object();
       objPage.page = page;
       objPage.length = length;
+      objPage.order_type = this.table.order_type;
       var result = await clientService.getEvent(objPage);
       if (result.success) {
         this.pagination.state = false;

@@ -45,35 +45,42 @@
         <header class="hidden xl:grid grid-cols-17 gap-2 table-head">
           <div class="col-span-3 flex items-center gap-5">
             <p class="xl:pl-8">NOMBRE Y APELLIDOS</p>
-            <img src="../../../assets/images/arrow-down.png" alt="down" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
           </div>
-          <p class="col-span-2 flex items-center gap-4">
+          <p
+            class="col-span-2 flex items-center gap-4"
+            @click.prevent="changeTableOrder('document')"
+          >
             DOCUMENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <img
+              src="../../../assets/images/arrow-down.png"
+              alt=""
+              :class="table.order_type === 'document' ? 'transform rotate-180' : ''"
+            />
           </p>
-          <p class="col-span-2 flex items-center gap-4">
+          <p class="col-span-2 flex items-center gap-4 cursor-pointer">
             EVENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             TELÉFONO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             F. NACIMIENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             E-MAIL
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             PROMOTOR
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             ACCIONES
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
         </header>
 
@@ -172,6 +179,9 @@ export default {
         links: [],
       },
       clave: "",
+      table: {
+        order_type: "id",
+      },
     };
   },
   mounted() {
@@ -194,6 +204,10 @@ export default {
         alert("Error en la búsqueda");
       }
     },
+    changeTableOrder(data) {
+      this.table.order_type = data;
+      this.getTickets();
+    },
     async getTickets(option, data) {
       var page = 0;
       var length = 10;
@@ -205,6 +219,7 @@ export default {
       var objPage = new Object();
       objPage.page = page;
       objPage.length = length;
+      objPage.order_type = this.table.order_type;
       var result = await ticketService.getTickets(objPage);
       if (result.success) {
         this.pagination.state = false;
