@@ -22,20 +22,22 @@
           <span class="hidden xl:block">Buscar</span>
         </button>
       </div>
-      <!-- <div class="hidden xl:flex justify-between">
-        <button
+      <div class="hidden xl:flex justify-between">
+        <!-- <button
           class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
         >
           <img src="../../../assets/images/filtros.png" alt="Filtros" />
           Filtrar por
-        </button>
+        </button> -->
         <button
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-green text-white"
+          @click.prevent="deleteMultipleSelect"
+          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
+          v-if="deleteList.length !== 0"
         >
-          <img src="../../../assets/images/plus.png" alt="Agregar" />
-          Agregar Usuario
+          <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
+          Eliminar
         </button>
-      </div> -->
+      </div>
     </form>
   </article>
   <!-- Tabla -->
@@ -43,7 +45,12 @@
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-13 gap-5 table-head">
         <div class="col-span-3 flex items-center gap-5">
-          <input type="checkbox" class="w-5 h-5 mr-4" />
+          <input
+            :checked="deleteList.length !== 0"
+            type="checkbox"
+            class="w-5 h-5 mr-4"
+            @change="deleteGroup(clientes, 'all')"
+          />
           <p class="">NOMBRE Y APELLIDOS</p>
           <img src="../../../assets/images/arrow-down.png" alt="down" />
         </div>
@@ -71,7 +78,13 @@
       <span v-for="data in clientes" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
-            <input type="checkbox" class="hidden xl:block w-5 h-5 mr-4" checked />
+            <input
+              :checked="data.check"
+              type="checkbox"
+              @change="deleteGroup(data, 'one')"
+              class="hidden xl:block w-5 h-5 mr-4"
+            />
+            {{ data.check }}
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
               {{ data.name }}
@@ -128,6 +141,7 @@
 <script>
 import { clientService } from "../../../service/Cliente/cliente.service";
 import { verifyService } from "../../../service/Verify/verify.service";
+import { deleteService } from "../../../service/Delete/delete.service";
 export default {
   data() {
     return {
@@ -137,12 +151,50 @@ export default {
         links: [],
       },
       clave: "",
+      deleteList: [],
     };
   },
   mounted() {
     this.getClients();
   },
   methods: {
+    deleteGroup(data, type) {
+      if (type === "one") {
+        if (this.deleteList.length === 0) {
+          this.deleteList.push(data.id);
+          data.check = true;
+        } else {
+          let found = this.deleteList.find((element) => element === data.id);
+          if (found) {
+            this.deleteList = this.deleteList.filter((id) => id !== data.id);
+            data.check = false;
+          } else {
+            this.deleteList.push(data.id);
+            data.check = true;
+          }
+        }
+      }
+      if (type === "all") {
+        if (this.deleteList.length === 0) {
+          this.clientes.forEach((element) => (element.check = true));
+          this.clientes.forEach((element) => this.deleteList.push(element.id));
+        } else {
+          this.deleteList = [];
+          this.clientes.forEach((element) => (element.check = false));
+        }
+      }
+    },
+    async deleteMultipleSelect() {
+      var opcion = confirm("Desea eliminar");
+      if (opcion == true) {
+        var result = await deleteService.deletemultiple(this.deleteList, "Cliente");
+        if (result.success) {
+          window.location.reload();
+        } else {
+          alert("Error al eliminar");
+        }
+      }
+    },
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;
@@ -171,6 +223,7 @@ export default {
       if (result.success) {
         this.pagination.state = false;
         this.clientes = result.data.data;
+        this.clientes.forEach((element) => (element.check = false));
 
         this.pagination.links = [];
         result.data.links.forEach((element) => {
