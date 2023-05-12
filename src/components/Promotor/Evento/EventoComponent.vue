@@ -147,10 +147,7 @@ export default {
     },
     charedEvent(codeEvento) {
       copyText(
-        "http://promotores.s3-website.us-east-2.amazonaws.com/register/event/" +
-          codeEvento +
-          "/" +
-          this.codePromotor,
+        "https://niiru.club/register/event/" + codeEvento + "/" + this.codePromotor,
         undefined,
         (error, event) => {
           if (error) {
@@ -174,7 +171,7 @@ export default {
       objPage.length = length;
       var result = await clientService.getEvent(objPage);
       if (result.success) {
-         this.pagination.state = false;
+        this.pagination.state = false;
         this.eventos = result.data.data;
 
         this.pagination.links = [];
@@ -197,7 +194,7 @@ export default {
       }
     },
   },
-    watch: {
+  watch: {
     clave: function (val) {
       if (val === "") {
         this.getEvents();

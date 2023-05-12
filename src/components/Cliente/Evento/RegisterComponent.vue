@@ -125,7 +125,7 @@ export default {
     async getDataEvents() {
       var result = await clientService.getDetailEnvet(this.codeEvent, this.codePromotor);
       if (result.success) {
-        if (this.codePromotor !== null) {
+        if (this.codePromotor) {
           this.portada = result.data.event.banner;
           this.form.idEvento = result.data.event.id;
           this.form.idPromotor = result.data.promoter.id;
