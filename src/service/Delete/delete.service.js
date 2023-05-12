@@ -5,7 +5,7 @@
         deletemultiple(data, type) {
 
             let response
-            let url = 'http://localhost:8000/api/delete-multiple'
+            let url = 'https://backend.niiru.club/api/delete-multiple'
             response = axios
                 .post(url, {
                     ids: data,
