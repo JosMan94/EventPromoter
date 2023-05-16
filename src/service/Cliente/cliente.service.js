@@ -30,13 +30,15 @@ export const clientService = {
     },
     getDetailEnvet(codeEvent, codePromotor) {
 
+
         let response
         var url = '';
 
         if (codePromotor) {
-            url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent
-        } else {
             url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent + '/' + codePromotor
+
+        } else {
+            url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent
         }
         response = axios
             .post(url)

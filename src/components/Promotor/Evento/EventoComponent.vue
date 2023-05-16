@@ -41,7 +41,7 @@
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-8 gap-5 table-head">
         <div class="col-span-2 flex items-center gap-5">
-          <input type="checkbox" class="w-5 h-5 mr-4" />
+          <!-- <input type="checkbox" class="w-5 h-5 mr-4" /> -->
           <p class="">NOMBRE DE EVENTO</p>
           <img src="../../../assets/images/arrow-down.png" alt="down" />
         </div>
@@ -61,7 +61,7 @@
       <span v-for="data in eventos" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-8 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
-            <input type="checkbox" class="hidden xl:block w-5 h-5 mr-4" checked />
+            <!-- <input type="checkbox" class="hidden xl:block w-5 h-5 mr-4" checked /> -->
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre de evento</span>
               {{ data.name }}

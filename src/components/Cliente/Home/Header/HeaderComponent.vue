@@ -148,9 +148,9 @@
             required
           />
         </label>
-        <a href="#" class="block mb-8 text-center underline text-bg-black font-bold"
+        <!-- <a href="#" class="block mb-8 text-center underline text-bg-black font-bold"
           >Recuperar clave</a
-        >
+        > -->
         <button
           type="submit"
           class="block mx-auto py-4 px-16 rounded-2xl bg-main-green text-white font-bold"

@@ -7,7 +7,7 @@
         <input
           class="w-full bg-gray-100 rounded-2xl py-4 px-6 text-base shadow-md"
           type="text"
-          placeholder="Buscar por documento"
+          placeholder="Ingresar palabra clave"
           v-model="clave"
         />
         <br />
@@ -49,16 +49,34 @@
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-8 gap-5 table-head">
-        <div class="col-span-2 flex items-center gap-5">
-          <input
+        <div
+          class="col-span-2 flex items-center gap-5 cursor-pointer"
+          @click.prevent="changeTableOrder('id')"
+        >
+          <!-- <input
             :checked="deleteList.length !== 0"
             type="checkbox"
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
+          /> -->
+          <p class="">ID</p>
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'id' ? 'transform rotate-180' : ''"
+            alt="down"
           />
-          <p class="">NOMBRE DE EVENTO</p>
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('name')"
+        >
+          NOMBRE
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
+            alt=""
+          />
+        </p>
         <p
           class="col-span-2 flex items-center gap-4 cursor-pointer"
           @click.prevent="changeTableOrder('date')"
@@ -70,30 +88,41 @@
             alt=""
           />
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('direction')"
+        >
           LUGAR
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'direction' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
-        </p>
+          <img src="../../../assets/images/arrow-down.png" alt="" />
+        </p> -->
       </header>
       <span v-for="data in eventos" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-8 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <!-- checked -->
-            <input
+            <!-- <input
               :checked="data.check"
               type="checkbox"
               @change="deleteGroup(data, 'one')"
               class="hidden xl:block w-5 h-5 mr-4"
-            />
+            /> -->
             <p class="">
-              <span class="block xl:hidden text-text-blue mb-2">Nombre de evento</span>
-              {{ data.name }}
+              <span class="block xl:hidden text-text-blue mb-2">ID</span>
+              {{ data.id }}
             </p>
           </div>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">Nombre de evento</span>
+            {{ data.name }}
+          </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">Fecha de evento</span>
             {{ data.date }}
@@ -106,13 +135,13 @@
             <span class="block xl:hidden text-text-blue mb-2">N° Generales:</span>
             {{ data.number_tickets }}
           </p>
-
+          <!-- 
           <button
             type="button"
             class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
           >
             <img src="../../../assets/images/more_actions.png" alt="" />
-          </button>
+          </button> -->
         </div>
       </span>
     </div>

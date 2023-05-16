@@ -9,7 +9,7 @@
         <input
           class="w-full bg-gray-100 rounded-2xl py-4 px-6 text-base shadow-md"
           type="text"
-          placeholder="Buscar por documento"
+          placeholder="Ingresar palabra clave"
           v-model="clave"
         />
         <br />
@@ -45,12 +45,12 @@
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-13 gap-5 table-head">
         <div class="col-span-3 flex items-center gap-5">
-          <input
+          <!-- <input
             :checked="deleteList.length !== 0"
             type="checkbox"
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
-          />
+          /> -->
           <p class="">NOMBRE Y APELLIDOS</p>
           <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
@@ -85,13 +85,13 @@
       <span v-for="data in clientes" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
-            <input
+            <!-- <input
               :checked="data.check"
               type="checkbox"
               @change="deleteGroup(data, 'one')"
               class="hidden xl:block w-5 h-5 mr-4"
-            />
-            {{ data.check }}
+            /> -->
+
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
               {{ data.name }}

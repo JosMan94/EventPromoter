@@ -11,7 +11,7 @@
             class="w-full bg-gray-100 rounded-2xl py-4 px-6 text-base shadow-md"
             type="text"
             v-model="clave"
-            placeholder="Buscar por documento"
+            placeholder="Ingresar palabra clave"
           />
           <br />
           <button

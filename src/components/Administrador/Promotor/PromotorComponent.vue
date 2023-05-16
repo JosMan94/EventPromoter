@@ -7,7 +7,7 @@
         <input
           class="w-full bg-gray-100 rounded-2xl py-4 px-6 text-base shadow-md"
           type="text"
-          placeholder="Buscar por documento"
+          placeholder="Ingresar palabra clave"
           v-model="clave"
         />
         <br />
@@ -49,15 +49,22 @@
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-10 gap-5 table-head">
-        <div class="col-span-2 flex items-center gap-5">
-          <input
+        <div
+          class="col-span-2 flex items-center gap-5 cursor-pointer"
+          @click.prevent="changeTableOrder('name')"
+        >
+          <!-- <input
             :checked="deleteList.length !== 0"
             type="checkbox"
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
-          />
+          /> -->
           <p class="">NOMBRE Y APELLIDOS</p>
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </div>
         <p
           class="col-span-2 flex items-center gap-4 cursor-pointer"
@@ -70,28 +77,42 @@
             alt=""
           />
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('alias')"
+        >
           ALIAS
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'alias' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <p
+          class="col-span-2 flex items-center gap-4 cursor-pointer"
+          @click.prevent="changeTableOrder('email')"
+        >
           E-MAIL
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+          <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'email' ? 'transform rotate-180' : ''"
+            alt=""
+          />
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
-        </p>
+          <img src="../../../assets/images/arrow-down.png" alt="" />
+        </p> -->
       </header>
       <span v-for="data in promotores" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-10 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
-            <input
+            <!-- <input
               :checked="data.check"
               type="checkbox"
               @change="deleteGroup(data, 'one')"
               class="hidden xl:block w-5 h-5 mr-4"
-            />
+            /> -->
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
               {{ data.name }}
@@ -109,12 +130,12 @@
             <span class="block xl:hidden text-text-blue mb-2">Correo electrónico:</span>
             {{ data.email }}
           </p>
-          <button
+          <!-- <button
             type="button"
             class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
           >
             <img src="../../../assets/images/more_actions.png" alt="" />
-          </button>
+          </button> -->
         </div>
       </span>
     </div>
@@ -155,7 +176,7 @@ export default {
       clave: "",
       deleteList: [],
       table: {
-        order_type: "id",
+        order_type: "code_user",
       },
     };
   },
