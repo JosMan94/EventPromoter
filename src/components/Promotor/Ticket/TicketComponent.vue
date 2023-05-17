@@ -170,6 +170,9 @@ export default {
         links: [],
       },
       clave: "",
+      table: {
+        order_type: "id",
+      },
     };
   },
   mounted() {
@@ -206,7 +209,7 @@ export default {
         objPage.page = page;
         objPage.length = length;
         objPage.codePromotor = this.$store.state.codeUser;
-
+        objPage.order_type = this.table.order_type;
         var result = await promotorService.ticketPromotor(objPage);
         if (result.success) {
           this.pagination.state = false;

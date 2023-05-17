@@ -77,10 +77,10 @@
           E-MAIL
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-        <p class="col-span-2 flex items-center gap-4">
+        <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
-        </p>
+          <img src="../../../assets/images/arrow-down.png" alt="" />
+        </p> -->
       </header>
       <span v-for="data in clientes" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
@@ -113,12 +113,12 @@
             <span class="block xl:hidden text-text-blue mb-2">E-mail:</span>
             {{ data.email }}
           </p>
-          <button
+          <!-- <button
             type="button"
             class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
           >
             <img src="../../../assets/images/more_actions.png" alt="" />
-          </button>
+          </button> -->
         </div>
       </span>
     </div>

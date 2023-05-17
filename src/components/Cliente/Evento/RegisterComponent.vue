@@ -164,6 +164,7 @@ export default {
         }
 
         var result = await clientService.registerEvent(ojb);
+
         if (result.success) {
           this.form.documento = "";
           this.form.celular = "";

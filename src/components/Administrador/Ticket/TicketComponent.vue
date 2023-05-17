@@ -43,20 +43,24 @@
     <article>
       <div class="rounded-xl overflow-hidden shadow-lg mb-10">
         <header class="hidden xl:grid grid-cols-17 gap-2 table-head">
-          <div class="col-span-3 flex items-center gap-5">
-            <p class="xl:pl-8">NOMBRE Y APELLIDOS</p>
-            <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
-          </div>
-          <p
-            class="col-span-2 flex items-center gap-4"
+          <div
+            class="col-span-3 flex items-center gap-5 cursor-pointer"
             @click.prevent="changeTableOrder('document')"
           >
-            DOCUMENTO
+            <p class="xl:pl-8">DOCUMENTO</p>
             <img
               src="../../../assets/images/arrow-down.png"
               alt=""
               :class="table.order_type === 'document' ? 'transform rotate-180' : ''"
             />
+          </div>
+          <p class="col-span-2 flex items-center gap-4">
+            NOMBRE Y APELLIDOS
+            <!-- <img
+              src="../../../assets/images/arrow-down.png"
+              alt=""
+              :class="table.order_type === 'document' ? 'transform rotate-180' : ''"
+            /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4 cursor-pointer">
             EVENTO
@@ -84,7 +88,7 @@
           </p>
         </header>
 
-        <span v-for="data in tickets" :key="data">
+        <span v-for="(data, index) in tickets" :key="data">
           <div class="relative grid grid-cols-2 xl:grid-cols-17 gap-2 table-row">
             <span
               :class="data.assistance ? 'bg-main-green' : 'bg-main-yellow'"
@@ -93,15 +97,15 @@
             >
             <div class="xl:col-span-3 xl:flex items-center gap-5">
               <p class="xl:pl-8">
-                <span class="block xl:hidden text-text-blue mb-2"
-                  >Nombre y Apellidos:</span
-                >
-                {{ data.name }}
+                <span class="block xl:hidden text-text-blue mb-2">Documento:</span>
+                {{ data.document }}
               </p>
             </div>
             <p class="xl:col-span-2 xl:flex items-center gap-4">
-              <span class="block xl:hidden text-text-blue mb-2">Documento</span>
-              {{ data.document }}
+              <span class="block xl:hidden text-text-blue mb-2"
+                >>Nombre y Apellidos:</span
+              >
+              {{ data.name }}
             </p>
             <p class="xl:col-span-2 xl:flex items-center gap-4">
               <span class="block xl:hidden text-text-blue mb-2">Evento</span>
@@ -125,11 +129,22 @@
             </p>
 
             <button
-              @click.prevent="viewDetailTicket(data.idTicket)"
-              class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
+              class="relative xl:block pl-4 xl:col-span-2 flex items-center gap-4"
               type="button"
+              @click.prevent="acction(index)"
             >
               <img src="../../../assets/images/more_actions.png" alt="" />
+              <span
+                :id="index"
+                class="oculto absolute z-10 bg-white border shadow-lg py-2 top-2 -left-24 rounded-xl text-left transition-opacity"
+              >
+                <a
+                  @click.prevent="viewDetailTicket(data.idTicket)"
+                  class="block text-xs font-semibold py-3 px-4 transition-colors hover:bg-blue-500 hover:bg-opacity-20 w-max"
+                >
+                  Administrar
+                </a>
+              </span>
             </button>
           </div>
         </span>
@@ -189,6 +204,15 @@ export default {
     this.getTickets();
   },
   methods: {
+    acction(index) {
+      let elem = document.getElementById(index);
+      var hasClaseOculto = elem.classList.contains("oculto");
+      if (hasClaseOculto) {
+        elem.classList.remove("oculto");
+      } else {
+        elem.classList.add("oculto");
+      }
+    },
     viewDetailTicket(value) {
       this.idTicket = value;
       this.typeForm = 2;

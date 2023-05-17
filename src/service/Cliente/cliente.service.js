@@ -61,7 +61,13 @@ export const clientService = {
                 return { success: true, data: response.data.data }
             })
             .catch((error) => {
-                return { success: false, data: error.response.data.data }
+
+                if (error.response.data.data === null) {
+                    return { success: false, data: error.response.data.message }
+                } else {
+                    return { success: false, data: error.response.data.data }
+                }
+
             })
         return response
     },
