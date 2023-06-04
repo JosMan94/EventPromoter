@@ -43,19 +43,19 @@
         <div class="col-span-2 flex items-center gap-5">
           <!-- <input type="checkbox" class="w-5 h-5 mr-4" /> -->
           <p class="">NOMBRE DE EVENTO</p>
-          <img src="../../../assets/images/arrow-down.png" alt="down" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
         <p class="col-span-2 flex items-center gap-4">
           FECHA DE EVENTO
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           LUGAR
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
       </header>
       <span v-for="data in eventos" :key="data">

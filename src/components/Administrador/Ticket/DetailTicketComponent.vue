@@ -43,7 +43,7 @@
           type="submit"
           class="block mb-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
         >
-          ENVIAR A TU CORREO
+          REENVIAR VIA EMAIL
         </button>
         <button
         onclick="window.print()"
@@ -101,7 +101,7 @@ export default {
       objPage.typeUser = length;
       var result = await ticketService.detailTIcket(objPage);
       if (result.success) {
-        console.log(result);
+      
         this.email = result.data.email;
         this.ticket = result.data.idTicket;
         this.banner = result.data.banner;

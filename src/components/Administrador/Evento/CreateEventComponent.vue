@@ -147,7 +147,7 @@ export default {
         ojb.direction = this.form.direction;
         ojb.banner = this.form.banner;
         var result = await eventoService.createEvent(ojb);
-        console.log(result.data);
+       
         if (result.success) {
           this.$refs.banner.value = null;
           this.form.name = "";

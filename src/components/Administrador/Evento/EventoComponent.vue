@@ -49,10 +49,8 @@
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-8 gap-5 table-head">
-        <div
-          class="col-span-2 flex items-center gap-5 cursor-pointer"
-          @click.prevent="changeTableOrder('id')"
-        >
+        <!-- @click.prevent="changeTableOrder('id')" -->
+        <div class="col-span-2 flex items-center gap-5">
           <!-- <input
             :checked="deleteList.length !== 0"
             type="checkbox"
@@ -60,44 +58,38 @@
             @change="deleteGroup(clientes, 'all')"
           /> -->
           <p class="">ID</p>
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'id' ? 'transform rotate-180' : ''"
             alt="down"
-          />
+          /> -->
         </div>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('name')"
-        >
+        <!-- @click.prevent="changeTableOrder('name')" -->
+        <p class="col-span-2 flex items-center gap-4">
           NOMBRE
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('date')"
-        >
+        <!-- @click.prevent="changeTableOrder('date')" -->
+        <p class="col-span-2 flex items-center gap-4">
           FECHA DE EVENTO
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'date' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('direction')"
-        >
+        <!-- @click.prevent="changeTableOrder('direction')" -->
+        <p class="col-span-2 flex items-center gap-4">
           LUGAR
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'direction' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
         <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES

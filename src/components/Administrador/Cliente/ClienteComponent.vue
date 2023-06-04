@@ -62,16 +62,14 @@
           TELÉFONO
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('date_of_brith')"
-        >
+        <!-- @click.prevent="changeTableOrder('date_of_brith')" -->
+        <p class="col-span-2 flex items-center gap-4">
           F. NACIMIENTO
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'date_of_brith' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
           E-MAIL

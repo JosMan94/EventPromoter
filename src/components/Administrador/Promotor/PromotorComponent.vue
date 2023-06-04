@@ -49,10 +49,8 @@
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-10 gap-5 table-head">
-        <div
-          class="col-span-2 flex items-center gap-5 cursor-pointer"
-          @click.prevent="changeTableOrder('name')"
-        >
+        <!-- @click.prevent="changeTableOrder('name')" -->
+        <div class="col-span-2 flex items-center gap-5">
           <!-- <input
             :checked="deleteList.length !== 0"
             type="checkbox"
@@ -60,44 +58,31 @@
             @change="deleteGroup(clientes, 'all')"
           /> -->
           <p class="">NOMBRE Y APELLIDOS</p>
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </div>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('code_user')"
-        >
+        <!-- @click.prevent="changeTableOrder('code_user')" -->
+        <p class="col-span-2 flex items-center gap-4">
           Cód. promotor
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'code_user' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('alias')"
-        >
-          ALIAS
-          <img
-            src="../../../assets/images/arrow-down.png"
-            :class="table.order_type === 'alias' ? 'transform rotate-180' : ''"
-            alt=""
-          />
-        </p>
-        <p
-          class="col-span-2 flex items-center gap-4 cursor-pointer"
-          @click.prevent="changeTableOrder('email')"
-        >
+        <!-- @click.prevent="changeTableOrder('alias')" -->
+        <p class="col-span-2 flex items-center gap-4">ALIAS</p>
+        <!-- @click.prevent="changeTableOrder('email')" -->
+        <p class="col-span-2 flex items-center gap-4">
           E-MAIL
-          <img
+          <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'email' ? 'transform rotate-180' : ''"
             alt=""
-          />
+          /> -->
         </p>
         <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES

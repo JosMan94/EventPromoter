@@ -45,35 +45,35 @@
         <header class="hidden xl:grid grid-cols-17 gap-2 table-head">
           <div class="col-span-3 flex items-center gap-5">
             <p class="xl:pl-8">NOMBRE Y APELLIDOS</p>
-            <img src="../../../assets/images/arrow-down.png" alt="down" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
           </div>
           <p class="col-span-2 flex items-center gap-4">
             DOCUMENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             EVENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             TELÉFONO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             F. NACIMIENTO
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             E-MAIL
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             PROMOTOR
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
           <p class="col-span-2 flex items-center gap-4">
             ACCIONES
-            <img src="../../../assets/images/arrow-down.png" alt="" />
+            <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
         </header>
         <span v-for="data in ticketsPromotor" :key="data">

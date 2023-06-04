@@ -43,16 +43,14 @@
     <article>
       <div class="rounded-xl overflow-hidden shadow-lg mb-10">
         <header class="hidden xl:grid grid-cols-17 gap-2 table-head">
-          <div
-            class="col-span-3 flex items-center gap-5 cursor-pointer"
-            @click.prevent="changeTableOrder('document')"
-          >
+          <!-- @click.prevent="changeTableOrder('document')" -->
+          <div class="col-span-3 flex items-center gap-5">
             <p class="xl:pl-8">DOCUMENTO</p>
-            <img
+            <!-- <img
               src="../../../assets/images/arrow-down.png"
               alt=""
               :class="table.order_type === 'document' ? 'transform rotate-180' : ''"
-            />
+            /> -->
           </div>
           <p class="col-span-2 flex items-center gap-4">
             NOMBRE Y APELLIDOS
@@ -62,7 +60,7 @@
               :class="table.order_type === 'document' ? 'transform rotate-180' : ''"
             /> -->
           </p>
-          <p class="col-span-2 flex items-center gap-4 cursor-pointer">
+          <p class="col-span-2 flex items-center gap-4">
             EVENTO
             <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
