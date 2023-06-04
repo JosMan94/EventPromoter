@@ -4,7 +4,7 @@
   </h2>
   <div class="xl:grid xl:grid-cols-2 items-start justify-between gap-40">
     <article>
-      <div  class="mb-10 mx-auto xl:mx-0">
+      <div class="mb-10 mx-auto xl:mx-0">
         <qrcode-vue
           size="200"
           :value="
@@ -46,7 +46,7 @@
           REENVIAR VIA EMAIL
         </button>
         <button
-        onclick="window.print()"
+          onclick="window.print()"
           type="button"
           class="flex items-center justify-center gap-3 bg-main-blue-black text-base font-bold text-white rounded-2xl p-5 text-center"
         >
@@ -83,7 +83,6 @@ export default {
     this.getDetailTicket();
   },
   methods: {
-   
     async petitionEmail() {
       var objPage = new Object();
       objPage.idTicket = this.idTicket;
@@ -100,8 +99,8 @@ export default {
       objPage.idTicket = this.idTicket;
       objPage.typeUser = length;
       var result = await ticketService.detailTIcket(objPage);
+
       if (result.success) {
-      
         this.email = result.data.email;
         this.ticket = result.data.idTicket;
         this.banner = result.data.banner;

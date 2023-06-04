@@ -11,7 +11,7 @@
             class="w-full bg-gray-100 rounded-2xl py-4 px-6 text-base shadow-md"
             type="text"
             v-model="clave"
-            placeholder="Buscar por documento"
+            placeholder="Busca..."
           />
           <br />
           <button
@@ -91,6 +91,7 @@
                 {{ data.name }}
               </p>
             </div>
+
             <p class="xl:col-span-2 xl:flex items-center gap-4">
               <span class="block xl:hidden text-text-blue mb-2">Documento</span>
               {{ data.document }}
@@ -116,7 +117,7 @@
               {{ data.alias }}
             </p>
             <button
-              @click.prevent="viewDetailTicket(data.id)"
+              @click.prevent="viewDetailTicket(data.idTicket)"
               class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
               type="button"
             >
