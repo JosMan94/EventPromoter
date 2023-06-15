@@ -2,7 +2,7 @@ import axios from 'axios'
 export const ticketService = {
     reenviarTicket(data) {
         let response
-        let url = 'https://backend.niiru.club/api/reenviar/ticket'
+        let url = 'https://promotoresback.azurewebsites.net/api/reenviar/ticket'
         response = axios
             .post(url, data)
             .then(response => {
@@ -15,7 +15,7 @@ export const ticketService = {
     },
     getTickets(data) {
         let response
-        let url = 'https://backend.niiru.club/api/ticket/list'
+        let url = 'https://promotoresback.azurewebsites.net/api/ticket/list'
         response = axios
             .post(url, data)
             .then(response => {
@@ -28,7 +28,7 @@ export const ticketService = {
     },
     detailTIcket(data) {
         let response
-        let url = 'https://backend.niiru.club/api/detail/ticket'
+        let url = 'https://promotoresback.azurewebsites.net/api/detail/ticket'
         response = axios
             .post(url, data)
             .then(response => {

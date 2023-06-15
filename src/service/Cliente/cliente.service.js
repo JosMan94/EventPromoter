@@ -3,7 +3,7 @@ export const clientService = {
     getEvent(data) {
 
         let response
-        let url = 'https://backend.niiru.club/api/list-events'
+        let url = 'https://promotoresback.azurewebsites.net/api/list-events'
         response = axios
             .post(url, { order_type: 'id' })
             .then(response => {
@@ -16,7 +16,7 @@ export const clientService = {
     },
     login(data) {
         let response
-        let url = 'https://backend.niiru.club/api/client/auth'
+        let url = 'https://promotoresback.azurewebsites.net/api/client/auth'
         response = axios
             .post(url, data)
             .then(response => {
@@ -35,10 +35,10 @@ export const clientService = {
         var url = '';
 
         if (codePromotor) {
-            url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent + '/' + codePromotor
+            url = 'https://promotoresback.azurewebsites.net/api/event-invitation/' + codeEvent + '/' + codePromotor
 
         } else {
-            url = 'https://backend.niiru.club/api/event-invitation/' + codeEvent
+            url = 'https://promotoresback.azurewebsites.net/api/event-invitation/' + codeEvent
         }
         response = axios
             .post(url)
@@ -54,7 +54,7 @@ export const clientService = {
     },
     registerEvent(data) {
         let response
-        let url = 'https://backend.niiru.club/api/client/register'
+        let url = 'https://promotoresback.azurewebsites.net/api/client/register'
         response = axios
             .post(url, data)
             .then(response => {
@@ -73,7 +73,7 @@ export const clientService = {
     },
     getClient(data) {
         let response
-        let url = 'https://backend.niiru.club/api/client/list'
+        let url = 'https://promotoresback.azurewebsites.net/api/client/list'
         response = axios
             .post(url, data)
             .then(response => {
