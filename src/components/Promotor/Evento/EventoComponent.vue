@@ -147,7 +147,7 @@ export default {
     },
     charedEvent(codeEvento) {
       copyText(
-        "https://niiru.club/register/event/" + codeEvento + "/" + this.codePromotor,
+        "https://in.niiru.club/register/event/" + codeEvento + "/" + this.codePromotor,
         undefined,
         (error, event) => {
           if (error) {
