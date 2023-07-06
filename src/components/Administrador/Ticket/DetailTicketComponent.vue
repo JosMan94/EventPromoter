@@ -8,7 +8,7 @@
         <qrcode-vue
           size="200"
           :value="
-            'http://promotores.s3-website.us-east-2.amazonaws.com/security/verify/entry/' +
+            'https://in.niiru.club/security/verify/entry/' +
             qrView.idClient +
             '/' +
             qrView.idEvent +
@@ -21,6 +21,18 @@
       <h3 class="font-bold text-xl xl:text-3xl mb-10">
         <span class="text-text-blue">Tu código es: </span>
         <span class="text-black">{{ ticket }}</span>
+      </h3>
+      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+        <span class="text-text-blue">Evento: </span>
+        <span class="text-black">{{ nameEvento }}</span>
+      </h3>
+      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+        <span class="text-text-blue">Fecha: </span>
+        <span class="text-black">{{ fecha }}</span>
+      </h3>
+      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+        <span class="text-text-blue">Dirección: </span>
+        <span class="text-black">{{ lugar }}</span>
       </h3>
       <form @submit.prevent="petitionEmail" class="grid">
         <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
@@ -56,7 +68,12 @@
       </form>
     </article>
     <aside class="hidden xl:block">
-      <img :src="banner" alt="Event"  class="block w-full object-contain"  style="height: 480px"/>
+      <img
+        :src="banner"
+        alt="Event"
+        class="block w-full object-contain"
+        style="height: 480px"
+      />
     </aside>
   </div>
 </template>
@@ -72,6 +89,9 @@ export default {
       email: null,
       ticket: null,
       banner: null,
+      nameEvento: null,
+      fecha: null,
+      lugar: null,
       qrView: {
         idClient: null,
         idEvent: null,
@@ -81,7 +101,6 @@ export default {
   },
   mounted() {
     this.getDetailTicket();
-    
   },
   methods: {
     async petitionEmail() {
@@ -90,9 +109,13 @@ export default {
       objPage.email = this.email;
       var result = await ticketService.reenviarTicket(objPage);
       if (result.success) {
-        alert("Email Reenviado");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Email reenviado";
       } else {
-        alert("Error al reenviar el correo");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al reenviar el correo";
       }
     },
     async getDetailTicket() {
@@ -102,13 +125,24 @@ export default {
       var result = await ticketService.detailTIcket(objPage);
 
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Detalles del ticket";
         this.email = result.data.email;
         this.ticket = result.data.idTicket;
         this.banner = result.data.banner;
+        this.nameEvento = result.data.nameEvent ?? null;
+
+        this.fecha = result.data.fechaEvent ?? null;
+        this.lugar = result.data.lugarEvent ?? null;
 
         this.qrView.idClient = result.data.idClient;
         this.qrView.idEvent = result.data.idEvent;
         this.qrView.idPromotor = result.data.idPromotor;
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar el ticket";
       }
     },
   },

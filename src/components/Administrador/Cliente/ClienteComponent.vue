@@ -197,9 +197,16 @@ export default {
       if (opcion == true) {
         var result = await deleteService.deletemultiple(this.deleteList, "Cliente");
         if (result.success) {
+          //----------component--------//
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Eliminación con éxito";
+          //--------------------------//
           window.location.reload();
         } else {
-          alert("Error al eliminar");
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al eliminar";
         }
       }
     },
@@ -209,9 +216,15 @@ export default {
       objPage.table = "adminClientes";
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Resultado de la búsqueda";
         this.pagination.state = true;
         this.clientes = result.data;
       } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error en la búsqueda";
         alert("Error en la búsqueda");
       }
     },
@@ -233,6 +246,10 @@ export default {
       objPage.order_type = this.table.order_type;
       var result = await clientService.getClient(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Listado de clientes";
+
         this.pagination.state = false;
         this.clientes = result.data.data;
         this.clientes.forEach((element) => (element.check = false));
@@ -253,7 +270,9 @@ export default {
           }
         });
       } else {
-        alert("Error al mostrar los clientes");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar clientes";
       }
     },
   },

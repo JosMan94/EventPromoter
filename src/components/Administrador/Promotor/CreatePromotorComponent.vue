@@ -53,6 +53,7 @@
           >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
         >
         <input
+         type="date"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="nacimiento"
           placeholder="dd/mm/aaaa"
@@ -163,6 +164,10 @@ export default {
 
         var result = await promotorService.createPromotor(ojb);
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Promotor creado";
+
           this.$refs.avatar.value = null;
           this.form.documento = "";
           this.form.celular = "";
@@ -184,10 +189,15 @@ export default {
           this.form.fecha = "";
           this.form.email = "";
           this.form.avatar = "";
-          alert(JSON.stringify(result.data));
+
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = JSON.stringify(result.data);
         }
       } else {
-        alert("Ingresar todos los datos");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Ingresar todos los datos";
       }
     },
   },

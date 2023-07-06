@@ -8,7 +8,7 @@
         Promotor
       </h2>
       <div class="flex items-center gap-4 mb-10" v-if="statusCodePromotor">
-        <img :src="promotor.avatar" alt="Usuario" />
+        <img :src="promotor.avatar" alt="Usuario" class="w-20 h-20" />
         <div>
           <p class="text-sm font-medium">
             <span class="text-text-blue">{{ promotor.name }} </span>
@@ -60,6 +60,7 @@
             >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
           >
           <input
+            type="date"
             class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
             id="nacimiento"
             placeholder="dd/mm/aaaa"
@@ -125,6 +126,9 @@ export default {
     async getDataEvents() {
       var result = await clientService.getDetailEnvet(this.codeEvent, this.codePromotor);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Datos del evento";
         if (this.codePromotor) {
           this.portada = result.data.event.banner;
           this.form.idEvento = result.data.event.id;
@@ -139,7 +143,9 @@ export default {
           this.form.idEvento = result.data.event.id;
         }
       } else {
-        alert("Error al mostrar detalle de los enveto");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar detalle del evento";
       }
     },
 
@@ -166,22 +172,28 @@ export default {
         var result = await clientService.registerEvent(ojb);
 
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Entrada enviada a su correo";
           this.form.documento = "";
           this.form.celular = "";
           this.form.name = "";
           this.form.fecha = "";
           this.form.email = "";
-          alert("Entrada enviada a su correo");
         } else {
           this.form.documento = "";
           this.form.celular = "";
           this.form.name = "";
           this.form.fecha = "";
           this.form.email = "";
-          alert(JSON.stringify(result.data));
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = JSON.stringify(result.data);
         }
       } else {
-        alert("Rellernar todos los campos");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Rellenar todos los campos";
       }
     },
   },

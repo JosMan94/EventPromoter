@@ -88,7 +88,9 @@ export default {
       if (result.success) {
         this.eventos = result.data.data;
       } else {
-        alert("Error al mostrar los Eventos");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar los eventos";
       }
     },
   },

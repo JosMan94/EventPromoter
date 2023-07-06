@@ -15,7 +15,7 @@
       </router-link>
       <nav class="text-light-gray hidden xl:block">
         <ul class="flex gap-8">
-          <li>
+          <!-- <li>
             <a
               class="pb-2 border-b-4 border-main-green px-4 text-white font-bold hover:text-white hover:font-bold transition-colors"
               href="#eventos"
@@ -35,11 +35,11 @@
               href="#reserva"
               >CELEBRA TU CUMPLEAÑOS</a
             >
-          </li>
+          </li> -->
 
           <li v-if="sessionUser === false">
             <a
-              class="pb-2 hover:border-b-4 hover:border-main-green px-4 hover:text-white transition-colors cursor-pointer"
+              class="pb-2 border-b-4 border-main-green hover:border-b-4 hover:border-main-green px-4 hover:text-white transition-colors cursor-pointer"
               @click.prevent="login"
               >SOY PROMOTOR</a
             >
@@ -71,7 +71,7 @@
     <button type="button" class="block w-full mb-10 pl-12 pr-40">
       <img src="../../../../assets/images/LOGO.png" alt="LOGO" class="mx-auto" />
     </button>
-    <button
+    <!-- <button
       href="#eventos"
       type="button"
       class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center bg-main-green hover:bg-main-green transition-colors"
@@ -94,12 +94,13 @@
     >
       <img src="../../../../assets/images/cumpleaños.png" alt="Celebra tu Cumpleaños" />
       <span>Celebra tu Cumpleaños</span>
-    </button>
+    </button> -->
+
     <button
       v-if="sessionUser === false"
       type="button"
       @click.prevent="openLogin"
-      class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
+      class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center bg-main-green hover:bg-main-green transition-colors"
     >
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       Promotores
@@ -108,7 +109,7 @@
       v-else-if="sessionUser"
       type="button"
       @click.prevent="plataformaUser"
-      class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
+      class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center bg-main-green hover:bg-main-green transition-colors"
     >
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       Plataforma
@@ -215,6 +216,9 @@ export default {
         ojb.password = this.form.password;
         var result = await clientService.login(ojb);
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Acceso permitido";
           if (result.data.type === "admin") {
             this.$router.push({
               name: "Administrador",
@@ -237,7 +241,9 @@ export default {
             60 + 60 + 60 + 60 + 60 + 60
           );
         } else {
-          alert("Error al iniciar sesión");
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al iniciar sesión";
         }
       }
     },

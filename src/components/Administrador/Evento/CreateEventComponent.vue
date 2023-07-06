@@ -20,6 +20,7 @@
           >Fecha del evento: <span class="text-red-600"> ( * )</span></label
         >
         <input
+         type="date"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="fecha_event"
           placeholder="dd/mm/aaaa"
@@ -82,14 +83,13 @@
       alt="Event"
       class="block w-full object-cover"
       style="height: 480px"
-
     />
     <label
       for="image"
       style="top: 45%"
       class="cursor-pointer absolute left-8 right-8 flex items-center justify-center gap-3 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
-      <img src="../../../assets/images/icon-descargar.svg" alt="Descargar"  />
+      <img src="../../../assets/images/icon-descargar.svg" alt="Descargar" />
       <span class="mt-1">Agregar foto evento</span>
     </label>
     <input
@@ -149,8 +149,12 @@ export default {
         ojb.direction = this.form.direction;
         ojb.banner = this.form.banner;
         var result = await eventoService.createEvent(ojb);
-       
+
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Evento creado";
+
           this.$refs.banner.value = null;
           this.form.name = "";
           this.form.fecha = "";
@@ -167,10 +171,14 @@ export default {
           this.form.aforo = "";
           this.form.direction = "";
           this.form.banner = "";
-          alert(JSON.stringify(result.data));
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = JSON.stringify(result.data);
         }
       } else {
-        alert("Revisar datos ha enviar");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Revisar datos ha enviar";
       }
     },
   },

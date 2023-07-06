@@ -200,9 +200,14 @@ export default {
       if (opcion == true) {
         var result = await deleteService.deletemultiple(this.deleteList, "Promotor");
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Eliminación con éxito";
           window.location.reload();
         } else {
-          alert("Error al eliminar");
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al eliminar";
         }
       }
     },
@@ -212,10 +217,16 @@ export default {
       objPage.table = "adminPromotores";
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Resultados de la búsqueda";
+
         this.pagination.state = true;
         this.promotores = result.data;
       } else {
-        alert("Error en la búsqueda");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error en la búsqueda";
       }
     },
     changeTableOrder(data) {
@@ -236,6 +247,10 @@ export default {
       objPage.order_type = this.table.order_type;
       var result = await promotorService.getPromotor(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Listado de promotores";
+
         this.pagination.state = false;
         this.promotores = result.data.data;
         this.promotores.forEach((element) => (element.check = false));
@@ -255,7 +270,9 @@ export default {
           }
         });
       } else {
-        alert("Error al mostrar  los promotores");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar los promotores";
       }
     },
   },

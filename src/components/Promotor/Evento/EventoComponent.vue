@@ -142,10 +142,15 @@ export default {
       objPage.table = "adminEventos";
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Resultados de la búsqueda";
         this.pagination.state = true;
         this.eventos = result.data;
       } else {
-        alert("Error en la búsqueda");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error en la búsqueda";
       }
     },
     charedEvent(codeEvento) {
@@ -154,9 +159,13 @@ export default {
         undefined,
         (error, event) => {
           if (error) {
-            alert("Error al copiar el Enlace");
+            this.$store.state.alert.status = true;
+            this.$store.state.alert.type = "error";
+            this.$store.state.alert.text = "Error al copiar el enlace";
           } else {
-            alert("Enlace copiado");
+            this.$store.state.alert.status = true;
+            this.$store.state.alert.type = "success";
+            this.$store.state.alert.text = "Enlace copiado";
           }
         }
       );
@@ -175,6 +184,9 @@ export default {
       objPage.order_type = this.table.order_type;
       var result = await clientService.getEvent(objPage, "admin");
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Listado de eventos";
         this.pagination.state = false;
         this.eventos = result.data.data;
 
@@ -194,7 +206,9 @@ export default {
           }
         });
       } else {
-        alert("Error al mostrar los Eventos");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar los eventos";
       }
     },
   },

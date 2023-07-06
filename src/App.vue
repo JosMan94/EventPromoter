@@ -1,5 +1,5 @@
 <template>
-  <!-- <alert-component/> -->
+  <alert-component/>
   <load-component />
   <router-view />
 </template>

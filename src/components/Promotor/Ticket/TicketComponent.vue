@@ -108,7 +108,10 @@
               <span class="block xl:hidden text-text-blue mb-2">F. Nacimiento:</span>
               {{ data.date_of_brith }}
             </p>
-            <p class="xl:col-span-2 xl:flex items-center gap-4" style="word-break: break-all;">
+            <p
+              class="xl:col-span-2 xl:flex items-center gap-4"
+              style="word-break: break-all"
+            >
               <span class="block xl:hidden text-text-blue mb-2">E-mail:</span>
               {{ data.email }}
             </p>
@@ -191,10 +194,15 @@ export default {
       objPage.codePromotor = this.$store.state.codeUser;
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Resultados de la búsqueda";
         this.pagination.state = true;
         this.ticketsPromotor = result.data;
       } else {
-        alert("Error en la búsqueda");
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error en la búsqueda";
       }
     },
     async getTicketPromotor(option, data) {
@@ -213,6 +221,9 @@ export default {
         objPage.order_type = this.table.order_type;
         var result = await promotorService.ticketPromotor(objPage);
         if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Listado de tickets";
           this.pagination.state = false;
           this.ticketsPromotor = result.data.data;
           this.pagination.links = [];
@@ -231,7 +242,9 @@ export default {
             }
           });
         } else {
-          alert("Error al mostrar sus tickets");
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al mostrar sus tickets";
         }
       } else {
         this.$store.commit("signOff");
