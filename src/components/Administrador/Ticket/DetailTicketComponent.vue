@@ -56,7 +56,7 @@
       </form>
     </article>
     <aside class="hidden xl:block">
-      <img :src="banner" alt="Event" />
+      <img :src="banner" alt="Event"  class="block w-full object-contain"  style="height: 480px"/>
     </aside>
   </div>
 </template>

@@ -125,6 +125,9 @@ export default {
         state: false,
         links: [],
       },
+      table: {
+        order_type: "id",
+      },
       clave: "",
     };
   },
@@ -169,7 +172,8 @@ export default {
       var objPage = new Object();
       objPage.page = page;
       objPage.length = length;
-      var result = await clientService.getEvent(objPage);
+      objPage.order_type = this.table.order_type;
+      var result = await clientService.getEvent(objPage, "admin");
       if (result.success) {
         this.pagination.state = false;
         this.eventos = result.data.data;

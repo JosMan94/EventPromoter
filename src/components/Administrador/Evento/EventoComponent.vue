@@ -246,7 +246,7 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
-      var result = await clientService.getEvent(objPage);
+      var result = await clientService.getEvent(objPage, "admin");
       if (result.success) {
         this.pagination.state = false;
         this.eventos = result.data.data;

@@ -121,7 +121,7 @@
   <!-- LOGIN -->
   <section
     :class="statusFormLogin ? '' : 'opacity-0 pointer-events-none'"
-    class="fixed inset-0 bg-bg-black bg-opacity-50 z-50 flex items-center justify-center"
+    class="fixed inset-0 bg-bg-black bg-opacity-50 z-40 flex items-center justify-center"
   >
     <article class="pt-20 pb-10 px-10 xl:px-20 bg-white rounded-2xl relative">
       <h3 class="font-bold text-xl xl:text-2xl text-center mb-10">

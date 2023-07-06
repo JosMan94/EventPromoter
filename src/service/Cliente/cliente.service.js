@@ -1,39 +1,57 @@
 import axios from 'axios'
+import store from '../../store/index';
+
 export const clientService = {
-    getEvent(data) {
+    getEvent(data, type) {
+        if (type === 'admin') {
+            store.state.load.status = true;
+        } else if (type === 'home') {
+            store.state.loadEvent.status = true;
+        }
 
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/list-events'
         response = axios
-            .post(url, { order_type: 'id' })
+            .post(url, data)
             .then(response => {
+                if (type === 'admin') {
+                    store.state.load.status = false;
+                } else if (type === 'home') {
+                    store.state.loadEvent.status = false;
+                }
+
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
+                if (type === 'admin') {
+                    store.state.load.status = false;
+                } else if (type === 'home') {
+                    store.state.loadEvent.status = false;
+                }
                 return { success: false }
             })
         return response
     },
     login(data) {
+        store.state.load.status = true;
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/client/auth'
         response = axios
             .post(url, data)
             .then(response => {
-
+                store.state.load.status = false;
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
+                store.state.load.status = false;
                 return { success: false }
             })
         return response
     },
     getDetailEnvet(codeEvent, codePromotor) {
-
-
+        store.state.load.status = true;
         let response
         var url = '';
-
         if (codePromotor) {
             url = 'https://promotoresback.azurewebsites.net/api/event-invitation/' + codeEvent + '/' + codePromotor
 
@@ -43,25 +61,28 @@ export const clientService = {
         response = axios
             .post(url)
             .then(response => {
-
+                store.state.load.status = false;
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
+                store.state.load.status = false;
                 return { success: false }
             })
         return response
 
     },
     registerEvent(data) {
+        store.state.load.status = true;
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/client/register'
         response = axios
             .post(url, data)
             .then(response => {
+                store.state.load.status = false;
                 return { success: true, data: response.data.data }
             })
             .catch((error) => {
-
+                store.state.load.status = false;
                 if (error.response.data.data === null) {
                     return { success: false, data: error.response.data.message }
                 } else {
@@ -72,14 +93,17 @@ export const clientService = {
         return response
     },
     getClient(data) {
+        store.state.load.status = true;
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/client/list'
         response = axios
             .post(url, data)
             .then(response => {
+                store.state.load.status = false;
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
+                store.state.load.status = false;
                 return { success: false }
             })
         return response

@@ -1,5 +1,25 @@
 <template>
-  <div id="eventos" class="bg-ladrillos">
+  <div id="eventos" class="bg-ladrillos" v-if="getStatusLoaderEvent">
+    <div class="u-container">
+      <Splide
+        id="carousel-hero"
+        :options="optionsEvent"
+        :extensions="extensions"
+        aria-label="Eventos"
+        class="splide"
+      >
+        <SplideSlide class="items-center splide__slide" v-for="n in 10" :key="n">
+          <div
+            class="mx-auto rounded-xl bg-light-gray flex items-center justify-center"
+            style="height: 85%; min-height: 375px"
+          >
+            <img src="../../../../assets/images/loader-white.svg" style="width: 70%" />
+          </div>
+        </SplideSlide>
+      </Splide>
+    </div>
+  </div>
+  <div id="eventos" class="bg-ladrillos" v-else>
     <div class="u-container">
       <Splide
         id="carousel-hero"
@@ -13,7 +33,7 @@
           v-for="data in eventos"
           :key="data"
         >
-          <img :src="data.banner" alt="Event" />
+          <img :src="data.banner" alt="Event" style="height: 85%" />
           <router-link
             :to="{
               name: 'RegisterEvent',
@@ -64,12 +84,17 @@ export default {
   },
   methods: {
     async getEvents() {
-      var result = await clientService.getEvent();
+      var result = await clientService.getEvent({ order_type: "id" }, "home");
       if (result.success) {
         this.eventos = result.data.data;
       } else {
         alert("Error al mostrar los Eventos");
       }
+    },
+  },
+  computed: {
+    getStatusLoaderEvent() {
+      return this.$store.state.loadEvent.status;
     },
   },
 };

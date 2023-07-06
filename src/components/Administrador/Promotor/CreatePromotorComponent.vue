@@ -90,7 +90,8 @@
     <img
       :src="form.avatar.length === 0 ? imgDefault : form.avatar"
       alt="Event"
-      class="block w-full"
+      class="block w-full object-cover"
+      style="height: 480px"
     />
     <label
       for="image"

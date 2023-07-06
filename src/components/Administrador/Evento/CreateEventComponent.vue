@@ -80,14 +80,16 @@
     <img
       :src="form.banner.length === 0 ? imgDefault : form.banner"
       alt="Event"
-      class="block w-full"
+      class="block w-full object-cover"
+      style="height: 480px"
+
     />
     <label
       for="image"
       style="top: 45%"
       class="cursor-pointer absolute left-8 right-8 flex items-center justify-center gap-3 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
-      <img src="../../../assets/images/icon-descargar.svg" alt="Descargar" />
+      <img src="../../../assets/images/icon-descargar.svg" alt="Descargar"  />
       <span class="mt-1">Agregar foto evento</span>
     </label>
     <input

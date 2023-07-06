@@ -3,7 +3,18 @@ export default createStore({
     state: {
         typeUser: null,
         codeUser: null,
+        load: {
+            status: false,
+        },
+        loadEvent: {
+            status: true
+        },
+        alert: {
+            status: false,
+            type: '',
+            text: '',
 
+        }
     },
     mutations: {
         signOff: state => {
