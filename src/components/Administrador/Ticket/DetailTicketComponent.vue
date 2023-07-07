@@ -58,7 +58,7 @@
           REENVIAR VIA EMAIL
         </button>
         <button
-          onclick="window.print()"
+          @click.prevent="dowload(ticket)"
           type="button"
           class="flex items-center justify-center gap-3 bg-main-blue-black text-base font-bold text-white rounded-2xl p-5 text-center"
         >
@@ -103,6 +103,19 @@ export default {
     this.getDetailTicket();
   },
   methods: {
+    async dowload(id) {
+      var result = await ticketService.dowloadTicket(id);
+
+      if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Ticket listo para descargar";
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al traer la descarga";
+      }
+    },
     async petitionEmail() {
       var objPage = new Object();
       objPage.idTicket = this.idTicket;
