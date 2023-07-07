@@ -133,7 +133,15 @@ export default {
   },
   mounted() {
     this.getEvents();
-    this.codePromotor = this.$cookies.get("code");
+    var codeUser = this.$cookies.get("code");
+    if (codeUser) {
+      this.codePromotor = codeUser;
+    } else {
+      this.$store.state.alert.status = true;
+      this.$store.state.alert.type = "error";
+      this.$store.state.alert.text = "Vuelva a iniciar sesión";
+      window.location.reload();
+    }
   },
   methods: {
     async search() {
