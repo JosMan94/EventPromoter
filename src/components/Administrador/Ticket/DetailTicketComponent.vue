@@ -18,22 +18,26 @@
         ></qrcode-vue>
       </div>
 
-      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+      <h2 class="font-bold text-xl xl:text-3xl mb-10">
         <span class="text-text-blue">Tu código es: </span>
         <span class="text-black">{{ ticket }}</span>
-      </h3>
-      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+      </h2>
+      <h2 class="font-bold text-xl xl:text-3xl mb-10">
         <span class="text-text-blue">Evento: </span>
         <span class="text-black">{{ nameEvento }}</span>
-      </h3>
-      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+      </h2>
+      <h2 class="font-bold text-xl xl:text-3xl mb-10">
         <span class="text-text-blue">Fecha: </span>
         <span class="text-black">{{ fecha }}</span>
-      </h3>
-      <h3 class="font-bold text-xl xl:text-3xl mb-10">
+      </h2>
+      <h2 class="font-bold text-xl xl:text-3xl mb-10">
         <span class="text-text-blue">Dirección: </span>
         <span class="text-black">{{ lugar }}</span>
-      </h3>
+      </h2>
+      <h2 class="font-bold text-xl xl:text-3xl mb-10">
+        <span class="text-text-blue">Dni: </span>
+        <span class="text-black">{{ dni }}</span>
+      </h2>
       <form @submit.prevent="petitionEmail" class="grid">
         <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
           >E-mail:</label
@@ -92,6 +96,7 @@ export default {
       nameEvento: null,
       fecha: null,
       lugar: null,
+      dni: null,
       qrView: {
         idClient: null,
         idEvent: null,
@@ -145,6 +150,7 @@ export default {
         this.ticket = result.data.idTicket;
         this.banner = result.data.banner;
         this.nameEvento = result.data.nameEvent ?? null;
+        this.dni = result.data.dni ?? null;
 
         this.fecha = result.data.fechaEvent ?? null;
         this.lugar = result.data.lugarEvent ?? null;
