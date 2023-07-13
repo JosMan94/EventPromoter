@@ -117,7 +117,7 @@ export default {
       this.$router.push({ name: "Home" });
     },
     verifyPIN() {
-      if (this.pin === "123456789") {
+      if (this.pin === "123456789@code@") {
         this.verifyTicket();
         this.pin = null;
       } else {
