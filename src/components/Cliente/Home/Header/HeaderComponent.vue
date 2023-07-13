@@ -99,7 +99,7 @@
     <button
       v-if="sessionUser === false"
       type="button"
-      @click.prevent="openLogin"
+      @click.prevent="login"
       class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center bg-main-green hover:bg-main-green transition-colors"
     >
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />

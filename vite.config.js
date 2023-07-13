@@ -9,6 +9,9 @@ export default ({ mode }) => {
         ...loadEnv(mode, process.cwd()),
     };
     return defineConfig({
+        server: {
+            port: 8080
+        },
         // server: {
         //     port: process.env.VITE_PORT,
         //     proxy: {
