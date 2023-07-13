@@ -3,7 +3,11 @@
     <div
       class="u-container py-5 flex items-center justify-center xl:justify-between relative"
     >
-      <button class="absolute left-0 top-6 xl:hidden" id="btn-abrir-menu">
+      <button
+        @click.prevent="changeStatusMenu"
+        class="absolute left-0 top-6 xl:hidden"
+        id="btn-abrir-menu"
+      >
         <img src="../../../../assets/images/menu.png" alt="" />
       </button>
       <router-link :to="{ name: 'Home' }">
@@ -65,8 +69,8 @@
   </header>
   <!-- Menu abierto -->
   <nav
-    id="menu"
-    class="fixed top-0 bottom-0 left-0 right-0 py-14 bg-main-blue-black min-h-screen transition-transform z-10 menu-cerrado"
+    :class="menuClass ? '' : 'menu-cerrado'"
+    class="fixed top-0 bottom-0 left-0 right-0 py-14 bg-main-blue-black min-h-screen transition-transform z-10"
   >
     <button type="button" class="block w-full mb-10 pl-12 pr-40">
       <img src="../../../../assets/images/LOGO.png" alt="LOGO" class="mx-auto" />
@@ -114,8 +118,12 @@
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       Plataforma
     </button>
-    <button type="button" class="absolute top-8 right-8" id="btn-cerrar-menu">
-      <img src="../../../../assets/images/Icon-x.png" alt="Cerrar menu" />
+    <button class="absolute top-8 right-8" id="btn-cerrar-menu">
+      <img
+        @click.prevent="changeStatusMenu"
+        src="../../../../assets/images/Icon-x.png"
+        alt="Cerrar menu"
+      />
     </button>
   </nav>
 
@@ -178,6 +186,7 @@ import { clientService } from "../../../../service/Cliente/cliente.service";
 export default {
   data() {
     return {
+      menuClass: false,
       statusFormLogin: false,
       form: {
         email: "",
@@ -186,20 +195,21 @@ export default {
     };
   },
   mounted() {
-    const $btn_abrir_menu = document.getElementById("btn-abrir-menu");
-    const $btn_cerrar_menu = document.getElementById("btn-cerrar-menu");
-    const $menu = document.getElementById("menu");
-
-    $btn_abrir_menu.addEventListener("click", () =>
-      $menu.classList.remove("menu-cerrado")
-    );
-    $btn_cerrar_menu.addEventListener("click", () => $menu.classList.add("menu-cerrado"));
-
-    addEventListener("click", (e) => {
-      if (e.target.matches("#menu")) $menu.classList.add("menu-cerrado");
-    });
+    // const $btn_abrir_menu = document.getElementById("btn-abrir-menu");
+    // const $btn_cerrar_menu = document.getElementById("btn-cerrar-menu");
+    // const $menu = document.getElementById("menu");
+    // $btn_abrir_menu.addEventListener("click", () =>
+    //   $menu.classList.remove("menu-cerrado")
+    // );
+    // $btn_cerrar_menu.addEventListener("click", () => $menu.classList.add("menu-cerrado"));
+    // addEventListener("click", (e) => {
+    //   if (e.target.matches("#menu")) $menu.classList.add("menu-cerrado");
+    // });
   },
   methods: {
+    changeStatusMenu() {
+      this.menuClass = !this.menuClass;
+    },
     plataformaUser() {
       if (this.$cookies.get("session") === "admin") {
         this.$router.push({ name: "Administrador", params: { viewAdmin: "eventos" } });
