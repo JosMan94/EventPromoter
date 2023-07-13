@@ -118,12 +118,12 @@
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       Plataforma
     </button>
-    <button class="absolute top-8 right-8" id="btn-cerrar-menu">
-      <img
-        @click.prevent="changeStatusMenu"
-        src="../../../../assets/images/Icon-x.png"
-        alt="Cerrar menu"
-      />
+    <button
+      @click.prevent="changeStatusMenu"
+      class="absolute top-8 right-8 h-10 w-10 bg-red-700"
+     
+    >
+      <img src="../../../../assets/images/Icon-x.png" alt="Cerrar menu" />
     </button>
   </nav>
 
