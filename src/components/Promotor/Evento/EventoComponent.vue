@@ -82,7 +82,7 @@
           <button
             type="button"
             @click.prevent="charedEvent(data.code_event)"
-            class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
+            class=" xl:block pl-4 xl:col-span-2 flex items-center gap-4"
           >
             <img src="../../../assets/images/more_actions.png" alt="" />
           </button>
