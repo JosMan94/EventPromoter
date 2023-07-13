@@ -120,7 +120,7 @@
     </button>
     <button
       @click.prevent="changeStatusMenu"
-      class="absolute top-8 right-8 h-10 w-10 bg-red-700"
+      class="absolute top-8 right-8 h-10 w-10 "
      
     >
       <img src="../../../../assets/images/Icon-x.png" alt="Cerrar menu" />
