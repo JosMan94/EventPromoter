@@ -133,7 +133,7 @@
       </button>
       <span v-for="data in pagination.links" :key="data">
         <button
-          @click.prevent="getClients(true, data.label)"
+          @click.prevent="getPromotor(true, data.label)"
           :class="data.status ? 'bg-bg-black text-white' : ''"
           class="h-8 w-8 rounded-full flex items-center justify-center hover:bg-bg-black hover:text-white transition-colors"
         >
