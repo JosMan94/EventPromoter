@@ -20,7 +20,7 @@
           >Fecha del evento: <span class="text-red-600"> ( * )</span></label
         >
         <input
-         type="date"
+          type="date"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="fecha_event"
           placeholder="dd/mm/aaaa"
@@ -32,6 +32,7 @@
           >Cantidad de entradas: <span class="text-red-600"> ( * )</span></label
         >
         <input
+          type="number"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="entradas"
           placeholder="10,000"
@@ -43,6 +44,7 @@
           >Aforo permitido: <span class="text-red-600"> ( * )</span></label
         >
         <input
+          type="number"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="aforo"
           placeholder="2,000"
