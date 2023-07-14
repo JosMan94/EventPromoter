@@ -156,8 +156,8 @@ export default {
         this.form.avatar.length !== 0
       ) {
         var ojb = new Object();
-        ojb.document = this.form.documento;
-        ojb.cellphone = this.form.celular;
+        ojb.document = String(this.form.documento);
+        ojb.cellphone = String(this.form.celular);
         ojb.name = this.form.nombre;
         ojb.alias = this.form.alias;
         ojb.date_of_birth = this.form.fecha;
