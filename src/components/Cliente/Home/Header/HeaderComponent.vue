@@ -14,7 +14,8 @@
         <img
           src="../../../../assets/images/LOGO.png"
           alt="Logo"
-          class="block h-6 w-auto xl:h-auto mx-auto"
+          class="block w-auto xl:h-auto mx-auto"
+          style="width: 300px"
         />
       </router-link>
       <nav class="text-light-gray hidden xl:block">
@@ -58,10 +59,11 @@
         </ul>
       </nav>
       <div class="hidden xl:flex gap-6">
-        <a href="#">
+        <!-- <a href="#">
           <img src="../../../../assets/images/fb.png" alt="Facebook" />
-        </a>
-        <a href="#">
+        </a> -->
+
+        <a href="https://www.instagram.com/euphoriape_/" target="_Blank">
           <img src="../../../../assets/images/ig.png" alt="instagram" />
         </a>
       </div>
@@ -118,11 +120,7 @@
       <img src="../../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       Plataforma
     </button>
-    <button
-      @click.prevent="changeStatusMenu"
-      class="absolute top-8 right-8 h-10 w-10 "
-     
-    >
+    <button @click.prevent="changeStatusMenu" class="absolute top-8 right-8 h-10 w-10">
       <img src="../../../../assets/images/Icon-x.png" alt="Cerrar menu" />
     </button>
   </nav>
