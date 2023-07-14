@@ -33,6 +33,7 @@
               class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
               id="document"
               placeholder="Ingresa documento"
+              type="number"
               v-model="form.documento"
             />
           </div>
@@ -44,6 +45,7 @@
               class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
               id="tel"
               placeholder="Ingresa celular"
+              type="number"
               v-model="form.celular"
             />
           </div>
@@ -79,6 +81,7 @@
               id="email"
               placeholder="Ingresa correo electrónico"
               v-model="form.email"
+              type="email"
             />
           </div>
 
@@ -98,59 +101,59 @@
   </span>
   <span v-if="viewStatus">
     <section class="u-container">
-    <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
-      Ticket emitido
-    </h2>
-    <div class="xl:grid xl:grid-cols-2 items-start justify-between gap-40">
-      <article>
-        <div class="mb-10 mx-auto xl:mx-0">
-          <qrcode-vue
-            size="200"
-            :value="
-              'https://in.niiru.club/security/verify/entry/' +
-              qrView.idClient +
-              '/' +
-              qrView.idEvent +
-              '/' +
-              qrView.idPromotor
-            "
-          ></qrcode-vue>
-        </div>
+      <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
+        Ticket emitido
+      </h2>
+      <div class="xl:grid xl:grid-cols-2 items-start justify-between gap-40">
+        <article>
+          <div class="mb-10 mx-auto xl:mx-0">
+            <qrcode-vue
+              size="200"
+              :value="
+                'https://in.niiru.club/security/verify/entry/' +
+                qrView.idClient +
+                '/' +
+                qrView.idEvent +
+                '/' +
+                qrView.idPromotor
+              "
+            ></qrcode-vue>
+          </div>
 
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Tu código es: </span>
-          <span class="text-black">{{ registro.ticket }}</span>
-        </h4>
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Evento: </span>
-          <span class="text-black">{{ registro.nameEvento }}</span>
-        </h4>
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Fecha: </span>
-          <span class="text-black">{{ registro.fecha }}</span>
-        </h4>
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Dirección: </span>
-          <span class="text-black">{{ registro.lugar }}</span>
-        </h4>
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Dni: </span>
-          <span class="text-black">{{ registro.dni }}</span>
-        </h4>
-        <h4 class="font-bold text-xl xl:text-3xl mb-10">
-          <span class="text-text-blue">Email: </span>
-          <span class="text-black">{{ registro.email }}</span>
-        </h4>
-      </article>
-      <aside class="hidden xl:block">
-        <img
-          :src="registro.banner"
-          alt="Event"
-          class="block w-full object-contain"
-          style="height: 480px"
-        />
-      </aside>
-    </div>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Tu código es: </span>
+            <span class="text-black">{{ registro.ticket }}</span>
+          </h4>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Evento: </span>
+            <span class="text-black">{{ registro.nameEvento }}</span>
+          </h4>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Fecha: </span>
+            <span class="text-black">{{ registro.fecha }}</span>
+          </h4>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Dirección: </span>
+            <span class="text-black">{{ registro.lugar }}</span>
+          </h4>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Dni: </span>
+            <span class="text-black">{{ registro.dni }}</span>
+          </h4>
+          <h4 class="font-bold text-xl xl:text-3xl mb-10">
+            <span class="text-text-blue">Email: </span>
+            <span class="text-black">{{ registro.email }}</span>
+          </h4>
+        </article>
+        <aside class="hidden xl:block">
+          <img
+            :src="registro.banner"
+            alt="Event"
+            class="block w-full object-contain"
+            style="height: 480px"
+          />
+        </aside>
+      </div>
     </section>
   </span>
 </template>
@@ -237,8 +240,8 @@ export default {
         this.form.idEvento !== null
       ) {
         var ojb = new Object();
-        ojb.document = this.form.documento;
-        ojb.cellphone = this.form.celular;
+        ojb.document = String(this.form.documento);
+        ojb.cellphone = String(this.form.celular);
         ojb.name = this.form.name;
         ojb.date_of_brith = this.form.fecha;
         ojb.email = this.form.email;
