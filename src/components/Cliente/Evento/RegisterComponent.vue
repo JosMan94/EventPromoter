@@ -33,7 +33,7 @@
               class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
               id="document"
               placeholder="Ingresa documento"
-              type="number"
+              type="tel"
               v-model="form.documento"
             />
           </div>
@@ -45,7 +45,7 @@
               class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
               id="tel"
               placeholder="Ingresa celular"
-              type="number"
+              type="tel"
               v-model="form.celular"
             />
           </div>
