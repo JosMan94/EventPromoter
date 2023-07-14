@@ -146,8 +146,8 @@ export default {
         var ojb = new Object();
         ojb.name = this.form.name;
         ojb.date = this.form.fecha;
-        ojb.number_tickets = this.form.canditad;
-        ojb.capacity = this.form.aforo;
+        ojb.number_tickets = String(this.form.canditad);
+        ojb.capacity = String(this.form.aforo);
         ojb.direction = this.form.direction;
         ojb.banner = this.form.banner;
         var result = await eventoService.createEvent(ojb);
