@@ -17,6 +17,26 @@ export const eventoService = {
             })
         return response
     },
+    updateStatusEvent(id, dataStatus) {
+
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/status-change-events'
+        response = axios
+            .put(url, {
+                "id_event": id,
+                "status": dataStatus
+            })
+            .then(() => {
+                store.state.load.status = false;
+                return { success: true }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                return { success: false }
+            })
+        return response
+    },
 
 
 }

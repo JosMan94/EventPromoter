@@ -48,7 +48,7 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-8 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-10 gap-5 table-head">
         <!-- @click.prevent="changeTableOrder('id')" -->
         <div class="col-span-2 flex items-center gap-5">
           <!-- <input
@@ -91,13 +91,13 @@
             alt=""
           /> -->
         </p>
-        <!-- <p class="col-span-2 flex items-center gap-4">
+        <p class="col-span-2 flex items-center gap-4">
           ACCIONES
           <img src="../../../assets/images/arrow-down.png" alt="" />
-        </p> -->
+        </p>
       </header>
       <span v-for="data in eventos" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-8 gap-5 table-row">
+        <div class="grid grid-cols-2 xl:grid-cols-10 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <!-- checked -->
             <!-- <input
@@ -123,10 +123,24 @@
             <span class="block xl:hidden text-text-blue mb-2">Lugar</span>
             {{ data.direction }}
           </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">Lugar</span>
+
+            <label class="switch">
+              <input
+                type="checkbox"
+                :value="data.status"
+                :checked="data.status"
+                @change="updateStatusEvent(data.id, data.status)"
+              />
+              <span class="slider round"></span>
+            </label>
+          </p>
           <p class="xl:col-span-2 block xl:hidden items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">N° Generales:</span>
             {{ data.number_tickets }}
           </p>
+
           <!-- 
           <button
             type="button"
@@ -162,6 +176,7 @@
 import { clientService } from "../../../service/Cliente/cliente.service";
 import { verifyService } from "../../../service/Verify/verify.service";
 import { deleteService } from "../../../service/Delete/delete.service";
+import { eventoService } from "../../../service/Evento/evento.service";
 export default {
   data() {
     return {
@@ -181,6 +196,25 @@ export default {
     this.getEvents();
   },
   methods: {
+    async updateStatusEvent(id, status) {
+      var dataStatus = false;
+      if (status === 1) {
+        dataStatus = 0;
+      } else if (status === 0) {
+        dataStatus = 1;
+      }
+      var result = await eventoService.updateStatusEvent(id, dataStatus);
+      if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Evento actualizado";
+        this.getEvents();
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al actualizar";
+      }
+    },
     deleteGroup(data, type) {
       if (type === "one") {
         if (this.deleteList.length === 0) {
@@ -297,3 +331,67 @@ export default {
   },
 };
 </script>
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
