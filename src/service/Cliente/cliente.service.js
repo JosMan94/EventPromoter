@@ -2,32 +2,39 @@ import axios from 'axios'
 import store from '../../store/index';
 
 export const clientService = {
-    getEvent(data, type) {
-        if (type === 'admin') {
-            store.state.load.status = true;
-        } else if (type === 'home') {
-            store.state.loadEvent.status = true;
-        }
-
+    getEvent(data) {
+        store.state.loadEvent.status = true;
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/list-events'
         response = axios
             .post(url, data)
             .then(response => {
-                if (type === 'admin') {
-                    store.state.load.status = false;
-                } else if (type === 'home') {
-                    store.state.loadEvent.status = false;
-                }
-
+                store.state.loadEvent.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
-                if (type === 'admin') {
-                    store.state.load.status = false;
-                } else if (type === 'home') {
-                    store.state.loadEvent.status = false;
-                }
+
+                store.state.loadEvent.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
+    getEventAdmin(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/events-admin-list'
+        response = axios
+            .post(url, data)
+            .then(response => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true, data: response.data.data }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -40,10 +47,12 @@ export const clientService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -62,10 +71,12 @@ export const clientService = {
             .post(url)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -79,10 +90,12 @@ export const clientService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch((error) => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 if (error.response.data.data === null) {
                     return { success: false, data: error.response.data.message }
                 } else {
@@ -100,10 +113,12 @@ export const clientService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response

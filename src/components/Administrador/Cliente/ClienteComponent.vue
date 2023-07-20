@@ -122,7 +122,7 @@
     </div>
     <div
       v-if="pagination.state === false"
-      class="bg-gray-100 hidden xl:flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
+      class="bg-gray-100 flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
     >
       <button class="h-8 w-8 rounded-full flex items-center justify-center">
         <img src="../../../assets/images/arrow-left.png" alt="Prev" />

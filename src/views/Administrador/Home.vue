@@ -33,7 +33,7 @@ import ClienteComponent from "../../components/Administrador/Cliente/ClienteComp
 import PromotorComponent from "../../components/Administrador/Promotor/PromotorComponent.vue";
 import TicketComponent from "../../components/Administrador/Ticket/TicketComponent.vue";
 import CreateEventComponent from "../../components/Administrador/Evento/CreateEventComponent.vue";
-import CreatePromotorComponent from "../../components/Administrador/Promotor/CreatePromotorComponent.vue"
+import CreatePromotorComponent from "../../components/Administrador/Promotor/CreatePromotorComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -44,7 +44,7 @@ export default {
     PromotorComponent,
     TicketComponent,
     CreateEventComponent,
-    CreatePromotorComponent
+    CreatePromotorComponent,
   },
   data() {
     return {

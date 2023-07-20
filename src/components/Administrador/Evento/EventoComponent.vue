@@ -153,7 +153,7 @@
     </div>
     <div
       v-if="pagination.state === false"
-      class="bg-gray-100 hidden xl:flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
+      class="bg-gray-100 flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
     >
       <button class="h-8 w-8 rounded-full flex items-center justify-center">
         <img src="../../../assets/images/arrow-left.png" alt="Prev" /></button
@@ -291,7 +291,7 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
-      var result = await clientService.getEvent(objPage, "admin");
+      var result = await clientService.getEventAdmin(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "success";

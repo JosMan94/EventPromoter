@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     async getEvents() {
-      var result = await clientService.getEvent({ order_type: "id" }, "home");
+      var result = await clientService.getEvent({ order_type: "id" });
       if (result.success) {
         this.eventos = result.data.data;
       } else {

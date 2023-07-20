@@ -13,10 +13,12 @@
                 })
                 .then(() => {
                     store.state.load.status = false;
+                    store.state.nav.status = false
                     return { success: true }
                 })
                 .catch(() => {
                     store.state.load.status = false;
+                    store.state.nav.status = false
                     return { success: false }
                 })
             return response

@@ -15,10 +15,12 @@ export const verifyService = {
             .post(url)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -31,10 +33,12 @@ export const verifyService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response

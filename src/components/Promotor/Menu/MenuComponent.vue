@@ -34,8 +34,8 @@
   </nav>
   <!-- Menu abierto -->
   <div
-    id="menu"
-    class="bg-black bg-opacity-50 fixed top-0 bottom-0 left-0 right-0 transition-transform menu-cerrado z-10"
+    :class="$store.state.nav.status ? '' : 'menu-cerrado'"
+    class="bg-black bg-opacity-50 fixed top-0 bottom-0 left-0 right-0 transition-transform z-10"
   >
     <nav
       class="relative py-14 bg-main-blue-black min-h-screen xl:w-max flex flex-col justify-between"
@@ -71,7 +71,11 @@
         <img src="../../../assets/images/cerrar-sesion.png" />
         Cerrar Sesión
       </button>
-      <button type="button" class="absolute top-8 right-8" id="btn-cerrar-menu">
+      <button
+        @click.prevent="closeNav"
+        type="button"
+        class="absolute top-8 right-8 h-10 w-10"
+      >
         <img src="../../../assets/images/Icon-x.png" alt="Cerrar menu" />
       </button>
     </nav>
@@ -83,21 +87,11 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    const $btn_abrir_menu = document.getElementById("btn-abrir-menu");
-    const $btn_cerrar_menu = document.getElementById("btn-cerrar-menu");
-    const $menu = document.getElementById("menu");
-
-    $btn_abrir_menu.addEventListener("click", () =>
-      $menu.classList.remove("menu-cerrado")
-    );
-    $btn_cerrar_menu.addEventListener("click", () => $menu.classList.add("menu-cerrado"));
-
-    addEventListener("click", (e) => {
-      if (e.target.matches("#menu")) $menu.classList.add("menu-cerrado");
-    });
-  },
+  mounted() {},
   methods: {
+    closeNav() {
+      this.$store.state.nav.status = false;
+    },
     cerrarSesion() {
       this.$store.commit("signOff");
       this.$router.push({ name: "Home" });

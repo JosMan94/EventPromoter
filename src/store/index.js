@@ -13,7 +13,9 @@ export default createStore({
             status: false,
             type: '',
             text: '',
-
+        },
+        nav: {
+            status: false,
         }
     },
     mutations: {

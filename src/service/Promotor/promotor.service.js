@@ -9,10 +9,12 @@ export const promotorService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -25,10 +27,12 @@ export const promotorService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch((error) => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false, data: error.response.data.data }
             })
         return response
@@ -41,10 +45,12 @@ export const promotorService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch((error) => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response

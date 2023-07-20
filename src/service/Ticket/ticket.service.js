@@ -9,6 +9,7 @@ export const ticketService = {
             .get(url, { responseType: 'blob' })
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
@@ -19,6 +20,7 @@ export const ticketService = {
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -31,10 +33,12 @@ export const ticketService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -47,10 +51,12 @@ export const ticketService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
@@ -63,10 +69,12 @@ export const ticketService = {
             .post(url, data)
             .then(response => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: true, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;
+                store.state.nav.status = false
                 return { success: false }
             })
         return response
