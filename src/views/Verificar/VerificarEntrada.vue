@@ -119,7 +119,7 @@ export default {
       window.close();
     },
     verifyPIN() {
-      if (this.pin === "123456789@code@") {
+      if (this.pin === "271237") {
         this.verifyTicket();
         this.pin = null;
       } else {
