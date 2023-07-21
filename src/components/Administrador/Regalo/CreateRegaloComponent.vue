@@ -40,6 +40,20 @@
           v-model="form.amount"
         />
       </div>
+      <div>
+        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
+          >Evento: <span class="text-red-600"> ( * ) </span></label
+        >
+        <select
+          v-model="form.idEvento"
+          class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
+        >
+          <option value="nulo" disabled selected>Seleccionar un evento</option>
+          <option :value="data.id" v-for="data in eventos" :key="data">
+            {{ data.name }}
+          </option>
+        </select>
+      </div>
     </form>
     <button
       type="submit"
@@ -52,7 +66,7 @@
 </template>
 <script>
 import { regaloService } from "../../../service/Regalo/regalo.service";
-
+import { clientService } from "../../../service/Cliente/cliente.service";
 export default {
   data() {
     return {
@@ -60,20 +74,37 @@ export default {
         title: "",
         description: "",
         amount: "",
+        idEvento: "nulo",
       },
+      eventos: [],
     };
   },
+  mounted() {
+    this.getEvents();
+  },
   methods: {
+    async getEvents() {
+      var result = await clientService.getEvent({ order_type: "id" });
+      if (result.success) {
+        this.eventos = result.data.data;
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar los eventos";
+      }
+    },
     async createRegalo() {
       if (
         this.form.title.length !== 0 &&
         this.form.description.length !== 0 &&
-        this.form.amount.length !== 0
+        this.form.amount.length !== 0 &&
+        this.form.idEvento !== "nulo"
       ) {
         var ojb = new Object();
         ojb.title = this.form.title;
         ojb.description = this.form.description;
         ojb.amount = String(this.form.amount);
+        ojb.idEvento = this.form.idEvento;
 
         var result = await regaloService.createRegalo(ojb);
         if (result.success) {
@@ -84,6 +115,7 @@ export default {
           this.form.title = "";
           this.form.description = "";
           this.form.amount = "";
+          this.form.idEvento = "nulo";
 
           this.$router.push({
             name: "Administrador",
@@ -93,6 +125,7 @@ export default {
           this.form.title = "";
           this.form.description = "";
           this.form.amount = "";
+          this.form.idEvento = "nulo";
 
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";

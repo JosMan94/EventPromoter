@@ -181,7 +181,7 @@ export default {
         this.$store.state.alert.text = "Listado de regalos";
 
         this.pagination.state = false;
-        this.clientes = result.data.data;
+        this.regalos = result.data.data;
 
         this.pagination.links = [];
         result.data.links.forEach((element) => {
