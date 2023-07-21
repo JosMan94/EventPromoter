@@ -12,6 +12,8 @@
           "
         ></qrcode-vue>
         <p class="">{{ data.title }}</p>
+        <p class="">{{ data.description }}</p>
+        <p class="">{{ data.amount }}</p>
       </center>
     </div>
   </div>
