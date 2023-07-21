@@ -48,7 +48,7 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-10 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-12 gap-5 table-head">
         <!-- @click.prevent="changeTableOrder('name')" -->
         <div class="col-span-2 flex items-center gap-5">
           <!-- <input
@@ -84,13 +84,15 @@
             alt=""
           /> -->
         </p>
+        <p class="col-span-2 flex items-center gap-4">DNI</p>
+        <p class="col-span-2 flex items-center gap-4">CELULAR</p>
         <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES
           <img src="../../../assets/images/arrow-down.png" alt="" />
         </p> -->
       </header>
       <span v-for="data in promotores" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-10 gap-5 table-row">
+        <div class="grid grid-cols-2 xl:grid-cols-12 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <!-- <input
               :checked="data.check"
@@ -115,6 +117,14 @@
             <span class="block xl:hidden text-text-blue mb-2">Correo electrónico:</span>
             {{ data.email }}
           </p>
+          <p class="col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">Dni:</span>
+            {{ data.document }}
+          </p>
+          <p class="col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">Celular:</span>
+            {{ data.cellphone }}
+          </p>
           <!-- <button
             type="button"
             class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
@@ -126,7 +136,7 @@
     </div>
     <div
       v-if="pagination.state === false"
-      class="bg-gray-100  flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
+      class="bg-gray-100 flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
     >
       <button class="h-8 w-8 rounded-full flex items-center justify-center">
         <img src="../../../assets/images/arrow-left.png" alt="Prev" />
