@@ -100,14 +100,16 @@
   </footer>
 </template>
 <script>
-import { verifyService } from "../../service/Verify/verify.service";
+import { regaloService } from "../../service/Regalo/regalo.service";
 export default {
   data() {
     return {
-      evento: this.$route.params.codeEvent,
+      regalo: this.$route.params.codeRegalo,
       promotor: this.$route.params.codePromotor,
+
       verify: 0,
       status: false,
+
       pin: null,
     };
   },
@@ -125,23 +127,19 @@ export default {
         this.pin = null;
       }
     },
-    closeWindow() {
-      window.close();
-    },
-    async verifyTicket() {
+    async verifyRegalo() {
       this.status = true;
       var obj = new Object();
-      obj.cliente = this.cliente;
-      obj.evento = this.evento;
-      if (this.statusPromotor) {
-        obj.promotor = this.promotor;
-      } else {
-        obj.promotor = null;
-      }
-      var result = await verifyService.verifyTicket(obj);
+      obj.id_regalo = this.regalo;
+      obj.cod_user = this.promotor;
+
+      var result = await regaloService.verifyRegalo(obj);
+      
       if (result.success) {
+
         this.verify = 1;
       } else {
+
         this.verify = 2;
       }
     },

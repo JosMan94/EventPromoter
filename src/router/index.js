@@ -36,7 +36,7 @@ const routes = [{
 
     },
     {
-        path: "/verify/security/regalo/promotor/:codeEvent/:codePromotor",
+        path: "/verify/security/regalo/promotor/:codeRegalo/:codePromotor",
         name: "VerifyRegalo",
         component: () =>
             import ('../views/Verificar/VerificarRegalo.vue'),
