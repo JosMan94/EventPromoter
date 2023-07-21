@@ -5,6 +5,7 @@
     <section class="u-container">
       <evento-component v-if="view === 'eventos'" />
       <ticket-component v-if="view === 'tickets'" />
+      <list-regalo-component v-if="view === 'regalos'" />
     </section>
   </main>
 </template>
@@ -13,8 +14,15 @@ import HeaderComponent from "../../components/Promotor/Header/HeaderComponent.vu
 import MenuComponent from "../../components/Promotor/Menu/MenuComponent.vue";
 import EventoComponent from "../../components/Promotor/Evento/EventoComponent.vue";
 import TicketComponent from "../../components/Promotor/Ticket/TicketComponent.vue";
+import ListRegaloComponent from "../../components/Promotor/Regalo/ListRegaloComponent.vue";
 export default {
-  components: { HeaderComponent, MenuComponent, EventoComponent, TicketComponent },
+  components: {
+    HeaderComponent,
+    MenuComponent,
+    EventoComponent,
+    TicketComponent,
+    ListRegaloComponent,
+  },
   data() {
     return {
       view: this.$route.params.viewPromotor,

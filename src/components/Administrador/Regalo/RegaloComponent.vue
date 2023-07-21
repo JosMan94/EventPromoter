@@ -48,7 +48,7 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-9 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-11 gap-5 table-head">
         <div class="col-span-3 flex items-center gap-5">
           <!-- <input
             :checked="deleteList.length !== 0"
@@ -76,9 +76,13 @@
             alt=""
           /> -->
         </p>
+        <p class="col-span-2 flex items-center gap-4">
+          EVENTO
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+        </p>
       </header>
       <span v-for="data in regalos" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-9 gap-5 table-row">
+        <div class="grid grid-cols-2 xl:grid-cols-11 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">ID:</span>
@@ -97,6 +101,10 @@
             <span class="block xl:hidden text-text-blue mb-2">CANTIDAD:</span>
             {{ data.amount }}
           </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">EVENTO:</span>
+            {{ data.name }}
+          </p>
         </div>
       </span>
     </div>
@@ -109,7 +117,7 @@
       </button>
       <span v-for="data in pagination.links" :key="data">
         <button
-          @click.prevent="getClients(true, data.label)"
+          @click.prevent="getRegalos(true, data.label)"
           :class="data.status ? 'bg-bg-black text-white' : ''"
           class="h-8 w-8 rounded-full flex items-center justify-center hover:bg-bg-black hover:text-white transition-colors"
         >
@@ -208,7 +216,7 @@ export default {
   watch: {
     clave: function (val) {
       if (val === "") {
-        this.getClients();
+        this.getRegalos();
       }
     },
   },
