@@ -10,9 +10,14 @@ export const verifyService = {
         } else {
             url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento;
         }
-
+        // Obtener la fecha y hora actual
+        const fechaHoraActual = new Date();
+        const fechaActual = fechaHoraActual.toISOString().slice(0, 10);
+        const horaActual = fechaHoraActual.toISOString().slice(11, 19);
         response = axios
-            .post(url)
+            .post(url, {
+                'date_scanner': fechaActual + ' ' + horaActual
+            })
             .then(response => {
                 store.state.load.status = false;
                 store.state.nav.status = false
