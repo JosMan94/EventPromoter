@@ -13,7 +13,10 @@ export const verifyService = {
         // Obtener la fecha y hora actual
         const fechaHoraActual = new Date();
         const fechaActual = fechaHoraActual.toISOString().slice(0, 10);
-        const horaActual = fechaHoraActual.toISOString().slice(11, 19);
+        // const horaActual = fechaHoraActual.toISOString().slice(11, 19);
+
+        const horaActual = fechaHoraActual.toLocaleTimeString('es-PE', { timeZone: 'America/Lima' });
+
         response = axios
             .post(url, {
                 'date_scanner': fechaActual + ' ' + horaActual
