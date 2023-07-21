@@ -4,14 +4,14 @@ export const regaloService = {
     verifyRegalo(data) {
         store.state.load.status = true;
         let response
-        let url = 'http://127.0.0.1:8000/api/reclamar/regalo'
+        let url = 'https://promotoresback.azurewebsites.net/api/reclamar/regalo'
         response = axios
             .post(url, data)
             .then(response => {
                 console.log(response, "response");
                 store.state.load.status = false;
                 store.state.nav.status = false
-                return { success: true, data: response.data.data }
+                return { success: true, message: response.data.message, data: response.data.data }
             })
             .catch(() => {
                 store.state.load.status = false;

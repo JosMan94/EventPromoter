@@ -35,15 +35,18 @@
           class="text-main-red text-2xl font-bold text-center mb-14"
           v-if="verify === 2"
         >
-          Cliente no registrado
+          {{ typeVerify }} <br />
+          {{ datosRegalo.description }} - {{ datosRegalo.amount }}
         </h3>
 
         <h3
           class="text-text-blue text-2xl font-bold text-center mb-14"
           v-if="verify === 1"
         >
-          Cliente registrado
+          {{ typeVerify }} <br />
+          {{ datosRegalo.description }} - {{ datosRegalo.amount }}
         </h3>
+
         <button
           type="button"
           @click.prevent="homeView"
@@ -106,11 +109,11 @@ export default {
     return {
       regalo: this.$route.params.codeRegalo,
       promotor: this.$route.params.codePromotor,
-
       verify: 0,
       status: false,
-
+      typeVerify: null,
       pin: null,
+      datosRegalo: null,
     };
   },
   mounted() {},
@@ -134,13 +137,18 @@ export default {
       obj.cod_user = this.promotor;
 
       var result = await regaloService.verifyRegalo(obj);
-      
+
       if (result.success) {
-
         this.verify = 1;
+        if (result.message === 1) {
+          this.typeVerify = "El promotor ya reclamó este regalo";
+        } else if (result.message === 2) {
+          this.typeVerify = "El promotor puede reclamar este regalo";
+        }
+        this.datosRegalo = result.data;
       } else {
-
         this.verify = 2;
+        this.typeVerify = "Ocurrió un error inesperado";
       }
     },
   },
