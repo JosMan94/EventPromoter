@@ -208,7 +208,7 @@ export default {
     async getTicketPromotor(option, data) {
       if (this.$store.state.codeUser !== null) {
         var page = 0;
-        var length = 10;
+        var length = 20;
         if (option) {
           page = data;
         } else {

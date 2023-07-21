@@ -241,7 +241,7 @@ export default {
     },
     async getTickets(option, data) {
       var page = 0;
-      var length = 10;
+      var length = 20;
       if (option) {
         page = data;
       } else {
