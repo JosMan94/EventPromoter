@@ -29,7 +29,7 @@
         :class="view === 'regalos' ? 'bg-main-green' : ''"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-tickets.png" alt="TICKETS" />
+        <img src="../../../assets/images/icon-regalo.png" alt="regalos" width="30" />
       </button>
     </div>
     <button
@@ -76,7 +76,8 @@
           :class="view === 'regalos' ? 'bg-main-green' : ''"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-tickets.png" alt="Tickets" />
+          <img src="../../../assets/images/icon-regalo.png" alt="regalos" />
+
           Regalos
         </button>
       </div>
