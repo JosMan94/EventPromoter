@@ -41,6 +41,14 @@
       >
         <img src="../../../assets/images/icon-tickets.png" alt="TICKETS" />
       </button>
+      <button
+        @click.prevent="changeView('regalos')"
+        :class="view === 'regalos' || view === 'create-regalo' ? 'bg-main-green' : ''"
+        type="button"
+        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+      >
+        <img src="../../../assets/images/icon-tickets.png" alt="regalos" />
+      </button>
     </div>
     <button
       @click.prevent="cerrarSesion"
@@ -97,6 +105,15 @@
         >
           <img src="../../../assets/images/icon-tickets.png" alt="Tickets" />
           Tickets
+        </button>
+        <button
+          @click.prevent="changeView('regalos')"
+          :class="view === 'regalos' || view === 'create-regalo' ? 'bg-main-green' : ''"
+          type="button"
+          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
+        >
+          <img src="../../../assets/images/icon-tickets.png" alt="Tickets" />
+          Regalos
         </button>
       </div>
 

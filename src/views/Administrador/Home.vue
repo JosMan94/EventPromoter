@@ -8,7 +8,8 @@
         view === 'eventos' ||
         view === 'clientes' ||
         view === 'promotores' ||
-        view === 'tickets'
+        view === 'tickets' ||
+        view === 'regalos'
           ? ''
           : 'grid grid-cols-1 xl:grid-cols-3 items-start justify-between gap-10 xl:gap-40'
       "
@@ -18,10 +19,12 @@
       <cliente-component v-if="view === 'clientes'" />
       <promotor-component v-if="view === 'promotores'" />
       <ticket-component v-if="view === 'tickets'" />
+      <regalo-component v-if="view === 'regalos'" />
       <!-- formularios -->
 
       <create-event-component v-if="view === 'create-event'" />
       <create-promotor-component v-if="view === 'create-promotor'" />
+      <create-regalo-component v-if="view === 'create-regalo'" />
     </section>
   </main>
 </template>
@@ -34,6 +37,8 @@ import PromotorComponent from "../../components/Administrador/Promotor/PromotorC
 import TicketComponent from "../../components/Administrador/Ticket/TicketComponent.vue";
 import CreateEventComponent from "../../components/Administrador/Evento/CreateEventComponent.vue";
 import CreatePromotorComponent from "../../components/Administrador/Promotor/CreatePromotorComponent.vue";
+import RegaloComponent from "../../components/Administrador/Regalo/RegaloComponent.vue";
+import CreateRegaloComponent from "../../components/Administrador/Regalo/CreateRegaloComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -45,6 +50,8 @@ export default {
     TicketComponent,
     CreateEventComponent,
     CreatePromotorComponent,
+    RegaloComponent,
+    CreateRegaloComponent,
   },
   data() {
     return {

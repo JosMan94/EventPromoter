@@ -2,7 +2,7 @@
   <!-- Buscador -->
   <article class="mb-6">
     <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
-      Lista de clientes
+      Lista de Regalos
     </h2>
     <form class="grid xl:grid-cols-2 gap-6">
       <div class="relative">
@@ -22,28 +22,33 @@
           <span class="hidden xl:block">Buscar</span>
         </button>
       </div>
-      <!-- <div class="hidden xl:flex justify-between">
+      <div class="hidden xl:flex justify-between">
         <button
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
+          class="invisible py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
         >
           <img src="../../../assets/images/filtros.png" alt="Filtros" />
           Filtrar por
         </button>
         <button
-          @click.prevent="deleteMultipleSelect"
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
-          v-if="deleteList.length !== 0"
+          class="invisible py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
         >
-          <img src="../../../assets/images/plus.png" alt="Agregar" />
+          <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
           Eliminar
         </button>
-      </div> -->
+        <router-link
+          :to="{ name: 'Administrador', params: { viewAdmin: 'create-regalo' } }"
+          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-green text-white"
+        >
+          <img src="../../../assets/images/plus.png" alt="Agregar" />
+          Crear Regalo
+        </router-link>
+      </div>
     </form>
   </article>
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-13 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-9 gap-5 table-head">
         <div class="col-span-3 flex items-center gap-5">
           <!-- <input
             :checked="deleteList.length !== 0"
@@ -51,72 +56,47 @@
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
           /> -->
-          <p class="">NOMBRE Y APELLIDOS</p>
+          <p class="">ID</p>
           <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
         <p class="col-span-2 flex items-center gap-4">
-          DOCUMENTO
+          TÍTULO
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
-          TELÉFONO
+          DESCRIPCIÓN
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
         <!-- @click.prevent="changeTableOrder('date_of_brith')" -->
         <p class="col-span-2 flex items-center gap-4">
-          F. NACIMIENTO
+          CANTIDAD
           <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'date_of_brith' ? 'transform rotate-180' : ''"
             alt=""
           /> -->
         </p>
-        <p class="col-span-2 flex items-center gap-4">
-          E-MAIL
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
-        </p>
-        <!-- <p class="col-span-2 flex items-center gap-4">
-          ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
-        </p> -->
       </header>
-      <span v-for="data in clientes" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
+      <span v-for="data in regalos" :key="data">
+        <div class="grid grid-cols-2 xl:grid-cols-9 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
-            <!-- <input
-              :checked="data.check"
-              type="checkbox"
-              @change="deleteGroup(data, 'one')"
-              class="hidden xl:block w-5 h-5 mr-4"
-            /> -->
-
             <p class="">
-              <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
-              {{ data.name }}
+              <span class="block xl:hidden text-text-blue mb-2">ID:</span>
+              {{ data.id }}
             </p>
           </div>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Documento</span>
-            {{ data.document }}
+            <span class="block xl:hidden text-text-blue mb-2">TÍTULO:</span>
+            {{ data.title }}
           </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Teléfono:</span>
-            {{ data.cellphone }}
+            <span class="block xl:hidden text-text-blue mb-2">DESCRIPCIÓN:</span>
+            {{ data.description }}
           </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">F. Nacimiento:</span>
-            {{ data.date_of_brith }}
+            <span class="block xl:hidden text-text-blue mb-2">CANTIDAD:</span>
+            {{ data.amount }}
           </p>
-          <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">E-mail:</span>
-            {{ data.email }}
-          </p>
-          <!-- <button
-            type="button"
-            class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
-          >
-            <img src="../../../assets/images/more_actions.png" alt="" />
-          </button> -->
         </div>
       </span>
     </div>
@@ -144,72 +124,26 @@
   </article>
 </template>
 <script>
-import { clientService } from "../../../service/Cliente/cliente.service";
-import { verifyService } from "../../../service/Verify/verify.service";
-import { deleteService } from "../../../service/Delete/delete.service";
+import { regaloService } from "../../../service/Regalo/regalo.service";
+
 export default {
   data() {
     return {
-      clientes: [],
+      regalos: [],
       pagination: {
         state: false,
         links: [],
       },
       clave: "",
-      deleteList: [],
       table: {
         order_type: "id",
       },
     };
   },
   mounted() {
-    this.getClients();
+    this.getRegalos();
   },
   methods: {
-    deleteGroup(data, type) {
-      if (type === "one") {
-        if (this.deleteList.length === 0) {
-          this.deleteList.push(data.id);
-          data.check = true;
-        } else {
-          let found = this.deleteList.find((element) => element === data.id);
-          if (found) {
-            this.deleteList = this.deleteList.filter((id) => id !== data.id);
-            data.check = false;
-          } else {
-            this.deleteList.push(data.id);
-            data.check = true;
-          }
-        }
-      }
-      if (type === "all") {
-        if (this.deleteList.length === 0) {
-          this.clientes.forEach((element) => (element.check = true));
-          this.clientes.forEach((element) => this.deleteList.push(element.id));
-        } else {
-          this.deleteList = [];
-          this.clientes.forEach((element) => (element.check = false));
-        }
-      }
-    },
-    async deleteMultipleSelect() {
-      var opcion = confirm("Desea eliminar");
-      if (opcion == true) {
-        var result = await deleteService.deletemultiple(this.deleteList, "Cliente");
-        if (result.success) {
-          //----------component--------//
-          this.$store.state.alert.status = true;
-          this.$store.state.alert.type = "success";
-          this.$store.state.alert.text = "Eliminación con éxito";
-          //--------------------------//
-          window.location.reload();
-        } else {
-          this.$store.state.alert.status = true;
-          this.$store.state.alert.type = "error";
-          this.$store.state.alert.text = "Error al eliminar";
-        }
-      }
-    },
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;
@@ -228,11 +162,7 @@ export default {
         alert("Error en la búsqueda");
       }
     },
-    changeTableOrder(data) {
-      this.table.order_type = data;
-      this.getClients();
-    },
-    async getClients(option, data) {
+    async getRegalos(option, data) {
       var page = 0;
       var length = 10;
       if (option) {
@@ -244,15 +174,14 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
-      var result = await clientService.getClient(objPage);
+      var result = await regaloService.getRegalo(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "success";
-        this.$store.state.alert.text = "Listado de clientes";
+        this.$store.state.alert.text = "Listado de regalos";
 
         this.pagination.state = false;
         this.clientes = result.data.data;
-        this.clientes.forEach((element) => (element.check = false));
 
         this.pagination.links = [];
         result.data.links.forEach((element) => {
@@ -272,7 +201,7 @@ export default {
       } else {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
-        this.$store.state.alert.text = "Error al mostrar clientes";
+        this.$store.state.alert.text = "Error al mostrar regalos";
       }
     },
   },
