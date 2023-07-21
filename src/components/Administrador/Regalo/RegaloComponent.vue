@@ -162,7 +162,7 @@ export default {
         this.$store.state.alert.type = "success";
         this.$store.state.alert.text = "Resultado de la búsqueda";
         this.pagination.state = true;
-        this.clientes = result.data;
+        this.regalos = result.data;
       } else {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
