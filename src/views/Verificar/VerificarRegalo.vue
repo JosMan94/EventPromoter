@@ -20,31 +20,36 @@
         v-if="status"
       >
         <img
-          v-if="verify === 2"
-          src="../../assets/images/error.png"
-          alt="Check"
-          class="mb-8 mx-auto"
-        />
-        <img
           v-if="verify === 1"
           src="../../assets/images/check-green.png"
           alt="Check"
           class="mb-8 mx-auto"
         />
-        <h3
-          class="text-main-red text-2xl font-bold text-center mb-14"
+        <img
           v-if="verify === 2"
+          src="../../assets/images/bxs-error.png"
+          alt="Check"
+          class="mb-8 mx-auto"
+        />
+        <img
+          v-if="verify === 3"
+          src="../../assets/images/error.png"
+          alt="Check"
+          class="mb-8 mx-auto"
+        />
+
+        <h3
+          class="text-text-blue text-2xl font-bold text-center mb-14"
+          v-if="verify === 1 || verify === 2"
         >
           {{ typeVerify }} <br />
           {{ datosRegalo.description }} - {{ datosRegalo.amount }}
         </h3>
-
         <h3
-          class="text-text-blue text-2xl font-bold text-center mb-14"
-          v-if="verify === 1"
+          class="text-main-red text-2xl font-bold text-center mb-14"
+          v-if="verify === 3"
         >
-          {{ typeVerify }} <br />
-          {{ datosRegalo.description }} - {{ datosRegalo.amount }}
+          {{ typeVerify }}
         </h3>
 
         <button
@@ -109,7 +114,7 @@ export default {
     return {
       regalo: this.$route.params.codeRegalo,
       promotor: this.$route.params.codePromotor,
-      verify: 0,
+      verify: null,
       status: false,
       typeVerify: null,
       pin: null,
@@ -139,15 +144,16 @@ export default {
       var result = await regaloService.verifyRegalo(obj);
 
       if (result.success) {
-        this.verify = 1;
         if (result.message === 1) {
           this.typeVerify = "El promotor ya reclamó este regalo";
+          this.verify = 2;
         } else if (result.message === 2) {
           this.typeVerify = "El promotor puede reclamar este regalo";
+          this.verify = 1;
         }
         this.datosRegalo = result.data;
       } else {
-        this.verify = 2;
+        this.verify = 3;
         this.typeVerify = "Ocurrió un error inesperado";
       }
     },
