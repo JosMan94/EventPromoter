@@ -155,7 +155,7 @@ export default {
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;
-      objPage.table = "adminClientes";
+      objPage.table = "adminRegalos";
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
