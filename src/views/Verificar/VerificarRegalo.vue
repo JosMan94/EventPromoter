@@ -120,7 +120,7 @@ export default {
     },
     verifyPIN() {
       if (this.pin === "271237") {
-        this.verifyTicket();
+        this.verifyRegalo();
         this.pin = null;
       } else {
         alert("PIN incorrecto");
