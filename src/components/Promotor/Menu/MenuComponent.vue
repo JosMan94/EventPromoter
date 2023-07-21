@@ -34,7 +34,7 @@
   </nav>
   <!-- Menu abierto -->
   <div
-    :class="$store.state.nav.status ? '' : 'menu-cerrado'"
+    :class="$store.state.nav.status ? '' : 'hidden'"
     class="bg-black bg-opacity-50 fixed top-0 bottom-0 left-0 right-0 transition-transform z-10"
   >
     <nav

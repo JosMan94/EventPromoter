@@ -101,7 +101,7 @@
             </div>
             <p class="xl:col-span-2 xl:flex items-center gap-4">
               <span class="block xl:hidden text-text-blue mb-2"
-                >>Nombre y Apellidos:</span
+                >Nombre y Apellidos:</span
               >
               {{ data.name }}
             </p>
