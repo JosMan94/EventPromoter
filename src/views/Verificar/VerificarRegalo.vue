@@ -48,8 +48,8 @@
             {{ datosRegalo.description }} - {{ datosRegalo.amount }} <br />
 
             <ul>
-              <li>{{ promotor.dni }}</li>
-              <li>{{ promotor.name }}</li>
+              <li>{{ promotorData.dni }}</li>
+              <li>{{ promotorData.name }}</li>
             </ul>
           </span>
           <br />
@@ -128,7 +128,7 @@ export default {
       typeVerify: null,
       pin: null,
       datosRegalo: null,
-      promotor: {
+      promotorData: {
         dni: null,
         name: null,
       },
@@ -163,8 +163,8 @@ export default {
         } else if (result.message === 2) {
           this.typeVerify = "El promotor puede reclamar este regalo";
           this.verify = 1;
-          this.promotor.dni = result.promotor.document;
-          this.promotor.name = result.promotor.name;
+          this.promotorData.dni = result.promotor.document;
+          this.promotorData.name = result.promotor.name;
         }
         this.datosRegalo = result.data;
       } else {
