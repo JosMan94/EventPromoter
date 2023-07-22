@@ -92,7 +92,7 @@
         <!-- <a href="#">
           <img src="../../assets/images/fb-white.png" alt="Facebook" />
         </a> -->
-        <a href="https://www.instagram.com/euphoriape_/" target="_Blank">
+        <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
           <img src="../../assets/images/ig-white.png" alt="Instagram" />
         </a>
       </div>

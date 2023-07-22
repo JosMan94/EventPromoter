@@ -63,7 +63,7 @@
           <img src="../../../../assets/images/fb.png" alt="Facebook" />
         </a> -->
 
-        <a href="https://www.instagram.com/euphoriape_/" target="_Blank">
+        <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
           <img src="../../../../assets/images/ig.png" alt="instagram" />
         </a>
       </div>

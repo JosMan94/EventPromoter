@@ -42,8 +42,12 @@
           class="text-text-blue text-2xl font-bold text-center mb-14"
           v-if="verify === 1 || verify === 2"
         >
-          {{ typeVerify }} <br />
-          {{ datosRegalo.description }} - {{ datosRegalo.amount }}
+          {{ typeVerify }}
+          <span v-if="verify === 1">
+            <br />
+            {{ datosRegalo.description }} - {{ datosRegalo.amount }}
+          </span>
+          <br />
         </h3>
         <h3
           class="text-main-red text-2xl font-bold text-center mb-14"
@@ -100,7 +104,7 @@
         <!-- <a href="#">
           <img src="../../assets/images/fb-white.png" alt="Facebook" />
         </a> -->
-        <a href="https://www.instagram.com/euphoriape_/" target="_Blank">
+        <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
           <img src="../../assets/images/ig-white.png" alt="Instagram" />
         </a>
       </div>
