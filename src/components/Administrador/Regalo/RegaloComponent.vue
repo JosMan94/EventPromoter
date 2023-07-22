@@ -133,7 +133,7 @@
 </template>
 <script>
 import { regaloService } from "../../../service/Regalo/regalo.service";
-
+import { verifyService } from "../../../service/Verify/verify.service";
 export default {
   data() {
     return {
