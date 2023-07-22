@@ -8,10 +8,10 @@ export const regaloService = {
         response = axios
             .post(url, data)
             .then(response => {
-                console.log(response, "response");
+
                 store.state.load.status = false;
                 store.state.nav.status = false
-                return { success: true, message: response.data.message, data: response.data.data }
+                return { success: true, message: response.data.message, data: response.data.data, promotor: response.data.promotor }
             })
             .catch(() => {
                 store.state.load.status = false;
