@@ -119,12 +119,24 @@
               <span class="block xl:hidden text-text-blue mb-2">Promotor:</span>
               {{ data.alias }}
             </p>
+
             <button
-              @click.prevent="viewDetailTicket(data.idTicket)"
-              class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
+              class="relative xl:block pl-4 xl:col-span-2 flex items-center gap-4"
               type="button"
+              @click.prevent="acction(index)"
             >
               <img src="../../../assets/images/more_actions.png" alt="" />
+              <span
+                :id="index"
+                class="oculto absolute z-10 bg-white border shadow-lg py-2 top-2 xl:-left-24 rounded-xl text-left transition-opacity"
+              >
+                <a
+                  @click.prevent="viewDetailTicket(data.idTicket)"
+                  class="block text-xs font-semibold py-3 px-4 transition-colors hover:bg-blue-500 hover:bg-opacity-20 w-max"
+                >
+                  Administrar
+                </a>
+              </span>
             </button>
           </div>
         </span>
@@ -218,6 +230,15 @@ export default {
     this.getTicketPromotor();
   },
   methods: {
+    acction(index) {
+      let elem = document.getElementById(index);
+      var hasClaseOculto = elem.classList.contains("oculto");
+      if (hasClaseOculto) {
+        elem.classList.remove("oculto");
+      } else {
+        elem.classList.add("oculto");
+      }
+    },
     viewDetailTicket(value) {
       this.idTicket = value;
       this.typeForm = 2;

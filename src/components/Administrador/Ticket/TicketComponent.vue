@@ -135,7 +135,7 @@
               <img src="../../../assets/images/more_actions.png" alt="" />
               <span
                 :id="index"
-                class="oculto absolute z-10 bg-white border shadow-lg py-2 top-2 -left-24 rounded-xl text-left transition-opacity"
+                class="oculto absolute z-10 bg-white border shadow-lg py-2 top-2 xl:-left-24 rounded-xl text-left transition-opacity"
               >
                 <a
                   @click.prevent="viewDetailTicket(data.idTicket)"
