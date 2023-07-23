@@ -76,7 +76,7 @@
             <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
           </p>
         </header>
-        <span v-for="data in ticketsPromotor" :key="data">
+        <span v-for="(data, index) in ticketsPromotor" :key="data">
           <div class="relative grid grid-cols-2 xl:grid-cols-17 gap-2 table-row">
             <span
               :class="data.assistance ? 'bg-main-green' : 'bg-main-yellow'"
