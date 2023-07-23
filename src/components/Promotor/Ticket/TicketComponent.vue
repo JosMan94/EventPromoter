@@ -80,7 +80,7 @@
           <div class="relative grid grid-cols-2 xl:grid-cols-17 gap-2 table-row">
             <span
               :class="data.assistance ? 'bg-main-green' : 'bg-main-yellow'"
-              class="hidden xl:block absolute top-1 bottom-1 left-0 py-3 px-4 font-black text-2xl text-white rounded-tr-2xl rounded-br-2xl"
+              class="block xl:absolute top-1 bottom-1 left-0 py-3 px-4 font-black text-2xl text-white rounded-tr-2xl rounded-br-2xl"
               >A</span
             >
             <div class="xl:col-span-3 xl:flex items-center gap-5">
@@ -132,7 +132,7 @@
       <!-- Paginacion -->
       <div
         v-if="pagination.state === false"
-        class="bg-gray-100 flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
+        class="bg-gray-100 hidden xl:flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
       >
         <button class="h-8 w-8 rounded-full flex items-center justify-center">
           <img src="../../../assets/images/arrow-left.png" alt="Prev" />
@@ -149,6 +149,29 @@
         <button class="h-8 w-8 rounded-full flex items-center justify-center">
           <img src="../../../assets/images/arrow-right.png" alt="Next" />
         </button>
+      </div>
+      <div class="mt-12 flex xl:hidden justify-end items-center gap-12">
+        <p>
+          Pág.
+          <span class="mx-3 py-1 px-3 ring ring-blue-300">{{ dataTable.from }}</span> de
+          {{ dataTable.page }}
+        </p>
+        <div class="flex items-center gap-4">
+          <figure
+            v-if="dataTable.pastStatus"
+            @click.prevent="getTicketPromotor(true, pagePast)"
+            class="cursor-pointer p-3"
+          >
+            <img src="../../../assets/images/arrow-left.png" alt="Prev" />
+          </figure>
+          <figure
+            v-if="dataTable.nextStatus"
+            @click.prevent="getTicketPromotor(true, pageNext)"
+            class="cursor-pointer p-3"
+          >
+            <img src="../../../assets/images/arrow-right.png" alt="Next" />
+          </figure>
+        </div>
       </div>
     </article>
   </span>
@@ -177,6 +200,18 @@ export default {
       table: {
         order_type: "id",
       },
+      dataTable: {
+        page: 0,
+        from: 0,
+
+        next: "",
+        past: "",
+
+        nextStatus: false,
+        pastStatus: false,
+      },
+      pageNext: 1,
+      pagePast: 1,
     };
   },
   mounted() {
@@ -241,6 +276,27 @@ export default {
               this.pagination.links.push(paginate);
             }
           });
+          this.dataTable.page = result.data.last_page;
+          this.dataTable.from = result.data.current_page;
+          this.dataTable.next = result.data.next_page_url;
+          this.dataTable.past = result.data.prev_page_url;
+
+          if (this.dataTable.next !== null) {
+            let separator = this.dataTable.next.split("&page=");
+
+            this.pageNext = separator[1];
+            this.dataTable.nextStatus = true;
+          } else {
+            this.dataTable.nextStatus = false;
+          }
+          if (this.dataTable.past !== null) {
+            let separator = this.dataTable.past.split("&page=");
+
+            this.pagePast = separator[1];
+            this.dataTable.pastStatus = true;
+          } else {
+            this.dataTable.pastStatus = false;
+          }
         } else {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
