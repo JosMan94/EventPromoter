@@ -39,7 +39,7 @@
               name: 'RegisterEvent',
               params: { code: data.code_event },
             }"
-            class="py-3 px-6 text-sm font-bold text-white bg-gray-400 rounded-lg block w-max mx-auto mt-6"
+            class="py-3 px-6 text-sm font-bold text-white bg-gray-400 rounded-lg block w-max mx-auto"
             >Entrada gratis</router-link
           >
         </SplideSlide>
