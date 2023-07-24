@@ -11,11 +11,11 @@ export const verifyService = {
             url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento;
         }
         // Obtener la fecha y hora actual
-        const fechaHoraActual = new Date();
-        const fechaActual = fechaHoraActual.toISOString().slice(0, 10);
+        var fechaHoraActual = new Date();
+        var fechaActual = fechaHoraActual.toISOString().slice(0, 10);
         // const horaActual = fechaHoraActual.toISOString().slice(11, 19);
 
-        const horaActual = fechaHoraActual.toLocaleTimeString('es-PE', { timeZone: 'America/Lima' });
+        var horaActual = fechaHoraActual.toLocaleTimeString('es-PE', { timeZone: 'America/Lima' });
 
         response = axios
             .post(url, {
