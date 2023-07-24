@@ -144,6 +144,7 @@ import { verifyService } from "../../../service/Verify/verify.service";
 export default {
   data() {
     return {
+      deleteList: [],
       cajeros: [],
       pagination: {
         state: false,
