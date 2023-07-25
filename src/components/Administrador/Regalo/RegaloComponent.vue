@@ -56,20 +56,20 @@
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
           /> -->
-          <p class="">ID</p>
+          <p class="">TÍTULO</p>
           <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
-        <p class="col-span-2 flex items-center gap-4">
-          TÍTULO
-          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
-        </p>
         <p class="col-span-2 flex items-center gap-4">
           DESCRIPCIÓN
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-        <!-- @click.prevent="changeTableOrder('date_of_brith')" -->
         <p class="col-span-2 flex items-center gap-4">
           CANTIDAD
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+        </p>
+        <!-- @click.prevent="changeTableOrder('date_of_brith')" -->
+        <p class="col-span-2 flex items-center gap-4">
+          EVENTO
           <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'date_of_brith' ? 'transform rotate-180' : ''"
@@ -77,22 +77,19 @@
           /> -->
         </p>
         <p class="col-span-2 flex items-center gap-4">
-          EVENTO
+          STATUS
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
+      
       </header>
       <span v-for="data in regalos" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-11 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
             <p class="">
-              <span class="block xl:hidden text-text-blue mb-2">ID:</span>
-              {{ data.id }}
+              <span class="block xl:hidden text-text-blue mb-2">TÍTULO:</span>
+              {{ data.title }}
             </p>
           </div>
-          <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">TÍTULO:</span>
-            {{ data.title }}
-          </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">DESCRIPCIÓN:</span>
             {{ data.description }}
@@ -104,6 +101,18 @@
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">EVENTO:</span>
             {{ data.name }}
+          </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-2">STATUS:</span>
+            <label class="switch">
+              <input
+                type="checkbox"
+                :value="data.status"
+                :checked="data.status"
+                @change="updateStatusRegalo(data.id, data.status)"
+              />
+              <span class="slider round"></span>
+            </label>
           </p>
         </div>
       </span>
@@ -187,6 +196,25 @@ export default {
     this.getRegalos();
   },
   methods: {
+    async updateStatusRegalo(id, status) {
+      var dataStatus = false;
+      if (status === 1) {
+        dataStatus = 0;
+      } else if (status === 0) {
+        dataStatus = 1;
+      }
+      var result = await regaloService.updateStatusRegalo(id, dataStatus);
+      if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Regalo actualizado";
+        this.getEvents();
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al actualizar";
+      }
+    },
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;
@@ -278,3 +306,67 @@ export default {
   },
 };
 </script>
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>

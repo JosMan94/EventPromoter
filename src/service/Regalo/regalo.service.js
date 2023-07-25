@@ -1,6 +1,28 @@
 import axios from 'axios'
 import store from '../../store/index';
 export const regaloService = {
+    updateStatusRegalo(id, dataStatus) {
+
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/status-change-regalo'
+        response = axios
+            .put(url, {
+                "id_regalo": id,
+                "status": dataStatus
+            })
+            .then(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
     verifyRegalo(data) {
         store.state.load.status = true;
         let response
