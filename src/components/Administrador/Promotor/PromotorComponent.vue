@@ -20,16 +20,16 @@
           <span class="hidden xl:block">Buscar</span>
         </button>
       </div>
-      <div class="hidden xl:flex justify-between">
+      <div class="flex justify-between">
         <button
-          class="invisible py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
+          class="invisible py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
         >
           <img src="../../../assets/images/filtros.png" alt="Filtros" />
           Filtrar por
         </button>
         <button
           @click.prevent="deleteMultipleSelect"
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
+          class="invisible py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl bg-main-red text-white"
           v-if="deleteList.length !== 0"
         >
           <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
