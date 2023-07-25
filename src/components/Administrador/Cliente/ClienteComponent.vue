@@ -106,7 +106,7 @@
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-4">Editar</span>
             <router-link
-              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-event' } }"
+              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-client' } }"
               @click.prevent="sendDataEvent(data)"
               class="ml-4 rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
             >
@@ -199,6 +199,9 @@ export default {
     this.getClients();
   },
   methods: {
+    sendDataEvent(data) {
+      this.$emit("dataClient", data);
+    },
     async descargarExcelCliente() {
       await clientService.exportClients();
     },

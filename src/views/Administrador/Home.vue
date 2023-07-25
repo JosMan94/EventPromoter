@@ -17,9 +17,9 @@
       "
     >
       <!-- tablas -->
- 
+
       <evento-component v-if="view === 'eventos'" @dataEvent="evento = $event" />
-      <cliente-component v-if="view === 'clientes'" />
+      <cliente-component v-if="view === 'clientes'" @dataClient="cliente = $event" />
       <promotor-component
         v-if="view === 'promotores'"
         @dataPromotor="promotor = $event"
@@ -38,6 +38,7 @@
 
       <edit-evento-component v-if="view === 'edit-event'" :evento="evento" />
       <edit-promotor-component v-if="view === 'edit-promotor'" :promotor="promotor" />
+      <edit-client-component v-if="view === 'edit-client'" :cliente="cliente" />
     </section>
   </main>
 </template>
@@ -58,6 +59,7 @@ import MeseroComponent from "../../components/Administrador/Mesero/MeseroCompone
 import CreateMeseroComponent from "../../components/Administrador/Mesero/CreateMeseroComponent.vue";
 import EditEventoComponent from "../../components/Administrador/Evento/EditEventComponent.vue";
 import EditPromotorComponent from "../../components/Administrador/Promotor/EditPromotorComponent.vue";
+import EditClientComponent from "../../components/Administrador/Cliente/EditClienteComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -77,12 +79,14 @@ export default {
     CreateMeseroComponent,
     EditEventoComponent,
     EditPromotorComponent,
+    EditClientComponent,
   },
   data() {
     return {
       view: this.$route.params.viewAdmin,
       evento: null,
       promotor: null,
+      cliente: null,
     };
   },
   watch: {

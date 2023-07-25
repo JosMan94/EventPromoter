@@ -9,7 +9,7 @@
       </button>
       <button
         @click.prevent="changeView('clientes')"
-        :class="view === 'clientes' ? 'bg-main-green' : ''"
+        :class="view === 'clientes' || view === 'edit-client' ? 'bg-main-green' : ''"
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
