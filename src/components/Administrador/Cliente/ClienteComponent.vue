@@ -22,22 +22,14 @@
           <span class="hidden xl:block">Buscar</span>
         </button>
       </div>
-      <!-- <div class="hidden xl:flex justify-between">
+      <div class="hidden xl:flex justify-between">
         <button
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
+          class="py-4 px-8 text-white flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 bg-green-500 shadow-sm"
+          @click.prevent="descargarExcelCliente"
         >
-          <img src="../../../assets/images/filtros.png" alt="Filtros" />
-          Filtrar por
+          exportar
         </button>
-        <button
-          @click.prevent="deleteMultipleSelect"
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
-          v-if="deleteList.length !== 0"
-        >
-          <img src="../../../assets/images/plus.png" alt="Agregar" />
-          Eliminar
-        </button>
-      </div> -->
+      </div>
     </form>
   </article>
   <!-- Tabla -->
@@ -203,6 +195,9 @@ export default {
     this.getClients();
   },
   methods: {
+    async descargarExcelCliente() {
+      await clientService.exportClients();
+    },
     async getClients(option, data) {
       var page = 0;
       var length = 10;
@@ -263,8 +258,6 @@ export default {
         } else {
           this.dataTable.pastStatus = false;
         }
-
-        
       } else {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
