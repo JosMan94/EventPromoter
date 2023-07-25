@@ -23,20 +23,15 @@
             <span class="hidden xl:block">Buscar</span>
           </button>
         </div>
-        <!-- <div class="hidden xl:flex justify-between">
-        <button
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
-        >
-          <img src="../../../assets/images/filtros.png" alt="Filtros" />
-          Filtrar por
-        </button>
-        <button
-          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-green text-white"
-        >
-          <img src="../../../assets/images/plus.png" alt="Agregar" />
-          Agregar Usuario
-        </button>
-      </div> -->
+
+        <div class="hidden xl:flex justify-between">
+          <button
+            class="py-4 px-8 text-white flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 bg-green-500 shadow-sm"
+            @click.prevent="descargarExcelTicket"
+          >
+            exportar
+          </button>
+        </div>
       </form>
     </article>
     <!-- Tabla -->
@@ -238,6 +233,9 @@ export default {
     this.getTickets();
   },
   methods: {
+    async descargarExcelTicket() {
+      await ticketService.exportTicket();
+    },
     acction(index) {
       let elem = document.getElementById(index);
       var hasClaseOculto = elem.classList.contains("oculto");
