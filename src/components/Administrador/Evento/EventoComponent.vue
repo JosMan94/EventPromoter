@@ -128,7 +128,7 @@
           </p>
 
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-4">Editar</span>
+            <span class="block xl:hidden text-text-blue mb-6">Editar</span>
             <router-link
               :to="{ name: 'Administrador', params: { viewAdmin: 'edit-event' } }"
               @click.prevent="sendDataEvent(data)"
