@@ -163,7 +163,7 @@ export default {
         ojb.date_of_birth = this.form.fecha;
         ojb.email = this.form.email;
         ojb.avatar = this.form.avatar;
-
+        ojb.type = "promotor";
         var result = await promotorService.createPromotor(ojb);
         if (result.success) {
           this.$store.state.alert.status = true;
