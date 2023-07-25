@@ -3,9 +3,12 @@ import store from '../../store/index';
 
 export const clientService = {
     exportClients() {
+        store.state.load.status = true;
         axios.get('https://promotoresback.azurewebsites.net/api/dowload/excel/clientes')
             .then(response => {
-                // La respuesta contiene el archivo Excel
+                store.state.load.status = false;
+                store.state.nav.status = false
+                    // La respuesta contiene el archivo Excel
                 const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
                 const url = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
@@ -16,6 +19,8 @@ export const clientService = {
                 document.body.removeChild(link);
             })
             .catch(error => {
+                store.state.load.status = false;
+                store.state.nav.status = false
                 console.error('Error al obtener los datos en Excel:', error);
             });
     },

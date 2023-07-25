@@ -67,10 +67,10 @@
           E-MAIL
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-        <!-- <p class="col-span-2 flex items-center gap-4">
-          ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
-        </p> -->
+        <p class="col-span-2 flex items-center gap-4">
+          EDITAR
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
+        </p>
       </header>
       <span v-for="data in clientes" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
@@ -103,12 +103,16 @@
             <span class="block xl:hidden text-text-blue mb-2">E-mail:</span>
             {{ data.email }}
           </p>
-          <!-- <button
-            type="button"
-            class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
-          >
-            <img src="../../../assets/images/more_actions.png" alt="" />
-          </button> -->
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-4">Editar</span>
+            <router-link
+              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-event' } }"
+              @click.prevent="sendDataEvent(data)"
+              class="ml-4 rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
+            >
+              Editar Cliente
+            </router-link>
+          </p>
         </div>
       </span>
     </div>
