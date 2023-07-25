@@ -17,7 +17,7 @@
       "
     >
       <!-- tablas -->
-      <evento-component v-if="view === 'eventos'" />
+      <evento-component v-if="view === 'eventos'" @dataEvent="evento = $event" />
       <cliente-component v-if="view === 'clientes'" />
       <promotor-component v-if="view === 'promotores'" />
       <ticket-component v-if="view === 'tickets'" />
@@ -31,6 +31,8 @@
       <create-regalo-component v-if="view === 'create-regalo'" />
       <create-cajero-component v-if="view === 'create-cajero'" />
       <create-mesero-component v-if="view === 'create-mesero'" />
+
+      <edit-evento-component v-if="view === 'edit-event'" :evento="evento" />
     </section>
   </main>
 </template>
@@ -49,6 +51,7 @@ import CajeroComponent from "../../components/Administrador/Cajero/CajeroCompone
 import CreateCajeroComponent from "../../components/Administrador/Cajero/CreateCajeroComponent.vue";
 import MeseroComponent from "../../components/Administrador/Mesero/MeseroComponent.vue";
 import CreateMeseroComponent from "../../components/Administrador/Mesero/CreateMeseroComponent.vue";
+import EditEventoComponent from "../../components/Administrador/Evento/EditEventComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -66,10 +69,12 @@ export default {
     CreateCajeroComponent,
     MeseroComponent,
     CreateMeseroComponent,
+    EditEventoComponent,
   },
   data() {
     return {
       view: this.$route.params.viewAdmin,
+      evento: null,
     };
   },
   watch: {

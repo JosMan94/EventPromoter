@@ -17,7 +17,11 @@
       </button>
       <button
         @click.prevent="changeView('eventos')"
-        :class="view === 'eventos' || view === 'create-event' ? 'bg-main-green' : ''"
+        :class="
+          view === 'eventos' || view === 'create-event' || view === 'edit-event'
+            ? 'bg-main-green'
+            : ''
+        "
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >

@@ -57,7 +57,7 @@
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
           /> -->
-          <p class="">ID</p>
+          <p class="">NOMBRE</p>
           <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'id' ? 'transform rotate-180' : ''"
@@ -66,7 +66,7 @@
         </div>
         <!-- @click.prevent="changeTableOrder('name')" -->
         <p class="col-span-2 flex items-center gap-4">
-          NOMBRE
+          FECHA DE EVENTO
           <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
@@ -75,7 +75,7 @@
         </p>
         <!-- @click.prevent="changeTableOrder('date')" -->
         <p class="col-span-2 flex items-center gap-4">
-          FECHA DE EVENTO
+          LUGAR
           <!-- <img
             src="../../../assets/images/arrow-down.png"
             :class="table.order_type === 'date' ? 'transform rotate-180' : ''"
@@ -83,17 +83,10 @@
           /> -->
         </p>
         <!-- @click.prevent="changeTableOrder('direction')" -->
+        <p class="col-span-2 flex items-center gap-4">OCULTAR</p>
         <p class="col-span-2 flex items-center gap-4">
-          LUGAR
-          <!-- <img
-            src="../../../assets/images/arrow-down.png"
-            :class="table.order_type === 'direction' ? 'transform rotate-180' : ''"
-            alt=""
-          /> -->
-        </p>
-        <p class="col-span-2 flex items-center gap-4">
-          ACCIONES
-          <img src="../../../assets/images/arrow-down.png" alt="" />
+          EDITAR
+          <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
       </header>
       <span v-for="data in eventos" :key="data">
@@ -107,14 +100,10 @@
               class="hidden xl:block w-5 h-5 mr-4"
             /> -->
             <p class="">
-              <span class="block xl:hidden text-text-blue mb-2">ID</span>
-              {{ data.id }}
+              <span class="block xl:hidden text-text-blue mb-2">Nombre de evento</span>
+              {{ data.name }}
             </p>
           </div>
-          <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Nombre de evento</span>
-            {{ data.name }}
-          </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">Fecha de evento</span>
             {{ data.date }}
@@ -123,8 +112,9 @@
             <span class="block xl:hidden text-text-blue mb-2">Lugar</span>
             {{ data.direction }}
           </p>
+
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Lugar</span>
+            <span class="block xl:hidden text-text-blue mb-2">Ocultar</span>
 
             <label class="switch">
               <input
@@ -136,9 +126,16 @@
               <span class="slider round"></span>
             </label>
           </p>
-          <p class="xl:col-span-2 block xl:hidden items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">N° Generales:</span>
-            {{ data.number_tickets }}
+
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-4">Editar</span>
+            <router-link
+              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-event' } }"
+              @click.prevent="sendDataEvent(data)"
+              class="rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
+            >
+              Editar Evento
+            </router-link>
           </p>
 
           <!-- 
@@ -231,6 +228,9 @@ export default {
     this.getEvents();
   },
   methods: {
+    sendDataEvent(data) {
+      this.$emit("dataEvent", data);
+    },
     async updateStatusEvent(id, status) {
       var dataStatus = false;
       if (status === 1) {
