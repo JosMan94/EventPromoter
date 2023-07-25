@@ -17,9 +17,13 @@
       "
     >
       <!-- tablas -->
+ 
       <evento-component v-if="view === 'eventos'" @dataEvent="evento = $event" />
       <cliente-component v-if="view === 'clientes'" />
-      <promotor-component v-if="view === 'promotores'" />
+      <promotor-component
+        v-if="view === 'promotores'"
+        @dataPromotor="promotor = $event"
+      />
       <ticket-component v-if="view === 'tickets'" />
       <regalo-component v-if="view === 'regalos'" />
       <cajero-component v-if="view === 'cajeros'" />
@@ -33,6 +37,7 @@
       <create-mesero-component v-if="view === 'create-mesero'" />
 
       <edit-evento-component v-if="view === 'edit-event'" :evento="evento" />
+      <edit-promotor-component v-if="view === 'edit-promotor'" :promotor="promotor" />
     </section>
   </main>
 </template>
@@ -52,6 +57,7 @@ import CreateCajeroComponent from "../../components/Administrador/Cajero/CreateC
 import MeseroComponent from "../../components/Administrador/Mesero/MeseroComponent.vue";
 import CreateMeseroComponent from "../../components/Administrador/Mesero/CreateMeseroComponent.vue";
 import EditEventoComponent from "../../components/Administrador/Evento/EditEventComponent.vue";
+import EditPromotorComponent from "../../components/Administrador/Promotor/EditPromotorComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -70,11 +76,13 @@ export default {
     MeseroComponent,
     CreateMeseroComponent,
     EditEventoComponent,
+    EditPromotorComponent,
   },
   data() {
     return {
       view: this.$route.params.viewAdmin,
       evento: null,
+      promotor: null,
     };
   },
   watch: {

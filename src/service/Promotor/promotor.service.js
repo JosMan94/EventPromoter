@@ -1,6 +1,24 @@
 import axios from 'axios'
 import store from '../../store/index';
 export const promotorService = {
+    updatePromotor(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/update/promotor'
+        response = axios
+            .post(url, data)
+            .then(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
     getPromotor(data) {
         store.state.load.status = true;
         let response

@@ -30,7 +30,7 @@
       <button
         @click.prevent="changeView('promotores')"
         :class="
-          view === 'promotores' || view === 'create-promotor' ? 'bg-main-green' : ''
+          view === 'promotores' || view === 'create-promotor' || view === 'edit-promotor' ? 'bg-main-green' : ''
         "
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
