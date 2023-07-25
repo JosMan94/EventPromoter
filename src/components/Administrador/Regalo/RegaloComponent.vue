@@ -80,7 +80,6 @@
           STATUS
           <!-- <img src="../../../assets/images/arrow-down.png" alt="" /> -->
         </p>
-      
       </header>
       <span v-for="data in regalos" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-11 gap-5 table-row">
@@ -245,6 +244,7 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
+      objPage.typeUser = "admin";
       var result = await regaloService.getRegalo(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;

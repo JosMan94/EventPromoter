@@ -232,6 +232,7 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
+      objPage.typeUser = "promotor";
       var result = await clientService.getEvent(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
