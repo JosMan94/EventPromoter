@@ -28,6 +28,7 @@
       <regalo-component v-if="view === 'regalos'" />
       <cajero-component v-if="view === 'cajeros'" />
       <mesero-component v-if="view === 'meseros'" />
+      <funcionality-component v-if="view === 'funcionality'" />
       <!-- formularios -->
 
       <create-event-component v-if="view === 'create-event'" />
@@ -60,6 +61,7 @@ import CreateMeseroComponent from "../../components/Administrador/Mesero/CreateM
 import EditEventoComponent from "../../components/Administrador/Evento/EditEventComponent.vue";
 import EditPromotorComponent from "../../components/Administrador/Promotor/EditPromotorComponent.vue";
 import EditClientComponent from "../../components/Administrador/Cliente/EditClienteComponent.vue";
+import FuncionalityComponent from "../../components/Administrador/Funcionality/FuncionalityComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -80,6 +82,7 @@ export default {
     EditEventoComponent,
     EditPromotorComponent,
     EditClientComponent,
+    FuncionalityComponent,
   },
   data() {
     return {

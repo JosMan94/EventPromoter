@@ -30,7 +30,9 @@
       <button
         @click.prevent="changeView('promotores')"
         :class="
-          view === 'promotores' || view === 'create-promotor' || view === 'edit-promotor' ? 'bg-main-green' : ''
+          view === 'promotores' || view === 'create-promotor' || view === 'edit-promotor'
+            ? 'bg-main-green'
+            : ''
         "
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
@@ -51,9 +53,7 @@
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
-
-    
-        <img src="../../../assets/images/icon-mesero.png"  width="30"  alt="MESEROS" />
+        <img src="../../../assets/images/icon-mesero.png" width="30" alt="MESEROS" />
       </button>
       <button
         @click.prevent="changeView('tickets')"
@@ -70,6 +70,14 @@
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
         <img src="../../../assets/images/icon-regalo.png" alt="regalos" width="30" />
+      </button>
+      <button
+        @click.prevent="changeView('funcionality')"
+        :class="view === 'funcionality' ? 'bg-main-green' : ''"
+        type="button"
+        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+      >
+        <img src="../../../assets/images/icon-tuerca.png" alt="regalos" width="30" />
       </button>
     </div>
     <button
@@ -134,7 +142,7 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-mesero.png"  width="30" alt="PROMOTORES" />
+          <img src="../../../assets/images/icon-mesero.png" width="30" alt="PROMOTORES" />
           Meseros
         </button>
         <button
@@ -154,6 +162,15 @@
         >
           <img src="../../../assets/images/icon-regalo.png" alt="Tickets" />
           Regalos
+        </button>
+        <button
+          @click.prevent="changeView('funcionality')"
+          :class="view === 'funcionality' ? 'bg-main-green' : ''"
+          type="button"
+          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
+        >
+          <img src="../../../assets/images/icon-tuerca.png" alt="Tickets" />
+          Funcionalidades
         </button>
       </div>
 
