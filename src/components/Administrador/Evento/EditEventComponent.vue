@@ -221,11 +221,11 @@ export default {
       var enlace = this.evento.enlace_direction;
       var separar1 = enlace.split("?q=");
       var separar2 = separar1[1].split(",");
-      this.center.lat = separar2[0];
-      this.center.lng = separar2[1];
+      this.center.lat = parseFloat(separar2[0]);
+      this.center.lng = parseFloat(separar2[1]);
 
-      this.markers[0].position.lat = separar2[0];
-      this.markers[0].position.lng = separar2[1];
+      this.markers[0].position.lat = parseFloat(separar2[0]);
+      this.markers[0].position.lng = parseFloat(separar2[1]);
     }
   },
   methods: {
