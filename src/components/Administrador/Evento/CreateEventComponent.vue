@@ -51,7 +51,7 @@
           v-model="form.aforo"
         />
       </div>
-      <div class="xl:col-span-2 mb-5">
+      <div class="xl:col-span-2">
         <label for="direccion" class="block mb-2 text-text-blue font-bold text-sm"
           >Dirección: <span class="text-red-600"> ( * )</span></label
         >
@@ -61,6 +61,69 @@
           placeholder="Ingresa dirección del evento"
           v-model="form.direction"
         />
+      </div>
+      <div>
+        <label for="fecha_event" class="block mb-2 text-text-blue font-bold text-sm"
+          >Obtener Enlace: <span class="text-red-600"> ( * )</span></label
+        >
+        <GMapAutocomplete
+          placeholder="Buscar y seleccionar para mayor presición"
+          @place_changed="setPlace"
+          class="p-6 input w-full text-sm xl:text-base bg-gray-100 bg-opacity-50 focus:border-blue-400 shadow-sm rounded-2xl"
+        >
+        </GMapAutocomplete>
+      </div>
+      <div>
+        <label for="fecha_event" class="block mb-2 text-text-blue font-bold text-sm"
+          >Enlace de la dirección: <span class="text-red-600"> ( * )</span></label
+        >
+        <a
+          :href="form.enlace"
+          target="_blank"
+          :class="
+            form.enlace === null
+              ? 'cursor-not-allowed bg-gray-500'
+              : 'bg-purple-500 cursor-pointer'
+          "
+          class="block mb-5 text-base font-bold text-white rounded-2xl p-5 text-center"
+        >
+          PROBAR ENLACE
+        </a>
+      </div>
+      <div class="xl:col-span-2 mb-5">
+        <GMapMap
+          ref="myMapRef"
+          :center="center"
+          :zoom="15"
+          map-type-id="terrain"
+          class="w-full h-80"
+        >
+          <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="openMarker(m.id)"
+            @dragend="handleMarkerDragend"
+          >
+            <GMapInfoWindow
+              :closeclick="true"
+              @closeclick="openMarker(null)"
+              :opened="openedMarkerID === m.id"
+              :options="{
+                pixelOffset: {
+                  width: 10,
+                  height: 0,
+                },
+                maxWidth: 320,
+                maxHeight: 320,
+              }"
+            >
+              <div>Dirección del evento: "{{ m.nameDirection }}"</div>
+            </GMapInfoWindow>
+          </GMapMarker>
+        </GMapMap>
       </div>
 
       <button
@@ -111,6 +174,18 @@ import imgDefault from "../../../assets/images/event-preview.png";
 export default {
   data() {
     return {
+      openedMarkerID: null,
+      center: { lat: -12.080730407219086, lng: -77.03606970955586 },
+      markers: [
+        {
+          id: 1,
+          position: {
+            lat: -12.080730407219086,
+            lng: -77.03606970955586,
+          },
+          nameDirection: "",
+        },
+      ],
       imgDefault: imgDefault,
       form: {
         name: "",
@@ -119,10 +194,38 @@ export default {
         aforo: "",
         direction: "",
         banner: "",
+        enlace: null,
       },
     };
   },
+
+  mounted() {},
   methods: {
+    handleMarkerDragend(event) {
+      this.center.lat = event.latLng.lat();
+      this.center.lng = event.latLng.lng();
+
+      this.markers[0].position.lat = event.latLng.lat();
+      this.markers[0].position.lng = event.latLng.lng();
+      this.form.enlace =
+        "https://www.google.com/maps?q=" + event.latLng.lat() + "," + event.latLng.lng();
+    },
+    setPlace(place) {
+      this.center.lat = place.geometry.location.lat();
+      this.center.lng = place.geometry.location.lng();
+
+      this.markers[0].position.lat = place.geometry.location.lat();
+      this.markers[0].position.lng = place.geometry.location.lng();
+      this.form.enlace =
+        "https://www.google.com/maps?q=" +
+        place.geometry.location.lat() +
+        "," +
+        place.geometry.location.lng();
+      // this.form.enlace = place.url;
+    },
+    openMarker(id) {
+      this.openedMarkerID = id;
+    },
     previewImage(e) {
       const file = e.target.files[0];
       this.cargarImagen(file);
@@ -141,7 +244,8 @@ export default {
         this.form.canditad.length !== 0 &&
         this.form.aforo.length !== 0 &&
         this.form.direction.length !== 0 &&
-        this.form.banner.length !== 0
+        this.form.banner.length !== 0 &&
+        this.form.enlace !== null
       ) {
         var ojb = new Object();
         ojb.name = this.form.name;
@@ -150,6 +254,7 @@ export default {
         ojb.capacity = String(this.form.aforo);
         ojb.direction = this.form.direction;
         ojb.banner = this.form.banner;
+        ojb.enlace_direction = this.form.enlace;
         var result = await eventoService.createEvent(ojb);
 
         if (result.success) {
@@ -164,6 +269,7 @@ export default {
           this.form.aforo = "";
           this.form.direction = "";
           this.form.banner = "";
+          this.form.enlace = null;
           this.$router.push({ name: "Administrador", params: { viewAdmin: "eventos" } });
         } else {
           this.$refs.banner.value = null;
@@ -173,6 +279,7 @@ export default {
           this.form.aforo = "";
           this.form.direction = "";
           this.form.banner = "";
+          this.form.enlace = null;
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
           this.$store.state.alert.text = JSON.stringify(result.data);
@@ -182,6 +289,11 @@ export default {
         this.$store.state.alert.type = "error";
         this.$store.state.alert.text = "Revisar datos ha enviar";
       }
+    },
+  },
+  watch: {
+    "form.name": function (val) {
+      this.markers[0].nameDirection = val;
     },
   },
 };

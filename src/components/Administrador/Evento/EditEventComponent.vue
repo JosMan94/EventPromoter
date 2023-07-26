@@ -62,6 +62,69 @@
           v-model="form.direction"
         />
       </div>
+      <div>
+        <label for="fecha_event" class="block mb-2 text-text-blue font-bold text-sm"
+          >Obtener Enlace: <span class="text-red-600"> ( * )</span></label
+        >
+        <GMapAutocomplete
+          placeholder="Buscar y seleccionar para mayor presición"
+          @place_changed="setPlace"
+          class="p-6 input w-full text-sm xl:text-base bg-gray-100 bg-opacity-50 focus:border-blue-400 shadow-sm rounded-2xl"
+        >
+        </GMapAutocomplete>
+      </div>
+      <div>
+        <label for="fecha_event" class="block mb-2 text-text-blue font-bold text-sm"
+          >Enlace de la dirección: <span class="text-red-600"> ( * )</span></label
+        >
+        <a
+          :href="form.enlace"
+          target="_blank"
+          :class="
+            form.enlace === null
+              ? 'cursor-not-allowed bg-gray-500'
+              : 'bg-purple-500 cursor-pointer'
+          "
+          class="block mb-5 text-base font-bold text-white rounded-2xl p-5 text-center"
+        >
+          PROBAR ENLACE
+        </a>
+      </div>
+      <div class="xl:col-span-2 mb-5">
+        <GMapMap
+          ref="myMapRef"
+          :center="center"
+          :zoom="15"
+          map-type-id="terrain"
+          class="w-full h-80"
+        >
+          <GMapMarker
+            :key="index"
+            v-for="(m, index) in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="true"
+            @click="openMarker(m.id)"
+            @dragend="handleMarkerDragend"
+          >
+            <GMapInfoWindow
+              :closeclick="true"
+              @closeclick="openMarker(null)"
+              :opened="openedMarkerID === m.id"
+              :options="{
+                pixelOffset: {
+                  width: 10,
+                  height: 0,
+                },
+                maxWidth: 320,
+                maxHeight: 320,
+              }"
+            >
+              <div>Dirección del evento: "{{ m.nameDirection }}"</div>
+            </GMapInfoWindow>
+          </GMapMarker>
+        </GMapMap>
+      </div>
 
       <button
         @click.prevent="createEvent"
@@ -111,6 +174,18 @@ export default {
   props: ["evento"],
   data() {
     return {
+      openedMarkerID: null,
+      center: { lat: null, lng: null },
+      markers: [
+        {
+          id: 1,
+          position: {
+            lat: null,
+            lng: null,
+          },
+          nameDirection: "",
+        },
+      ],
       newImage: "",
       nameEvent: "",
       form: {
@@ -120,6 +195,7 @@ export default {
         aforo: "",
         direction: "",
         banner: "",
+        enlace: null,
       },
     };
   },
@@ -138,11 +214,46 @@ export default {
       this.form.aforo = this.evento.capacity;
       this.form.direction = this.evento.direction;
       this.form.banner = this.evento.banner;
+      this.form.enlace = this.evento.enlace_direction;
       this.newImage = this.evento.banner;
       this.nameEvent = this.evento.name;
+      // obtener latitud y longitud
+      var enlace = this.evento.enlace_direction;
+      var separar1 = enlace.split("?q=");
+      var separar2 = separar1[1].split(",");
+      this.center.lat = separar2[0];
+      this.center.lng = separar2[1];
+
+      this.markers[0].position.lat = separar2[0];
+      this.markers[0].position.lng = separar2[1];
     }
   },
   methods: {
+    handleMarkerDragend(event) {
+      this.center.lat = event.latLng.lat();
+      this.center.lng = event.latLng.lng();
+
+      this.markers[0].position.lat = event.latLng.lat();
+      this.markers[0].position.lng = event.latLng.lng();
+      this.form.enlace =
+        "https://www.google.com/maps?q=" + event.latLng.lat() + "," + event.latLng.lng();
+    },
+    setPlace(place) {
+      this.center.lat = place.geometry.location.lat();
+      this.center.lng = place.geometry.location.lng();
+
+      this.markers[0].position.lat = place.geometry.location.lat();
+      this.markers[0].position.lng = place.geometry.location.lng();
+      this.form.enlace =
+        "https://www.google.com/maps?q=" +
+        place.geometry.location.lat() +
+        "," +
+        place.geometry.location.lng();
+      // this.form.enlace = place.url;
+    },
+    openMarker(id) {
+      this.openedMarkerID = id;
+    },
     previewImage(e) {
       const file = e.target.files[0];
       this.cargarImagen(file);
@@ -167,6 +278,7 @@ export default {
       if (this.form.banner !== this.newImage) {
         ojb.banner = this.form.banner;
       }
+      ojb.enlace_direction = this.form.enlace;
       var result = await eventoService.updateEvent(ojb);
       if (result.success) {
         this.$store.state.alert.status = true;
@@ -178,6 +290,11 @@ export default {
         this.$store.state.alert.type = "error";
         this.$store.state.alert.text = "Error al actualizar el evento";
       }
+    },
+  },
+  watch: {
+    "form.name": function (val) {
+      this.markers[0].nameDirection = val;
     },
   },
 };

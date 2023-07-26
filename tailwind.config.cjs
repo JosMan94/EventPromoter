@@ -30,4 +30,10 @@ module.exports = {
         },
     },
     plugins: [],
+    optimizeDeps: {
+        include: [
+            "@fawmi/vue-google-maps",
+            "fast-deep-equal",
+        ],
+    },
 }

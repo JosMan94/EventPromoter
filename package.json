@@ -9,6 +9,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@fawmi/vue-google-maps": "0.9.72",
         "@splidejs/splide-extension-auto-scroll": "^0.5.3",
         "@splidejs/vue-splide": "^0.6.11",
         "axios": "^0.27.2",
