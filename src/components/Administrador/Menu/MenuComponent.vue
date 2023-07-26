@@ -43,7 +43,7 @@
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-promotores.png" alt="CAJEROS" />
+        <img src="../../../assets/images/icon-cajero.png" width="30" alt="CAJEROS" />
       </button>
       <button
         @click.prevent="changeView('meseros')"
@@ -51,7 +51,9 @@
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-promotores.png" alt="MESEROS" />
+
+    
+        <img src="../../../assets/images/icon-mesero.png"  width="30"  alt="MESEROS" />
       </button>
       <button
         @click.prevent="changeView('tickets')"
@@ -123,7 +125,7 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
+          <img src="../../../assets/images/icon-cajero.png" width="30" alt="PROMOTORES" />
           Cajeros
         </button>
         <button
@@ -132,7 +134,7 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
+          <img src="../../../assets/images/icon-mesero.png"  width="30" alt="PROMOTORES" />
           Meseros
         </button>
         <button
