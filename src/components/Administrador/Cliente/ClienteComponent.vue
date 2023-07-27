@@ -22,7 +22,15 @@
           <span class="hidden xl:block">Buscar</span>
         </button>
       </div>
-      <div class="hidden xl:flex justify-between">
+      <div class="hidden xl:flex justify-start gap-2">
+        <button
+          @click.prevent="deleteMultipleSelect"
+          class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
+          v-if="deleteList.length !== 0"
+        >
+          <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
+          Eliminar
+        </button>
         <button
           class="py-4 px-8 text-white flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 bg-green-500 shadow-sm"
           @click.prevent="descargarExcelCliente"
@@ -37,12 +45,12 @@
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
       <header class="hidden xl:grid grid-cols-13 gap-5 table-head">
         <div class="col-span-3 flex items-center gap-5">
-          <!-- <input
+          <input
             :checked="deleteList.length !== 0"
             type="checkbox"
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
-          /> -->
+          />
           <p class="">NOMBRE Y APELLIDOS</p>
           <!-- <img src="../../../assets/images/arrow-down.png" alt="down" /> -->
         </div>
@@ -75,12 +83,12 @@
       <span v-for="data in clientes" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-13 gap-5 table-row">
           <div class="xl:col-span-3 xl:flex items-center gap-5">
-            <!-- <input
+            <input
               :checked="data.check"
               type="checkbox"
               @change="deleteGroup(data, 'one')"
               class="hidden xl:block w-5 h-5 mr-4"
-            /> -->
+            />
 
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
@@ -138,7 +146,6 @@
         <img src="../../../assets/images/arrow-right.png" alt="Next" />
       </button>
     </div>
-
     <div class="mt-12 flex xl:hidden justify-end items-center gap-12">
       <p>
         Pág.
@@ -225,7 +232,7 @@ export default {
 
         this.pagination.state = false;
         this.clientes = result.data.data;
-        // this.clientes.forEach((element) => (element.check = false));
+        this.clientes.forEach((element) => (element.check = false));
         //Paginacion-1
         this.pagination.links = [];
         result.data.links.forEach((element) => {

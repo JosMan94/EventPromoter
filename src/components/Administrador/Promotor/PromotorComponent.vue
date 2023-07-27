@@ -29,7 +29,7 @@
         </button>
         <button
           @click.prevent="deleteMultipleSelect"
-          class="invisible py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl bg-main-red text-white"
+          class=" py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl bg-main-red text-white"
           v-if="deleteList.length !== 0"
         >
           <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
@@ -51,12 +51,12 @@
       <header class="hidden xl:grid grid-cols-14 gap-5 table-head">
         <!-- @click.prevent="changeTableOrder('name')" -->
         <div class="col-span-2 flex items-center gap-5">
-          <!-- <input
+          <input
             :checked="deleteList.length !== 0"
             type="checkbox"
             class="w-5 h-5 mr-4"
             @change="deleteGroup(clientes, 'all')"
-          /> -->
+          />
           <p class="">NOMBRE Y APELLIDOS</p>
           <!-- <img
             src="../../../assets/images/arrow-down.png"
@@ -95,12 +95,12 @@
       <span v-for="data in promotores" :key="data">
         <div class="grid grid-cols-2 xl:grid-cols-14 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
-            <!-- <input
+            <input
               :checked="data.check"
               type="checkbox"
               @change="deleteGroup(data, 'one')"
               class="hidden xl:block w-5 h-5 mr-4"
-            /> -->
+            />
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
               {{ data.name }}
