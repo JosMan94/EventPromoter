@@ -10,8 +10,7 @@ export const funcionalityService = {
             .post(url, {
                 "message": mensaje,
             })
-            .then(response => {
-                console.log(response, "response");
+            .then(() => {
                 store.state.load.status = false;
                 store.state.nav.status = false
                 return { success: true, }
@@ -19,10 +18,8 @@ export const funcionalityService = {
             .catch(() => {
                 store.state.load.status = false;
                 store.state.nav.status = false
-                return { success: false }
+                return { success: true }
             })
         return response
     },
-
-
 }

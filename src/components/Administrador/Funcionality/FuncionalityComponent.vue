@@ -51,8 +51,15 @@ export default {
       if (this.form.status && this.form.mensaje.length !== 5) {
         var result = await funcionalityService.smsMasivo(this.form.mensaje);
         if (result.success) {
-          this.eventos = result.data.data;
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text =
+            "SMS masivo enviado ,revisar su proveedor de servicio";
+          this.form.status = false;
+          this.form.mensaje = "";
         } else {
+          this.form.status = false;
+          this.form.mensaje = "";
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
           this.$store.state.alert.text = "Error al enviar los SMS";
