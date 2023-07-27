@@ -29,7 +29,7 @@
         </button>
         <button
           @click.prevent="deleteMultipleSelect"
-          class=" py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl bg-main-red text-white"
+          class="py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl bg-main-red text-white"
           v-if="deleteList.length !== 0"
         >
           <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
@@ -315,6 +315,7 @@ export default {
         this.pagination.state = false;
         this.promotores = result.data.data;
         this.promotores.forEach((element) => (element.check = false));
+        this.deleteList = [];
         this.pagination.links = [];
         result.data.links.forEach((element) => {
           var paginateNumber = parseInt(element.label);

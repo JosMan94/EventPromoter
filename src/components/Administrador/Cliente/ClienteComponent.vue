@@ -233,6 +233,7 @@ export default {
         this.pagination.state = false;
         this.clientes = result.data.data;
         this.clientes.forEach((element) => (element.check = false));
+        this.deleteList = [];
         //Paginacion-1
         this.pagination.links = [];
         result.data.links.forEach((element) => {
