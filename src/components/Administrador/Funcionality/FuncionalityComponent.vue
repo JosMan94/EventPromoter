@@ -27,6 +27,7 @@
       </div>
     </form>
     <button
+      v-if="form.status"
       type="submit"
       @click.prevent="enviarSms"
       class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
@@ -48,7 +49,7 @@ export default {
   },
   methods: {
     async enviarSms() {
-      if (this.form.status && this.form.mensaje.length !== 5) {
+      if (this.form.status && this.form.mensaje.length !== 10) {
         var result = await funcionalityService.smsMasivo(this.form.mensaje);
         if (result.success) {
           this.$store.state.alert.status = true;
@@ -68,7 +69,7 @@ export default {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
         this.$store.state.alert.text =
-          "Recuerde confirmar el envío y el mensaje debe contener más de 5 caractéres";
+          "Recuerde confirmar el envío y el mensaje debe contener más de 10 caractéres";
       }
     },
   },
