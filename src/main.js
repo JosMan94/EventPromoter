@@ -8,6 +8,7 @@ import VueSplide from '@splidejs/vue-splide';
 import '@splidejs/vue-splide/css';
 import VueCookies from 'vue3-cookies';
 import VueClipboard from 'vue3-clipboard';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 const app = createApp(App);
 app.use(router);
 app.use(store);
@@ -17,6 +18,7 @@ app.use(VueClipboard, {
 });
 app.use(VueCookies);
 app.use(VueSplide);
+app.use(CKEditor);
 app.use(VueGoogleMaps, {
     load: {
         key: "AIzaSyAog3Tamm1l2ni9uEr_mrjOzcIOX0763kU",

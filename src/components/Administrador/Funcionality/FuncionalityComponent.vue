@@ -34,22 +34,65 @@
     >
       ENVIAR
     </button>
+
+    <h2 class="font-bold text-xl xl:text-3xl mb-4 mt-4 text-text-blue xl:block">
+      EMAIL MASIVO
+    </h2>
+    <form class="grid xl:grid-cols-1 gap-6">
+      <div>
+        <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
+          >Confirmar el envío de EMAIL: <span class="text-red-600"> ( * ) </span></label
+        >
+
+        <label class="switch">
+          <input type="checkbox" v-model="formEmail.status" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <div>
+        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
+          >Mensaje: <span class="text-red-600"> ( * ) </span></label
+        >
+
+        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+      </div>
+    </form>
+    <button
+      v-if="formEmail.status"
+      type="submit"
+      @click.prevent="enviarSms"
+      class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
+    >
+      ENVIAR
+    </button>
   </article>
 </template>
 <script>
 import { funcionalityService } from "../../../service/Funcionality/funcionality.service";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
     return {
+      // SMS
       form: {
         status: false,
         mensaje: "",
+      },
+      // EMAIL
+      formEmail: {
+        status: false,
+      },
+      editor: ClassicEditor,
+      editorData: null,
+      editorConfig: {
+        // The configuration of the editor.
       },
     };
   },
   methods: {
     async enviarSms() {
-      if (this.form.status && this.form.mensaje.length !== 10) {
+      if (this.form.status && this.form.mensaje.length > 10) {
         var result = await funcionalityService.smsMasivo(this.form.mensaje);
         if (result.success) {
           this.$store.state.alert.status = true;
