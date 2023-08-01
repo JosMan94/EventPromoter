@@ -58,14 +58,14 @@
         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       </div>
     </form>
-    <button
+    <!-- <button
       v-if="formEmail.status"
       type="submit"
       @click.prevent="enviarSms"
       class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
       ENVIAR
-    </button>
+    </button> -->
   </article>
 </template>
 <script>
