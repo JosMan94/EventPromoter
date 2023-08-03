@@ -32,7 +32,7 @@
           >Cantidad de entradas: <span class="text-red-600"> ( * )</span></label
         >
         <input
-          type="tel"
+          type="number"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="entradas"
           placeholder="10,000"
@@ -44,7 +44,7 @@
           >Aforo permitido: <span class="text-red-600"> ( * )</span></label
         >
         <input
-          type="tel"
+          type="number"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="aforo"
           placeholder="2,000"
