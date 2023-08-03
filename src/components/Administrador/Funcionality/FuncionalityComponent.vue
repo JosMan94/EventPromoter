@@ -70,13 +70,25 @@
     <h2 class="font-bold text-xl xl:text-3xl mb-4 mt-4 text-text-blue xl:block">
       ENVIAR TICKETS
     </h2>
-    <div class="">
-      
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+    >
+      <button
+        v-for="eventos in events"
+        :key="eventos"
+        :class="eventos.status === 1 ? 'cursor-pointer' : 'cursor-not-allowed'"
+        :disabled="eventos.status === 0"
+        @click.prevent="eventos.status === 1 ? sendTickets(eventos) : ''"
+        class="font-semibold text-center border border-black w-full h-full px-2 hover:bg-black hover:text-white transition duration-500 ease-in-out"
+      >
+        {{ eventos.name }}
+      </button>
     </div>
   </article>
 </template>
 <script>
 import { funcionalityService } from "../../../service/Funcionality/funcionality.service";
+import { clientService } from "../../../service/Cliente/cliente.service";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data() {
@@ -95,9 +107,44 @@ export default {
       editorConfig: {
         // The configuration of the editor.
       },
+      //tickets
+      events: [],
     };
   },
+  mounted() {
+    this.getEvents();
+  },
   methods: {
+    async sendTickets(data) {
+      var opcion = confirm("Desea enviar tickets del evento: " + data.name + " ?");
+      if (opcion) {
+        var result = await funcionalityService.ticketMasivo(data.id);
+        if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Ticket masivo enviado";
+        } else {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al enviar los Ticket";
+        }
+      }
+    },
+    async getEvents() {
+      var objPage = new Object();
+      objPage.order_type = "id";
+      var result = await clientService.getEventAdmin(objPage);
+      if (result.success) {
+        this.events = result.data.data;
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Lista de envetos";
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al mostrar los eventos";
+      }
+    },
     async enviarSms() {
       if (this.form.status && this.form.mensaje.length > 10) {
         var result = await funcionalityService.smsMasivo(this.form.mensaje);
