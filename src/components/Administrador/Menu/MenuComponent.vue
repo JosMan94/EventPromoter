@@ -169,7 +169,7 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-tuerca.png" alt="Tickets" />
+          <img src="../../../assets/images/icon-tuerca.png" alt="Tickets" width="30" />
           Funcionalidades
         </button>
       </div>
