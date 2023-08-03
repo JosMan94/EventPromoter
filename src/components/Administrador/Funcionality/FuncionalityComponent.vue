@@ -58,14 +58,14 @@
         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       </div>
     </form>
-    <!-- <button
+    <button
       v-if="formEmail.status"
       type="submit"
-      @click.prevent="enviarSms"
+      @click.prevent="enviarEmail"
       class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
       ENVIAR
-    </button> -->
+    </button>
   </article>
 </template>
 <script>
@@ -84,7 +84,7 @@ export default {
         status: false,
       },
       editor: ClassicEditor,
-      editorData: null,
+      editorData: "",
       editorConfig: {
         // The configuration of the editor.
       },
@@ -107,6 +107,29 @@ export default {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
           this.$store.state.alert.text = "Error al enviar los SMS";
+        }
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text =
+          "Recuerde confirmar el envío y el mensaje debe contener más de 10 caractéres";
+      }
+    },
+    async enviarEmail() {
+      if (this.formEmail.status && this.editorData.length > 10) {
+        var result = await funcionalityService.emailMasivo(this.editorData);
+        if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Email masivo enviado";
+          this.formEmail.status = false;
+          this.editorData = "";
+        } else {
+          this.formEmail.status = false;
+          this.editorData = "";
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al enviar los email";
         }
       } else {
         this.$store.state.alert.status = true;
