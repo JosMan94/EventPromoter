@@ -66,6 +66,13 @@
     >
       ENVIAR
     </button>
+
+    <h2 class="font-bold text-xl xl:text-3xl mb-4 mt-4 text-text-blue xl:block">
+      ENVIAR TICKETS
+    </h2>
+    <div class="">
+      
+    </div>
   </article>
 </template>
 <script>

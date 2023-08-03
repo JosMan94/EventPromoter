@@ -42,7 +42,7 @@ export const funcionalityService = {
             .catch(() => {
                 store.state.load.status = false;
                 store.state.nav.status = false
-                return { success: true }
+                return { success: false }
             })
         return response
     },
