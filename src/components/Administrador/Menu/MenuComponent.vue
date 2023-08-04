@@ -40,6 +40,18 @@
         <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
       </button>
       <button
+        @click.prevent="changeView('invitados')"
+        :class="
+          view === 'invitados' || view === 'create-invitado' || view === 'edit-invitado'
+            ? 'bg-main-green'
+            : ''
+        "
+        type="button"
+        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+      >
+        <img src="../../../assets/images/icon-invitado.png" alt="ENVITADO"  width="30"/>
+      </button>
+      <button
         @click.prevent="changeView('cajeros')"
         :class="view === 'cajeros' || view === 'create-cajero' ? 'bg-main-green' : ''"
         type="button"
@@ -126,6 +138,15 @@
         >
           <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
           Promotores
+        </button>
+        <button
+          @click.prevent="changeView('invitados')"
+          :class="view === 'invitados' ? 'bg-main-green' : ''"
+          type="button"
+          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" width="30" alt="INVITADOS" />
+          Invitados
         </button>
         <button
           @click.prevent="changeView('cajeros')"

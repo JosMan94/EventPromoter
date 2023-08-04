@@ -1,7 +1,7 @@
 <template>
   <!-- Buscador -->
   <article class="mb-6">
-    <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">Meseros</h2>
+    <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">Invitados</h2>
     <form class="grid xl:grid-cols-2 gap-6">
       <div class="relative">
         <input
@@ -22,25 +22,18 @@
       </div>
       <div class="flex justify-between">
         <button
-          class="invisible py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
+          class="invisible py-4 px-8 flex items-center gap-1 text-base font-bold rounded-2xl border border-gray-300 shadow-sm"
         >
           <img src="../../../assets/images/filtros.png" alt="Filtros" />
           Filtrar por
         </button>
-        <button
-          @click.prevent="deleteMultipleSelect"
-          class="invisible py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-red text-white"
-          v-if="deleteList.length !== 0"
-        >
-          <!-- <img src="../../../assets/images/plus.png" alt="Agregar" /> -->
-          Eliminar
-        </button>
+
         <router-link
-          :to="{ name: 'Administrador', params: { viewAdmin: 'create-mesero' } }"
+          :to="{ name: 'Administrador', params: { viewAdmin: 'create-invitado' } }"
           class="py-4 px-8 flex items-center gap-3 text-base font-bold rounded-2xl bg-main-green text-white"
         >
           <img src="../../../assets/images/plus.png" alt="Agregar" />
-          Crear Cajero
+          Crear Invitado
         </router-link>
       </div>
     </form>
@@ -48,21 +41,46 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-12 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-14 gap-5 table-head">
+        <!-- @click.prevent="changeTableOrder('name')" -->
         <div class="col-span-2 flex items-center gap-5">
           <p class="">NOMBRE Y APELLIDOS</p>
+          <!-- <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'name' ? 'transform rotate-180' : ''"
+            alt=""
+          /> -->
         </div>
-
-        <p class="col-span-2 flex items-center gap-4">Cód. mesero</p>
-
+        <!-- @click.prevent="changeTableOrder('code_user')" -->
+        <p class="col-span-2 flex items-center gap-4">
+          Cód. invitado
+          <!-- <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'code_user' ? 'transform rotate-180' : ''"
+            alt=""
+          /> -->
+        </p>
+        <!-- @click.prevent="changeTableOrder('alias')" -->
         <p class="col-span-2 flex items-center gap-4">ALIAS</p>
-
-        <p class="col-span-2 flex items-center gap-4">E-MAIL</p>
+        <!-- @click.prevent="changeTableOrder('email')" -->
+        <p class="col-span-2 flex items-center gap-4">
+          E-MAIL
+          <!-- <img
+            src="../../../assets/images/arrow-down.png"
+            :class="table.order_type === 'email' ? 'transform rotate-180' : ''"
+            alt=""
+          /> -->
+        </p>
         <p class="col-span-2 flex items-center gap-4">DNI</p>
         <p class="col-span-2 flex items-center gap-4">CELULAR</p>
+        <p class="col-span-2 flex items-center gap-4">EDITAR</p>
+        <!-- <p class="col-span-2 flex items-center gap-4">
+          ACCIONES
+          <img src="../../../assets/images/arrow-down.png" alt="" />
+        </p> -->
       </header>
-      <span v-for="data in mesero" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-12 gap-5 table-row">
+      <span v-for="data in invitados" :key="data">
+        <div class="grid grid-cols-2 xl:grid-cols-14 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
@@ -70,7 +88,7 @@
             </p>
           </div>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Cód. de mesero:</span>
+            <span class="block xl:hidden text-text-blue mb-2">Cód. de invitado:</span>
             {{ data.code_user }}
           </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
@@ -89,6 +107,22 @@
             <span class="block xl:hidden text-text-blue mb-2">Celular:</span>
             {{ data.cellphone }}
           </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-6">Editar:</span>
+            <router-link
+              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-invitado' } }"
+              @click.prevent="sendDataEvent(data)"
+              class="rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
+            >
+              Editar Invitado
+            </router-link>
+          </p>
+          <!-- <button
+            type="button"
+            class="hidden xl:block pl-4 xl:col-span-2 flex items-center gap-4"
+          >
+            <img src="../../../assets/images/more_actions.png" alt="" />
+          </button> -->
         </div>
       </span>
     </div>
@@ -101,7 +135,7 @@
       </button>
       <span v-for="data in pagination.links" :key="data">
         <button
-          @click.prevent="getMesero(true, data.label)"
+          @click.prevent="getInvitado(true, data.label)"
           :class="data.status ? 'bg-bg-black text-white' : ''"
           class="h-8 w-8 rounded-full flex items-center justify-center hover:bg-bg-black hover:text-white transition-colors"
         >
@@ -122,14 +156,14 @@
       <div class="flex items-center gap-4">
         <figure
           v-if="dataTable.pastStatus"
-          @click.prevent="getMesero(true, pagePast)"
+          @click.prevent="getInvitado(true, pagePast)"
           class="cursor-pointer p-3"
         >
           <img src="../../../assets/images/arrow-left.png" alt="Prev" />
         </figure>
         <figure
           v-if="dataTable.nextStatus"
-          @click.prevent="getMesero(true, pageNext)"
+          @click.prevent="getInvitado(true, pageNext)"
           class="cursor-pointer p-3"
         >
           <img src="../../../assets/images/arrow-right.png" alt="Next" />
@@ -144,18 +178,15 @@ import { verifyService } from "../../../service/Verify/verify.service";
 export default {
   data() {
     return {
-      deleteList: [],
-      mesero: [],
+      invitados: [],
       pagination: {
         state: false,
         links: [],
       },
       clave: "",
-
       table: {
-        order_type: "code_user",
+        order_type: "id",
       },
-
       dataTable: {
         page: 0,
         from: 0,
@@ -171,29 +202,30 @@ export default {
     };
   },
   mounted() {
-    this.getMesero();
+    this.getInvitado();
   },
   methods: {
+    sendDataEvent(data) {
+      this.$emit("dataInvitado", data);
+    },
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;
-      objPage.table = "adminMeseros";
+      objPage.table = "adminInvitados";
       var result = await verifyService.searchTable(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "success";
         this.$store.state.alert.text = "Resultados de la búsqueda";
-
         this.pagination.state = true;
-        this.mesero = result.data;
+        this.invitados = result.data;
       } else {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
         this.$store.state.alert.text = "Error en la búsqueda";
       }
     },
-
-    async getMesero(option, data) {
+    async getInvitado(option, data) {
       var page = 0;
       var length = 10;
       if (option) {
@@ -205,20 +237,18 @@ export default {
       objPage.page = page;
       objPage.length = length;
       objPage.order_type = this.table.order_type;
-      objPage.filterBy = "mesero";
+      objPage.filterBy = "invitado";
       var result = await promotorService.getPromotor(objPage);
       if (result.success) {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "success";
-        this.$store.state.alert.text = "Listado de meseros";
+        this.$store.state.alert.text = "Listado de invitados";
 
         this.pagination.state = false;
-        this.mesero = result.data.data;
-
+        this.invitados = result.data.data;
         this.pagination.links = [];
         result.data.links.forEach((element) => {
           var paginateNumber = parseInt(element.label);
-
           if (paginateNumber) {
             var paginate = new Object();
             paginate.label = paginateNumber;
@@ -255,14 +285,14 @@ export default {
       } else {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "error";
-        this.$store.state.alert.text = "Error al mostrar los meseros";
+        this.$store.state.alert.text = "Error al mostrar los invitados";
       }
     },
   },
   watch: {
     clave: function (val) {
       if (val === "") {
-        this.getMesero();
+        this.getInvitado();
       }
     },
   },

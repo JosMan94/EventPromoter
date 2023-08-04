@@ -11,7 +11,8 @@
         view === 'tickets' ||
         view === 'regalos' ||
         view === 'meseros' ||
-        view === 'cajeros'
+        view === 'cajeros' ||
+        view === 'invitados'
           ? ''
           : 'grid grid-cols-1 xl:grid-cols-3 items-start justify-between gap-10 xl:gap-40'
       "
@@ -24,6 +25,7 @@
         v-if="view === 'promotores'"
         @dataPromotor="promotor = $event"
       />
+      <invitado-component v-if="view === 'invitados'" @dataInvitado="invitado = $event" />
       <ticket-component v-if="view === 'tickets'" />
       <regalo-component v-if="view === 'regalos'" />
       <cajero-component v-if="view === 'cajeros'" />
@@ -36,10 +38,12 @@
       <create-regalo-component v-if="view === 'create-regalo'" />
       <create-cajero-component v-if="view === 'create-cajero'" />
       <create-mesero-component v-if="view === 'create-mesero'" />
+      <create-invitado-component v-if="view === 'create-invitado'" />
 
       <edit-evento-component v-if="view === 'edit-event'" :evento="evento" />
       <edit-promotor-component v-if="view === 'edit-promotor'" :promotor="promotor" />
       <edit-client-component v-if="view === 'edit-client'" :cliente="cliente" />
+      <edit-invitado-component v-if="view === 'edit-invitado'" :invitado="invitado" />
     </section>
   </main>
 </template>
@@ -62,6 +66,9 @@ import EditEventoComponent from "../../components/Administrador/Evento/EditEvent
 import EditPromotorComponent from "../../components/Administrador/Promotor/EditPromotorComponent.vue";
 import EditClientComponent from "../../components/Administrador/Cliente/EditClienteComponent.vue";
 import FuncionalityComponent from "../../components/Administrador/Funcionality/FuncionalityComponent.vue";
+import InvitadoComponent from "../../components/Administrador/Invitado/InvitadoComponent.vue";
+import CreateInvitadoComponent from "../../components/Administrador/Invitado/CreateInvitadoComponent.vue";
+import EditInvitadoComponent from "../../components/Administrador/Invitado/EditInvitadoComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -83,6 +90,9 @@ export default {
     EditPromotorComponent,
     EditClientComponent,
     FuncionalityComponent,
+    InvitadoComponent,
+    CreateInvitadoComponent,
+    EditInvitadoComponent,
   },
   data() {
     return {
@@ -90,6 +100,7 @@ export default {
       evento: null,
       promotor: null,
       cliente: null,
+      invitado: null,
     };
   },
   watch: {

@@ -53,7 +53,7 @@
           <p class="">NOMBRE Y APELLIDOS</p>
         </div>
 
-        <p class="col-span-2 flex items-center gap-4">Cód. promotor</p>
+        <p class="col-span-2 flex items-center gap-4">Cód. cajero</p>
 
         <p class="col-span-2 flex items-center gap-4">ALIAS</p>
 
@@ -70,7 +70,7 @@
             </p>
           </div>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
-            <span class="block xl:hidden text-text-blue mb-2">Cód. de promotor:</span>
+            <span class="block xl:hidden text-text-blue mb-2">Cód. de cajero:</span>
             {{ data.code_user }}
           </p>
           <p class="xl:col-span-2 xl:flex items-center gap-4">
