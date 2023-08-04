@@ -80,6 +80,7 @@ export const clientService = {
             })
         return response
     },
+
     login(data) {
         store.state.load.status = true;
         let response
