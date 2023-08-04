@@ -45,7 +45,7 @@
       <button
         @click.prevent="changeView('invitados')"
         :class="
-          view === 'invitados' || view === 'create-invitado' || view === 'edit-invitado'
+          view === 'invitados' || view === 'create-invitado' || view === 'edit-invitado'|| view === 'regalo-invitado'
             ? 'bg-main-green'
             : ''
         "

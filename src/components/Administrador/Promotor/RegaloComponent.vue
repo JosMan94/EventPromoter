@@ -34,21 +34,67 @@
         >
         <input
           type="number"
-          class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
+          class="cursor-not-allowed w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="nombres"
           placeholder="Ingresar la cantidad"
           v-model="form.amount"
           disabled
         />
       </div>
+      <div>
+        <button
+          type="submit"
+          @click.prevent="createRegaloForUser"
+          class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
+        >
+          CREAR REGALO
+        </button>
+      </div>
     </form>
-    <button
-      type="submit"
-      @click.prevent="createRegaloForUser"
-      class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
-    >
-      CREAR REGALO
-    </button>
+
+   
+    <article class="mt-8">
+      <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
+        Regalos realizados
+      </h2>
+    </article>
+   
+    <article>
+      <div class="rounded-xl overflow-hidden shadow-lg mb-10">
+        <header class="hidden xl:grid grid-cols-9 gap-5 table-head">
+          <div class="col-span-3 flex items-center gap-5">
+            <p class="">TÍTULO</p>
+          </div>
+          <p class="col-span-2 flex items-center gap-4">DESCRIPCIÓN</p>
+          <p class="col-span-2 flex items-center gap-4">CANTIDAD</p>
+          <p class="col-span-2 flex items-center gap-4">STATUS</p>
+        </header>
+
+        <span v-for="data in regalos" :key="data">
+          <div class="grid grid-cols-2 xl:grid-cols-9 gap-5 table-row">
+            <div class="xl:col-span-3 xl:flex items-center gap-5">
+              <p class="">
+                <span class="block xl:hidden text-text-blue mb-2">TÍTULO:</span>
+                {{ data.title }}
+              </p>
+            </div>
+            <p class="xl:col-span-2 xl:flex items-center gap-4">
+              <span class="block xl:hidden text-text-blue mb-2">DESCRIPCIÓN:</span>
+              {{ data.description }}
+            </p>
+            <p class="xl:col-span-2 xl:flex items-center gap-4">
+              <span class="block xl:hidden text-text-blue mb-2">CANTIDAD:</span>
+              {{ data.amount }}
+            </p>
+            <p class="xl:col-span-2 xl:flex items-center gap-4">
+              <span class="block xl:hidden text-text-blue mb-2">STATUS:</span>
+              {{ data.status === 0 ? "SIN RECLAMAR" : "RECLAMADO" }}
+            </p>
+          </div>
+        </span>
+      </div>
+    </article>
+
   </article>
 </template>
 <script>
@@ -58,6 +104,7 @@ export default {
   data() {
     return {
       name: "",
+      regalos: [],
       form: {
         user_id: null,
         title: "",
@@ -78,6 +125,7 @@ export default {
     } else {
       this.name = this.promotor.name;
       this.form.user_id = this.promotor.id;
+      this.regalos = this.promotor.regalos_user;
     }
   },
   methods: {

@@ -96,7 +96,7 @@
             <span class="block xl:hidden text-text-blue mb-2">Alias:</span>
             {{ data.alias }}
           </p>
-          <p class="xl:col-span-2 xl:flex items-center gap-4">
+          <p class="xl:col-span-2 xl:flex items-center gap-4"  style="word-break: break-all">
             <span class="block xl:hidden text-text-blue mb-2">Correo electrónico:</span>
             {{ data.email }}
           </p>
