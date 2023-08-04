@@ -41,7 +41,7 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-14 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-16 gap-5 table-head">
         <!-- @click.prevent="changeTableOrder('name')" -->
         <div class="col-span-2 flex items-center gap-5">
           <p class="">NOMBRE Y APELLIDOS</p>
@@ -74,13 +74,14 @@
         <p class="col-span-2 flex items-center gap-4">DNI</p>
         <p class="col-span-2 flex items-center gap-4">CELULAR</p>
         <p class="col-span-2 flex items-center gap-4">EDITAR</p>
+        <p class="col-span-2 flex items-center gap-4">REGALO</p>
         <!-- <p class="col-span-2 flex items-center gap-4">
           ACCIONES
           <img src="../../../assets/images/arrow-down.png" alt="" />
         </p> -->
       </header>
       <span v-for="data in invitados" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-14 gap-5 table-row">
+        <div class="grid grid-cols-2 xl:grid-cols-16 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
@@ -115,6 +116,16 @@
               class="rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
             >
               Editar Invitado
+            </router-link>
+          </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-6">Regalo:</span>
+            <router-link
+              :to="{ name: 'Administrador', params: { viewAdmin: 'regalo-invitado' } }"
+              @click.prevent="sendDataEvent(data)"
+              class="rounded-md px-6 py-4 bg-red-700 text-white ring-2 ring-red-700 hover:bg-white hover:text-red-700 transition-colors"
+            >
+              Regalo
             </router-link>
           </p>
           <!-- <button

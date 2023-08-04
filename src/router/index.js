@@ -30,6 +30,7 @@ const routes = [{
 
     {
         path: "/security/verify/entry/:codeClient/:codeEvent/:codePromotor?",
+
         name: "VerifyTicket",
         component: () =>
             import ('../views/Verificar/VerificarEntrada.vue'),

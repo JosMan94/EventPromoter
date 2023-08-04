@@ -44,6 +44,9 @@
       <edit-promotor-component v-if="view === 'edit-promotor'" :promotor="promotor" />
       <edit-client-component v-if="view === 'edit-client'" :cliente="cliente" />
       <edit-invitado-component v-if="view === 'edit-invitado'" :invitado="invitado" />
+
+      <regalo-promotor-component v-if="view === 'regalo-promotor'" :promotor="promotor" />
+      <regalo-invitado-component v-if="view === 'regalo-invitado'" :invitado="invitado" />
     </section>
   </main>
 </template>
@@ -69,6 +72,8 @@ import FuncionalityComponent from "../../components/Administrador/Funcionality/F
 import InvitadoComponent from "../../components/Administrador/Invitado/InvitadoComponent.vue";
 import CreateInvitadoComponent from "../../components/Administrador/Invitado/CreateInvitadoComponent.vue";
 import EditInvitadoComponent from "../../components/Administrador/Invitado/EditInvitadoComponent.vue";
+import RegaloPromotorComponent from "../../components/Administrador/Promotor/RegaloComponent.vue";
+import RegaloInvitadoComponent from "../../components/Administrador/Invitado/RegaloComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -93,6 +98,8 @@ export default {
     InvitadoComponent,
     CreateInvitadoComponent,
     EditInvitadoComponent,
+    RegaloPromotorComponent,
+    RegaloInvitadoComponent,
   },
   data() {
     return {

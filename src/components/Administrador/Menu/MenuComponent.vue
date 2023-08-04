@@ -30,7 +30,10 @@
       <button
         @click.prevent="changeView('promotores')"
         :class="
-          view === 'promotores' || view === 'create-promotor' || view === 'edit-promotor'
+          view === 'promotores' ||
+          view === 'create-promotor' ||
+          view === 'edit-promotor' ||
+          view === 'regalo-promotor'
             ? 'bg-main-green'
             : ''
         "
@@ -49,7 +52,7 @@
         type="button"
         class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-invitado.png" alt="ENVITADO"  width="30"/>
+        <img src="../../../assets/images/icon-invitado.png" alt="ENVITADO" width="30" />
       </button>
       <button
         @click.prevent="changeView('cajeros')"
@@ -145,7 +148,11 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-invitado.png" width="30" alt="INVITADOS" />
+          <img
+            src="../../../assets/images/icon-invitado.png"
+            width="30"
+            alt="INVITADOS"
+          />
           Invitados
         </button>
         <button

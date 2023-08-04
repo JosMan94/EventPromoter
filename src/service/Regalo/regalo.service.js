@@ -1,6 +1,25 @@
 import axios from 'axios'
 import store from '../../store/index';
 export const regaloService = {
+
+    createRegaloForUser(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/created-gift-for-user'
+        response = axios
+            .post(url, data)
+            .then(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
     updateStatusRegalo(id, dataStatus) {
 
         store.state.load.status = true;
