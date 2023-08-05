@@ -1,5 +1,6 @@
 <template>
-  <label>REGALOS POR EVENTO</label>
+  <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue">REGALOS POR EVENTO :</h2>
+
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div class="p-4" v-for="data in regalos" :key="data">
       <center>
@@ -65,7 +66,7 @@
       </figure>
     </div>
   </div>
-  <label>REGALOS</label>
+  <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue">REGALOS :</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div class="p-4" v-for="data in regalosPromotor" :key="data">
       <center>
