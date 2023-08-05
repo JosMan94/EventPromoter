@@ -1,7 +1,24 @@
 import axios from 'axios'
 import store from '../../store/index';
 export const regaloService = {
-
+    verifyRegaloForUser(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/reclamar-regalo-user'
+        response = axios
+            .post(url, data)
+            .then(response => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true, message: response.data.message, data: response.data.data, user: response.data.user }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
     createRegaloForUser(data) {
         store.state.load.status = true;
         let response
@@ -65,6 +82,24 @@ export const regaloService = {
         store.state.load.status = true;
         let response
         let url = 'https://promotoresback.azurewebsites.net/api/regalo/list'
+        response = axios
+            .post(url, data)
+            .then(response => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: true, data: response.data.data }
+            })
+            .catch(() => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                return { success: false }
+            })
+        return response
+    },
+    getRegaloForPromotor(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/regalo-promotor'
         response = axios
             .post(url, data)
             .then(response => {

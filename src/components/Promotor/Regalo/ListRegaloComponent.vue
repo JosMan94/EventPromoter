@@ -1,4 +1,5 @@
 <template>
+  <label>REGALOS POR EVENTO</label>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div class="p-4" v-for="data in regalos" :key="data">
       <center>
@@ -17,7 +18,6 @@
       </center>
     </div>
   </div>
-
   <div
     v-if="pagination.state === false"
     class="bg-gray-100 hidden xl:flex gap-1 items-center justify-end w-max ml-auto px-2 rounded-2xl"
@@ -39,7 +39,10 @@
       <img src="../../../assets/images/arrow-right.png" alt="Next" />
     </button>
   </div>
-  <div class="mt-12 flex xl:hidden justify-end items-center gap-12">
+  <div
+    v-if="pagination.state === false"
+    class="mt-12 flex xl:hidden justify-end items-center gap-12"
+  >
     <p>
       Pág.
       <span class="mx-3 py-1 px-3 ring ring-blue-300">{{ dataTable.from }}</span> de
@@ -62,8 +65,26 @@
       </figure>
     </div>
   </div>
+  <label>REGALOS</label>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="p-4" v-for="data in regalosPromotor" :key="data">
+      <center>
+        <qrcode-vue
+          size="200"
+          :value="
+            'https://in.niiru.club/verify/security/regalo/promotor/perzonalizado/' +
+            data.id +
+            '/' +
+            codePromotor
+          "
+        ></qrcode-vue>
+        <p class="">{{ data.title }}</p>
+        <p class="">{{ data.description }}</p>
+        <p class="">{{ data.amount }}</p>
+      </center>
+    </div>
+  </div>
 </template>
-
 <script>
 import { regaloService } from "../../../service/Regalo/regalo.service";
 import QrcodeVue from "qrcode.vue";
@@ -72,6 +93,7 @@ export default {
   data() {
     return {
       regalos: [],
+      regalosPromotor: [],
       pagination: {
         state: false,
         links: [],
@@ -99,6 +121,7 @@ export default {
     var codeUser = this.$cookies.get("code");
     if (codeUser) {
       this.codePromotor = codeUser;
+      this.getRegalosForPromotor();
     } else {
       this.$store.state.alert.status = true;
       this.$store.state.alert.type = "error";
@@ -107,6 +130,29 @@ export default {
     }
   },
   methods: {
+    async getRegalosForPromotor() {
+      if (this.codePromotor) {
+        var objPage = new Object();
+        objPage.code_user = this.codePromotor;
+        var result = await regaloService.getRegaloForPromotor(objPage);
+
+        if (result.success) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Listado de regalos";
+          this.regalosPromotor = result.data;
+        } else {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al mostrar regalos";
+        }
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Vuelva a iniciar sesión";
+        window.location.reload();
+      }
+    },
     async getRegalos(option, data) {
       var page = 0;
       var length = 10;
@@ -126,7 +172,7 @@ export default {
         this.$store.state.alert.type = "success";
         this.$store.state.alert.text = "Listado de regalos";
 
-        this.pagination.state = false;
+        this.pagination.state = true;
         this.regalos = result.data.data;
 
         this.pagination.links = [];

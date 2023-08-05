@@ -43,6 +43,12 @@ const routes = [{
             import ('../views/Verificar/VerificarRegalo.vue'),
 
     },
+    {
+        path: "/verify/security/regalo/promotor/perzonalizado/:codeRegalo/:codePromotor",
+        name: "VerifyRegaloForPromotor",
+        component: () =>
+            import ('../views/Verificar/VerificarRegaloPromotor.vue'),
+    },
     { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 
