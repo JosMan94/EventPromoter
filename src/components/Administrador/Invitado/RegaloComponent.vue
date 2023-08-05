@@ -157,12 +157,6 @@ export default {
             params: { viewAdmin: "invitados" },
           });
         } else {
-          this.form.user_id = null;
-          this.form.title = "";
-          this.form.description = "";
-          this.form.amount = 1;
-          this.form.type = "invitado";
-
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
           this.$store.state.alert.text = "Error al crear el regalo";

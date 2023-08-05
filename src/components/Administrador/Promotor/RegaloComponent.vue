@@ -52,13 +52,12 @@
       </div>
     </form>
 
-   
     <article class="mt-8">
       <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
         Regalos realizados
       </h2>
     </article>
-   
+
     <article>
       <div class="rounded-xl overflow-hidden shadow-lg mb-10">
         <header class="hidden xl:grid grid-cols-9 gap-5 table-head">
@@ -94,7 +93,6 @@
         </span>
       </div>
     </article>
-
   </article>
 </template>
 <script>
@@ -142,29 +140,16 @@ export default {
         ojb.description = this.form.description;
         ojb.amount = this.form.amount;
         ojb.type = this.form.type;
-
         var result = await regaloService.createRegaloForUser(ojb);
         if (result.success) {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "success";
           this.$store.state.alert.text = "Regalo creado";
-
-          this.form.user_id = null;
-          this.form.title = "";
-          this.form.description = "";
-          this.form.amount = 1;
-          this.form.type = "promotor";
           this.$router.push({
             name: "Administrador",
             params: { viewAdmin: "promotores" },
           });
         } else {
-          this.form.user_id = null;
-          this.form.title = "";
-          this.form.description = "";
-          this.form.amount = 1;
-          this.form.type = "promotor";
-
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
           this.$store.state.alert.text = "Error al crear el regalo";
