@@ -148,6 +148,7 @@ export default {
         this.pin = null;
       }
     },
+    
     async verifyRegaloForUser() {
       this.status = true;
       var obj = new Object();
