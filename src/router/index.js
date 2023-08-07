@@ -8,6 +8,12 @@ const routes = [{
             import ('../views/Cliente/Home.vue'),
     },
     {
+        path: "/:codeLink",
+        name: "Link",
+        component: () =>
+            import ('../views/Cliente/LinkCorto.vue'),
+    },
+    {
         path: "/register/event/:code/:promotor?",
         name: "RegisterEvent",
         component: () =>

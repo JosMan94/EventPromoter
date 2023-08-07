@@ -2,6 +2,24 @@ import axios from 'axios'
 import store from '../../store/index';
 
 export const clientService = {
+    linkShort(data) {
+        store.state.load.status = true;
+        let response
+        let url = 'https://promotoresback.azurewebsites.net/api/link-short/' + data
+        response = axios
+            .get(url, data)
+            .then((response) => {
+                store.state.load.status = false;
+                store.state.nav.status = false
+                window.location.href = response.data.url
+                return { success: true }
+            })
+            .catch(() => {
+                alert("Url no encontrada");
+                return { success: false }
+            })
+        return response
+    },
     updateClient(data) {
         store.state.load.status = true;
         let response
@@ -46,7 +64,7 @@ export const clientService = {
     getEvent(data) {
         store.state.loadEvent.status = true;
         let response
-        let url = 'http://127.0.0.1:8000/api/list-events'
+        let url = 'https://promotoresback.azurewebsites.net/api/list-events'
         response = axios
             .post(url, data)
             .then(response => {

@@ -88,10 +88,16 @@
           </button> -->
 
           <button
-            @click.prevent="charedEvent(data.code_event)"
+            @click.prevent="charedEvent(data.url_long)"
             class="rounded-md px-6 py-4 bg-purple-500 text-white ring-2 ring-purple-500 hover:bg-white hover:text-purple-500 transition-colors"
           >
             Copiar enlace
+          </button>
+          <button
+            @click.prevent="charedEvent(data.url_short)"
+            class="rounded-md px-6 py-4 bg-purple-500 text-white ring-2 ring-purple-500 hover:bg-white hover:text-purple-500 transition-colors"
+          >
+            Copiar enlace corto
           </button>
         </div>
       </span>
@@ -204,21 +210,17 @@ export default {
       }
     },
     charedEvent(codeEvento) {
-      copyText(
-        "https://in.niiru.club/register/event/" + codeEvento + "/" + this.codePromotor,
-        undefined,
-        (error, event) => {
-          if (error) {
-            this.$store.state.alert.status = true;
-            this.$store.state.alert.type = "error";
-            this.$store.state.alert.text = "Error al copiar el enlace";
-          } else {
-            this.$store.state.alert.status = true;
-            this.$store.state.alert.type = "success";
-            this.$store.state.alert.text = "Enlace copiado";
-          }
+      copyText(codeEvento, undefined, (error, event) => {
+        if (error) {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "error";
+          this.$store.state.alert.text = "Error al copiar el enlace";
+        } else {
+          this.$store.state.alert.status = true;
+          this.$store.state.alert.type = "success";
+          this.$store.state.alert.text = "Enlace copiado";
         }
-      );
+      });
     },
     async getEvents(option, data) {
       var page = 0;
