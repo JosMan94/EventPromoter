@@ -115,7 +115,7 @@ export default {
       if (this.upDocument !== this.form.document) {
         ojb.document = this.form.document;
       }
-      ojb.cellphone = this.form.cellphone;
+      ojb.cellphone = String(this.form.cellphone);
       ojb.name = this.form.name;
       ojb.date_of_brith = this.form.date_of_brith;
       ojb.email = this.form.email;

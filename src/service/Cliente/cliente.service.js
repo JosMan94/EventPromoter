@@ -46,7 +46,7 @@ export const clientService = {
     getEvent(data) {
         store.state.loadEvent.status = true;
         let response
-        let url = 'https://promotoresback.azurewebsites.net/api/list-events'
+        let url = 'http://127.0.0.1:8000/api/list-events'
         response = axios
             .post(url, data)
             .then(response => {
