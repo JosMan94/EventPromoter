@@ -1,6 +1,3 @@
-<template>
-  {{ code }}
-</template>
 <script>
 import { clientService } from "../../service/Cliente/cliente.service";
 export default {
