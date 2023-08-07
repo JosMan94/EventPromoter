@@ -88,12 +88,14 @@
           </button> -->
 
           <button
+            v-if="data.url_long"
             @click.prevent="charedEvent(data.url_long)"
             class="rounded-md px-6 py-4 bg-purple-500 text-white ring-2 ring-purple-500 hover:bg-white hover:text-purple-500 transition-colors"
           >
             Copiar enlace
           </button>
           <button
+            v-if="data.url_short"
             @click.prevent="charedEvent(data.url_short)"
             class="rounded-md px-6 py-4 bg-purple-500 text-white ring-2 ring-purple-500 hover:bg-white hover:text-purple-500 transition-colors"
           >
