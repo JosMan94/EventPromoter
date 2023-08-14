@@ -167,7 +167,7 @@
         </button>
         <button
           @click.prevent="changeView('clientes')"
-          :class="view === 'clientes' ? 'bg-main-green' : ''"
+          :class="view === 'clientes' || view === 'edit-client' ? 'bg-main-green' : ''"
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
@@ -176,7 +176,11 @@
         </button>
         <button
           @click.prevent="changeView('eventos')"
-          :class="view === 'eventos' ? 'bg-main-green' : ''"
+          :class="
+            view === 'eventos' || view === 'create-event' || view === 'edit-event'
+              ? 'bg-main-green'
+              : ''
+          "
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
@@ -184,45 +188,106 @@
           Eventos
         </button>
         <button
-          @click.prevent="changeView('promotores')"
-          :class="view === 'promotores' ? 'bg-main-green' : ''"
-          type="button"
-          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
-        >
-          <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
-          Promotores
-        </button>
-        <button
-          @click.prevent="changeView('invitados')"
-          :class="view === 'invitados' ? 'bg-main-green' : ''"
+          @click.prevent="openSelectUser"
+          :class="
+            view === 'promotores' ||
+            view === 'create-promotor' ||
+            view === 'edit-promotor' ||
+            view === 'regalo-promotor' ||
+            view === 'invitados' ||
+            view === 'create-invitado' ||
+            view === 'edit-invitado' ||
+            view === 'regalo-invitado' ||
+            view === 'cajeros' ||
+            view === 'create-cajero' ||
+            view === 'meseros' ||
+            view === 'create-mesero'
+              ? 'bg-main-green'
+              : ''
+          "
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
           <img
-            src="../../../assets/images/icon-invitado.png"
+            src="../../../assets/images/icon-promotores.png"
+            alt="PROMOTORES"
             width="30"
-            alt="INVITADOS"
           />
-          Invitados
+          Usuarios
         </button>
-        <button
-          @click.prevent="changeView('cajeros')"
-          :class="view === 'cajeros' ? 'bg-main-green' : ''"
-          type="button"
-          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
-        >
-          <img src="../../../assets/images/icon-cajero.png" width="30" alt="PROMOTORES" />
-          Cajeros
-        </button>
-        <button
-          @click.prevent="changeView('meseros')"
-          :class="view === 'meseros' ? 'bg-main-green' : ''"
-          type="button"
-          class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
-        >
-          <img src="../../../assets/images/icon-mesero.png" width="30" alt="PROMOTORES" />
-          Meseros
-        </button>
+        <span :class="selectUsers ? '' : 'hidden'">
+          <button
+            @click.prevent="changeView('promotores')"
+            :class="
+              view === 'promotores' ||
+              view === 'create-promotor' ||
+              view === 'edit-promotor' ||
+              view === 'regalo-promotor'
+                ? 'bg-main-yellow'
+                : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img
+              src="../../../assets/images/icon-invitado.png"
+              alt="PROMOTORES"
+              width="20"
+            />
+            Promotores
+          </button>
+          <button
+            @click.prevent="changeView('invitados')"
+            :class="
+              view === 'invitados' ||
+              view === 'create-invitado' ||
+              view === 'edit-invitado' ||
+              view === 'regalo-invitado'
+                ? 'bg-main-yellow'
+                : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img
+              src="../../../assets/images/icon-invitado.png"
+              width="20"
+              alt="INVITADOS"
+            />
+            Invitados
+          </button>
+          <button
+            @click.prevent="changeView('cajeros')"
+            :class="
+              view === 'cajeros' || view === 'create-cajero' ? 'bg-main-yellow' : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img
+              src="../../../assets/images/icon-invitado.png"
+              width="20"
+              alt="PROMOTORES"
+            />
+            Cajeros
+          </button>
+          <button
+            @click.prevent="changeView('meseros')"
+            :class="
+              view === 'meseros' || view === 'create-mesero' ? 'bg-main-yellow' : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img
+              src="../../../assets/images/icon-invitado.png"
+              width="20"
+              alt="PROMOTORES"
+            />
+            Meseros
+          </button>
+        </span>
+
         <button
           @click.prevent="changeView('tickets')"
           :class="view === 'tickets' ? 'bg-main-green' : ''"
@@ -238,7 +303,7 @@
           type="button"
           class="py-5 pl-12 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-green transition-colors"
         >
-          <img src="../../../assets/images/icon-regalo.png" alt="Tickets" />
+          <img src="../../../assets/images/icon-regalo.png" alt="Tickets" width="30" />
           Regalos
         </button>
         <button
