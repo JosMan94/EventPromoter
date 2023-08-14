@@ -11,10 +11,12 @@
         @click.prevent="changeView('clientes')"
         :class="view === 'clientes' || view === 'edit-client' ? 'bg-main-green' : ''"
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-clientes.png" alt="CLIENTES" />
+        <img src="../../../assets/images/icon-clientes.png" alt="CLIENTES" width="25" />
+        Clientes
       </button>
+
       <button
         @click.prevent="changeView('eventos')"
         :class="
@@ -23,76 +25,124 @@
             : ''
         "
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-eventos.png" alt="EVENTOS" />
+        <img src="../../../assets/images/icon-eventos.png" alt="EVENTOS" width="25" />
+        Eventos
       </button>
+
       <button
-        @click.prevent="changeView('promotores')"
+        @click.prevent="openSelectUser"
         :class="
           view === 'promotores' ||
           view === 'create-promotor' ||
           view === 'edit-promotor' ||
-          view === 'regalo-promotor'
+          view === 'regalo-promotor' ||
+          view === 'invitados' ||
+          view === 'create-invitado' ||
+          view === 'edit-invitado' ||
+          view === 'regalo-invitado' ||
+          view === 'cajeros' ||
+          view === 'create-cajero' ||
+          view === 'meseros' ||
+          view === 'create-mesero'
             ? 'bg-main-green'
             : ''
         "
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-promotores.png" alt="PROMOTORES" />
+        <img
+          src="../../../assets/images/icon-promotores.png"
+          alt="PROMOTORES"
+          width="25"
+        />
+        Usuarios
       </button>
-      <button
-        @click.prevent="changeView('invitados')"
-        :class="
-          view === 'invitados' || view === 'create-invitado' || view === 'edit-invitado'|| view === 'regalo-invitado'
-            ? 'bg-main-green'
-            : ''
-        "
-        type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
-      >
-        <img src="../../../assets/images/icon-invitado.png" alt="ENVITADO" width="30" />
-      </button>
-      <button
-        @click.prevent="changeView('cajeros')"
-        :class="view === 'cajeros' || view === 'create-cajero' ? 'bg-main-green' : ''"
-        type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
-      >
-        <img src="../../../assets/images/icon-cajero.png" width="30" alt="CAJEROS" />
-      </button>
-      <button
-        @click.prevent="changeView('meseros')"
-        :class="view === 'meseros' || view === 'create-mesero' ? 'bg-main-green' : ''"
-        type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
-      >
-        <img src="../../../assets/images/icon-mesero.png" width="30" alt="MESEROS" />
-      </button>
+
+      <span :class="selectUsers ? '' : 'hidden'">
+        <button
+          @click.prevent="changeView('promotores')"
+          :class="
+            view === 'promotores' ||
+            view === 'create-promotor' ||
+            view === 'edit-promotor' ||
+            view === 'regalo-promotor'
+              ? 'bg-main-yellow'
+              : ''
+          "
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img
+            src="../../../assets/images/icon-invitado.png"
+            alt="PROMOTORES"
+            width="20"
+          />
+          Promotores
+        </button>
+
+        <button
+          @click.prevent="changeView('invitados')"
+          :class="
+            view === 'invitados' ||
+            view === 'create-invitado' ||
+            view === 'edit-invitado' ||
+            view === 'regalo-invitado'
+              ? 'bg-main-yellow'
+              : ''
+          "
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" alt="ENVITADO" width="20" />
+          Invitados
+        </button>
+        <button
+          @click.prevent="changeView('cajeros')"
+          :class="view === 'cajeros' || view === 'create-cajero' ? 'bg-main-yellow' : ''"
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" width="20" alt="CAJEROS" />
+          Cajeros
+        </button>
+        <button
+          @click.prevent="changeView('meseros')"
+          :class="view === 'meseros' || view === 'create-mesero' ? 'bg-main-yellow' : ''"
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" width="20" alt="MESEROS" />
+          Meseros
+        </button>
+      </span>
       <button
         @click.prevent="changeView('tickets')"
         :class="view === 'tickets' ? 'bg-main-green' : ''"
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-tickets.png" alt="TICKETS" />
+        <img src="../../../assets/images/icon-tickets.png" alt="TICKETS" width="25" />
+        Tickets
       </button>
       <button
         @click.prevent="changeView('regalos')"
         :class="view === 'regalos' || view === 'create-regalo' ? 'bg-main-green' : ''"
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-regalo.png" alt="regalos" width="30" />
+        <img src="../../../assets/images/icon-regalo.png" alt="regalos" width="25" />
+        Regalos
       </button>
       <button
         @click.prevent="changeView('funcionality')"
         :class="view === 'funcionality' ? 'bg-main-green' : ''"
         type="button"
-        class="py-5 px-8 flex items-center justify-center hover:bg-main-green transition-colors"
+        class="py-5 pl-3 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-green transition-colors"
       >
-        <img src="../../../assets/images/icon-tuerca.png" alt="regalos" width="30" />
+        <img src="../../../assets/images/icon-tuerca.png" alt="regalos" width="25" />
+        Funciones
       </button>
     </div>
     <button
@@ -225,10 +275,15 @@
 export default {
   props: ["view"],
   data() {
-    return {};
+    return {
+      selectUsers: false,
+    };
   },
   mounted() {},
   methods: {
+    openSelectUser() {
+      this.selectUsers = !this.selectUsers;
+    },
     closeNav() {
       this.$store.state.nav.status = false;
     },
