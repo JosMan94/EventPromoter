@@ -45,7 +45,10 @@
           view === 'cajeros' ||
           view === 'create-cajero' ||
           view === 'meseros' ||
-          view === 'create-mesero'
+          view === 'create-mesero' ||
+          view === 'auxiliar' ||
+          view === 'create-auxiliar' ||
+          view === 'edit-auxiliar'
             ? 'bg-main-green'
             : ''
         "
@@ -115,6 +118,19 @@
         >
           <img src="../../../assets/images/icon-invitado.png" width="20" alt="MESEROS" />
           Meseros
+        </button>
+        <button
+          @click.prevent="changeView('auxiliar')"
+          :class="
+            view === 'auxiliar' || view === 'create-auxiliar' || view === 'edit-auxiliar'
+              ? 'bg-main-yellow'
+              : ''
+          "
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" width="20" alt="MESEROS" />
+          Auxiliar
         </button>
       </span>
       <button
@@ -201,7 +217,10 @@
             view === 'cajeros' ||
             view === 'create-cajero' ||
             view === 'meseros' ||
-            view === 'create-mesero'
+            view === 'create-mesero' ||
+            view === 'auxiliar' ||
+            view === 'create-auxiliar' ||
+            view === 'edit-auxiliar'
               ? 'bg-main-green'
               : ''
           "
@@ -285,6 +304,25 @@
               alt="PROMOTORES"
             />
             Meseros
+          </button>
+          <button
+            @click.prevent="changeView('auxiliar')"
+            :class="
+              view === 'auxiliar' ||
+              view === 'create-auxiliar' ||
+              view === 'edit-auxiliar'
+                ? 'bg-main-yellow'
+                : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img
+              src="../../../assets/images/icon-invitado.png"
+              width="20"
+              alt="PROMOTORES"
+            />
+            Auxiliar
           </button>
         </span>
 
