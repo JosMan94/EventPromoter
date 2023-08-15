@@ -48,7 +48,10 @@
           view === 'create-mesero' ||
           view === 'auxiliar' ||
           view === 'create-auxiliar' ||
-          view === 'edit-auxiliar'
+          view === 'edit-auxiliar' ||
+          view === 'admin' ||
+          view === 'create-admin' ||
+          view === 'edit-admin'
             ? 'bg-main-green'
             : ''
         "
@@ -131,6 +134,19 @@
         >
           <img src="../../../assets/images/icon-invitado.png" width="20" alt="MESEROS" />
           Auxiliar
+        </button>
+        <button
+          @click.prevent="changeView('admin')"
+          :class="
+            view === 'admin' || view === 'create-admin' || view === 'edit-admin'
+              ? 'bg-main-yellow'
+              : ''
+          "
+          type="button"
+          class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
+        >
+          <img src="../../../assets/images/icon-invitado.png" width="20" alt="MESEROS" />
+          Admin
         </button>
       </span>
       <button
@@ -220,7 +236,10 @@
             view === 'create-mesero' ||
             view === 'auxiliar' ||
             view === 'create-auxiliar' ||
-            view === 'edit-auxiliar'
+            view === 'edit-auxiliar' ||
+            view === 'admin' ||
+            view === 'create-admin' ||
+            view === 'edit-admin'
               ? 'bg-main-green'
               : ''
           "
@@ -323,6 +342,19 @@
               alt="PROMOTORES"
             />
             Auxiliar
+          </button>
+          <button
+            @click.prevent="changeView('admin')"
+            :class="
+              view === 'admin' || view === 'create-admin' || view === 'edit-admin'
+                ? 'bg-main-yellow'
+                : ''
+            "
+            type="button"
+            class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
+          >
+            <img src="../../../assets/images/icon-invitado.png" width="20" alt="ADMIN" />
+            Admin
           </button>
         </span>
 

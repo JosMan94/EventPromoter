@@ -13,7 +13,8 @@
         view === 'meseros' ||
         view === 'cajeros' ||
         view === 'invitados' ||
-        view === 'auxiliar'
+        view === 'auxiliar' ||
+        view === 'admin'
           ? ''
           : 'grid grid-cols-1 xl:grid-cols-3 items-start justify-between gap-10 xl:gap-40'
       "
@@ -32,6 +33,7 @@
       <cajero-component v-if="view === 'cajeros'" />
       <mesero-component v-if="view === 'meseros'" />
       <auxiliar-component v-if="view === 'auxiliar'" @dataAuxiliar="auxiliar = $event" />
+      <admin-component v-if="view === 'admin'" @dataAdmin="admin = $event" />
       <funcionality-component v-if="view === 'funcionality'" />
       <!-- formularios -->
 
@@ -42,12 +44,14 @@
       <create-mesero-component v-if="view === 'create-mesero'" />
       <create-invitado-component v-if="view === 'create-invitado'" />
       <create-auxiliar-component v-if="view === 'create-auxiliar'" />
+      <create-admin-component v-if="view === 'create-admin'" />
 
       <edit-evento-component v-if="view === 'edit-event'" :evento="evento" />
       <edit-promotor-component v-if="view === 'edit-promotor'" :promotor="promotor" />
       <edit-client-component v-if="view === 'edit-client'" :cliente="cliente" />
       <edit-invitado-component v-if="view === 'edit-invitado'" :invitado="invitado" />
       <edit-auxiliar-component v-if="view === 'edit-auxiliar'" :auxiliar="auxiliar" />
+      <edit-admin-component v-if="view === 'edit-admin'" :admin="admin"/>
 
       <regalo-promotor-component v-if="view === 'regalo-promotor'" :promotor="promotor" />
       <regalo-invitado-component v-if="view === 'regalo-invitado'" :invitado="invitado" />
@@ -81,6 +85,9 @@ import RegaloInvitadoComponent from "../../components/Administrador/Invitado/Reg
 import AuxiliarComponent from "../../components/Administrador/Auxiliar/AuxiliarComponent.vue";
 import CreateAuxiliarComponent from "../../components/Administrador/Auxiliar/CreateAuxiliarComponent.vue";
 import EditAuxiliarComponent from "../../components/Administrador/Auxiliar/EditAuxiliarComponent.vue";
+import AdminComponent from "../../components/Administrador/Administrador/AdministradorComponent.vue";
+import CreateAdminComponent from "../../components/Administrador/Administrador/CreateAdministradorComponent.vue";
+import EditAdminComponent from "../../components/Administrador/Administrador/EditAdministradorComponent.vue"
 export default {
   components: {
     HeaderComponent,
@@ -110,6 +117,9 @@ export default {
     AuxiliarComponent,
     CreateAuxiliarComponent,
     EditAuxiliarComponent,
+    AdminComponent,
+    CreateAdminComponent,
+    EditAdminComponent
   },
   data() {
     return {
@@ -119,6 +129,7 @@ export default {
       cliente: null,
       invitado: null,
       auxiliar: null,
+      admin: null,
     };
   },
   watch: {

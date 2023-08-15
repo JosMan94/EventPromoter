@@ -76,7 +76,7 @@
 
       <button
         type="submit"
-        @click.prevent="UpdateUser"
+        @click.prevent="updateAuxiliar"
         class="block mb-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
       >
         ACTUALIZAR AUXILIAR
@@ -174,7 +174,7 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    async UpdateUser() {
+    async updateAuxiliar() {
       var ojb = new Object();
       ojb.id = this.auxiliar.id;
       if (this.updocumento !== this.form.documento) {

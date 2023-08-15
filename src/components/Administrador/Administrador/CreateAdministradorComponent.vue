@@ -1,7 +1,7 @@
 <template>
   <article class="xl:col-span-2 order-2 xl:order-1">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue hidden xl:block">
-      Crear nuevo auxiliar
+      Crear nuevo administrador
     </h2>
     <form class="grid xl:grid-cols-2 gap-6">
       <div>
@@ -76,16 +76,16 @@
 
       <button
         type="submit"
-        @click.prevent="createAuxiliar"
+        @click.prevent="createAdmin"
         class="block mb-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
       >
-        CREAR AUXILIAR
+        CREAR ADMINISTRADOR
       </button>
     </form>
   </article>
   <aside class="xl:col-span-1 relative order-1 xl:order-2">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
-      Crear nuevo auxiliar
+      Crear nuevo administrador
     </h2>
     <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
       >Avatar: <span class="text-red-600"> ( * )</span></label
@@ -145,7 +145,7 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    async createAuxiliar() {
+    async createAdmin() {
       if (
         this.form.documento.length !== 0 &&
         this.form.celular.length !== 0 &&
@@ -163,12 +163,12 @@ export default {
         ojb.date_of_birth = this.form.fecha;
         ojb.email = this.form.email;
         ojb.avatar = this.form.avatar;
-        ojb.type = "auxiliar";
+        ojb.type = "admin";
         var result = await promotorService.createPromotor(ojb);
         if (result.success) {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "success";
-          this.$store.state.alert.text = "Auxiliar creado";
+          this.$store.state.alert.text = "Administrador creado";
 
           this.$refs.avatar.value = null;
           this.form.documento = "";
@@ -180,7 +180,7 @@ export default {
           this.form.avatar = "";
           this.$router.push({
             name: "Administrador",
-            params: { viewAdmin: "auxiliar" },
+            params: { viewAdmin: "admin" },
           });
         } else {
           this.$refs.avatar.value = null;

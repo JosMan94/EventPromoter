@@ -1,12 +1,12 @@
 <template>
   <article class="xl:col-span-2 order-2 xl:order-1">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue hidden xl:block">
-      Crear nuevo auxiliar
+      Editar Administrador
     </h2>
     <form class="grid xl:grid-cols-2 gap-6">
       <div>
         <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
-          >Documento de identidad: <span class="text-red-600"> ( * ) (único)</span></label
+          >Documento de identidad: <span class="text-red-600">(único)</span></label
         >
         <input
           type="tel"
@@ -18,7 +18,7 @@
       </div>
       <div>
         <label for="tel" class="block mb-2 text-text-blue font-bold text-sm"
-          >Celular: <span class="text-red-600"> ( * ) (único)</span></label
+          >Celular: <span class="text-red-600">(único)</span></label
         >
         <input
           type="number"
@@ -30,8 +30,8 @@
       </div>
       <div>
         <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-          >Nombre y apellidos: <span class="text-red-600"> ( * )</span></label
-        >
+          >Nombre y apellidos: <span class="text-red-600"></span
+        ></label>
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
           id="nombres"
@@ -41,7 +41,7 @@
       </div>
       <div>
         <label for="alias" class="block mb-2 text-text-blue font-bold text-sm"
-          >Alias: <span class="text-red-600"> ( * ) (único)</span></label
+          >Alias: <span class="text-red-600">(único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -52,8 +52,8 @@
       </div>
       <div>
         <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
-          >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
-        >
+          >Fecha de nacimiento: <span class="text-red-600"></span
+        ></label>
         <input
           type="date"
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -64,7 +64,7 @@
       </div>
       <div>
         <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
-          >E-mail: <span class="text-red-600"> ( * ) (único)</span></label
+          >E-mail: <span class="text-red-600">(único)</span></label
         >
         <input
           class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
@@ -76,22 +76,22 @@
 
       <button
         type="submit"
-        @click.prevent="createAuxiliar"
+        @click.prevent="updateAdmin"
         class="block mb-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
       >
-        CREAR AUXILIAR
+        ACTUALIZAR ADMINISTRADOR
       </button>
     </form>
   </article>
   <aside class="xl:col-span-1 relative order-1 xl:order-2">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
-      Crear nuevo auxiliar
+      Actualizar administrador
     </h2>
     <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
       >Avatar: <span class="text-red-600"> ( * )</span></label
     >
     <img
-      :src="form.avatar.length === 0 ? imgDefault : form.avatar"
+      :src="form.avatar"
       alt="Event"
       class="block w-full object-cover"
       style="height: 480px"
@@ -102,7 +102,7 @@
       class="cursor-pointer absolute left-8 right-8 flex items-center justify-center gap-3 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
       <img src="../../../assets/images/icon-descargar.svg" alt="Descargar" />
-      <span class="mt-1">Agregar foto de perfil</span>
+      <span class="mt-1">Foto de perfil</span>
     </label>
     <input
       type="file"
@@ -117,11 +117,11 @@
 </template>
 <script>
 import { promotorService } from "../../../service/Promotor/promotor.service";
-import imgDefault from "../../../assets/images/event-preview.png";
+
 export default {
+  props: ["admin"],
   data() {
     return {
-      imgDefault: imgDefault,
       form: {
         documento: "",
         celular: "",
@@ -131,7 +131,36 @@ export default {
         email: "",
         avatar: "",
       },
+      updocumento: "",
+      upCelular: "",
+      upAlias: "",
+      upEmail: "",
+      upAvatar: "",
     };
+  },
+  mounted() {
+    if (this.admin === null) {
+      this.$router.push({
+        name: "Administrador",
+        params: {
+          viewAdmin: "admin",
+        },
+      });
+    } else {
+      this.form.documento = this.admin.document;
+      this.form.celular = this.admin.cellphone;
+      this.form.nombre = this.admin.name;
+      this.form.alias = this.admin.alias;
+      this.form.fecha = this.admin.date_of_birth;
+      this.form.email = this.admin.email;
+      this.form.avatar = this.admin.avatar;
+
+      this.updocumento = this.admin.document;
+      this.upCelular = this.admin.cellphone;
+      this.upAlias = this.admin.alias;
+      this.upEmail = this.admin.email;
+      this.upAvatar = this.admin.avatar;
+    }
   },
   methods: {
     previewImage(e) {
@@ -145,62 +174,41 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    async createAuxiliar() {
-      if (
-        this.form.documento.length !== 0 &&
-        this.form.celular.length !== 0 &&
-        this.form.nombre.length !== 0 &&
-        this.form.alias.length !== 0 &&
-        this.form.fecha.length !== 0 &&
-        this.form.email.length !== 0 &&
-        this.form.avatar.length !== 0
-      ) {
-        var ojb = new Object();
+    async updateAdmin() {
+      var ojb = new Object();
+      ojb.id = this.admin.id;
+      if (this.updocumento !== this.form.documento) {
         ojb.document = String(this.form.documento);
+      }
+      if (this.upCelular !== this.form.celular) {
         ojb.cellphone = String(this.form.celular);
-        ojb.name = this.form.nombre;
+      }
+      ojb.nombre = this.form.nombre;
+      if (this.upAlias !== this.form.alias) {
         ojb.alias = this.form.alias;
-        ojb.date_of_birth = this.form.fecha;
+      }
+      ojb.fecha = this.form.fecha;
+      if (this.upEmail !== this.form.email) {
         ojb.email = this.form.email;
+      }
+      if (this.upAvatar !== this.form.avatar) {
         ojb.avatar = this.form.avatar;
-        ojb.type = "auxiliar";
-        var result = await promotorService.createPromotor(ojb);
+      }
+        var result = await promotorService.updatePromotor(ojb);
         if (result.success) {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "success";
-          this.$store.state.alert.text = "Auxiliar creado";
+          this.$store.state.alert.text = "Admin actualizado";
 
-          this.$refs.avatar.value = null;
-          this.form.documento = "";
-          this.form.celular = "";
-          this.form.nombre = "";
-          this.form.alias = "";
-          this.form.fecha = "";
-          this.form.email = "";
-          this.form.avatar = "";
           this.$router.push({
             name: "Administrador",
-            params: { viewAdmin: "auxiliar" },
+            params: { viewAdmin: "admin" },
           });
         } else {
-          this.$refs.avatar.value = null;
-          this.form.documento = "";
-          this.form.celular = "";
-          this.form.nombre = "";
-          this.form.alias = "";
-          this.form.fecha = "";
-          this.form.email = "";
-          this.form.avatar = "";
-
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
-          this.$store.state.alert.text = JSON.stringify(result.data);
+          this.$store.state.alert.text = "Error al actualizar";
         }
-      } else {
-        this.$store.state.alert.status = true;
-        this.$store.state.alert.type = "error";
-        this.$store.state.alert.text = "Ingresar todos los datos";
-      }
     },
   },
 };
