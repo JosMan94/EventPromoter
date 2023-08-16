@@ -73,15 +73,54 @@
           v-model="form.email"
         />
       </div>
+      <div>
+        <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
+          >PIN para scanner: <span class="text-red-600">(único)</span></label
+        >
+        <input
+          type="text"
+          class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
+          id="pin"
+          placeholder="Ingrese el pin,mayor de 3 dígitos"
+          v-model="form.pin"
+        />
+      </div>
 
-      <button
-        type="submit"
-        @click.prevent="updateAdmin"
-        class="block mb-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
-      >
-        ACTUALIZAR ADMINISTRADOR
-      </button>
+      <div>
+        <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
+          >Regalo por evento:
+        </label>
+        <label class="switch">
+          <input type="checkbox" v-model="form.regalo_type_1" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div>
+        <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
+          >Regalo personalizado:
+        </label>
+        <label class="switch">
+          <input type="checkbox" v-model="form.regalo_type_2" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+      <div>
+        <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
+          >Ticket:
+        </label>
+        <label class="switch">
+          <input type="checkbox" v-model="form.entrada_ticket" />
+          <span class="slider round"></span>
+        </label>
+      </div>
     </form>
+    <button
+      type="submit"
+      @click.prevent="updateAdmin"
+      class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
+    >
+      ACTUALIZAR ADMINISTRADOR
+    </button>
   </article>
   <aside class="xl:col-span-1 relative order-1 xl:order-2">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
@@ -130,12 +169,17 @@ export default {
         fecha: "",
         email: "",
         avatar: "",
+        pin: null,
+        regalo_type_1: false,
+        regalo_type_2: false,
+        entrada_ticket: false,
       },
       updocumento: "",
       upCelular: "",
       upAlias: "",
       upEmail: "",
       upAvatar: "",
+      upPin: null,
     };
   },
   mounted() {
@@ -154,12 +198,18 @@ export default {
       this.form.fecha = this.admin.date_of_birth;
       this.form.email = this.admin.email;
       this.form.avatar = this.admin.avatar;
+      this.form.pin = this.admin.pin;
+
+      this.form.regalo_type_1 = this.admin.regalo_type_1 === 0 ? false : true;
+      this.form.regalo_type_2 = this.admin.regalo_type_2 === 0 ? false : true;
+      this.form.entrada_ticket = this.admin.entrada_ticket === 0 ? false : true;
 
       this.updocumento = this.admin.document;
       this.upCelular = this.admin.cellphone;
       this.upAlias = this.admin.alias;
       this.upEmail = this.admin.email;
       this.upAvatar = this.admin.avatar;
+      this.upPin = this.admin.pin;
     }
   },
   methods: {
@@ -194,21 +244,27 @@ export default {
       if (this.upAvatar !== this.form.avatar) {
         ojb.avatar = this.form.avatar;
       }
-        var result = await promotorService.updatePromotor(ojb);
-        if (result.success) {
-          this.$store.state.alert.status = true;
-          this.$store.state.alert.type = "success";
-          this.$store.state.alert.text = "Admin actualizado";
+      if (this.upPin !== this.form.pin) {
+        ojb.pin = this.form.pin;
+      }
+      ojb.regalo_type_1 = this.form.regalo_type_1;
+      ojb.regalo_type_2 = this.form.regalo_type_2;
+      ojb.entrada_ticket = this.form.entrada_ticket;
+      var result = await promotorService.updatePromotor(ojb);
+      if (result.success) {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "success";
+        this.$store.state.alert.text = "Admin actualizado";
 
-          this.$router.push({
-            name: "Administrador",
-            params: { viewAdmin: "admin" },
-          });
-        } else {
-          this.$store.state.alert.status = true;
-          this.$store.state.alert.type = "error";
-          this.$store.state.alert.text = "Error al actualizar";
-        }
+        this.$router.push({
+          name: "Administrador",
+          params: { viewAdmin: "admin" },
+        });
+      } else {
+        this.$store.state.alert.status = true;
+        this.$store.state.alert.type = "error";
+        this.$store.state.alert.text = "Error al actualizar";
+      }
     },
   },
 };
