@@ -126,7 +126,7 @@ export default {
       verify: null,
       status: false,
       typeVerify: null,
-      pin: null,
+      pin: "",
       datosRegalo: null,
       promotorData: {
         dni: null,
@@ -140,20 +140,16 @@ export default {
       window.close();
     },
     verifyPIN() {
-      if (this.pin === "271237") {
+      if (this.pin.length !== 0) {
         this.verifyRegaloForUser();
-        this.pin = null;
-      } else {
-        alert("PIN incorrecto");
-        this.pin = null;
       }
     },
-    
     async verifyRegaloForUser() {
       this.status = true;
       var obj = new Object();
       obj.id_regalo = this.regalo;
       obj.cod_user = this.promotor;
+      obj.pin = this.pin;
 
       var result = await regaloService.verifyRegaloForUser(obj);
 

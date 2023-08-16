@@ -109,7 +109,7 @@ export default {
       promotor: this.$route.params.codePromotor,
       verify: 0,
       status: false,
-      pin: null,
+      pin: "",
     };
   },
   mounted() {},
@@ -119,12 +119,8 @@ export default {
       window.close();
     },
     verifyPIN() {
-      if (this.pin === "2701") {
+      if (this.pin.length !== 0) {
         this.verifyTicket();
-        this.pin = null;
-      } else {
-        alert("PIN incorrecto");
-        this.pin = null;
       }
     },
     closeWindow() {
@@ -140,6 +136,7 @@ export default {
       } else {
         obj.promotor = null;
       }
+      obj.pin = this.pin;
       var result = await verifyService.verifyTicket(obj);
       if (result.success) {
         this.verify = 1;
