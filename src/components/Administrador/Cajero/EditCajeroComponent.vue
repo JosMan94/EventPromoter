@@ -1,7 +1,7 @@
 <template>
   <article class="xl:col-span-2 order-2 xl:order-1">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue hidden xl:block">
-      Editar promotor
+      Editar cajero
     </h2>
     <form class="grid xl:grid-cols-2 gap-6">
       <div>
@@ -116,15 +116,15 @@
     </form>
     <button
       type="submit"
-      @click.prevent="UpdateUser"
+      @click.prevent="UpdateCajero"
       class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
     >
-      ACTUALIZAR PROMOTOR
+      ACTUALIZAR CAJERO
     </button>
   </article>
   <aside class="xl:col-span-1 relative order-1 xl:order-2">
     <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue xl:hidden">
-      Actualizar promotor
+      Actualizar cajero
     </h2>
     <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
       >Avatar: <span class="text-red-600"> ( * )</span></label
@@ -158,7 +158,7 @@
 import { promotorService } from "../../../service/Promotor/promotor.service";
 
 export default {
-  props: ["promotor"],
+  props: ["cajero"],
   data() {
     return {
       form: {
@@ -183,33 +183,33 @@ export default {
     };
   },
   mounted() {
-    if (this.promotor === null) {
+    if (this.cajero === null) {
       this.$router.push({
         name: "Administrador",
         params: {
-          viewAdmin: "promotores",
+          viewAdmin: "cajeros",
         },
       });
     } else {
-      this.form.documento = this.promotor.document;
-      this.form.celular = this.promotor.cellphone;
-      this.form.nombre = this.promotor.name;
-      this.form.alias = this.promotor.alias;
-      this.form.fecha = this.promotor.date_of_birth;
-      this.form.email = this.promotor.email;
-      this.form.avatar = this.promotor.avatar;
-      this.form.pin = this.promotor.pin;
+      this.form.documento = this.cajero.document;
+      this.form.celular = this.cajero.cellphone;
+      this.form.nombre = this.cajero.name;
+      this.form.alias = this.cajero.alias;
+      this.form.fecha = this.cajero.date_of_birth;
+      this.form.email = this.cajero.email;
+      this.form.avatar = this.cajero.avatar;
+      this.form.pin = this.cajero.pin;
 
-      this.form.regalo_type_1 = this.promotor.regalo_type_1 === 0 ? false : true;
-      this.form.regalo_type_2 = this.promotor.regalo_type_2 === 0 ? false : true;
-      this.form.entrada_ticket = this.promotor.entrada_ticket === 0 ? false : true;
+      this.form.regalo_type_1 = this.cajero.regalo_type_1 === 0 ? false : true;
+      this.form.regalo_type_2 = this.cajero.regalo_type_2 === 0 ? false : true;
+      this.form.entrada_ticket = this.cajero.entrada_ticket === 0 ? false : true;
 
-      this.updocumento = this.promotor.document;
-      this.upCelular = this.promotor.cellphone;
-      this.upAlias = this.promotor.alias;
-      this.upEmail = this.promotor.email;
-      this.upAvatar = this.promotor.avatar;
-      this.upPin = this.promotor.pin;
+      this.updocumento = this.cajero.document;
+      this.upCelular = this.cajero.cellphone;
+      this.upAlias = this.cajero.alias;
+      this.upEmail = this.cajero.email;
+      this.upAvatar = this.cajero.avatar;
+      this.upPin = this.cajero.pin;
     }
   },
   methods: {
@@ -224,9 +224,9 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    async UpdateUser() {
+    async UpdateCajero() {
       var ojb = new Object();
-      ojb.id = this.promotor.id;
+      ojb.id = this.cajero.id;
       if (this.updocumento !== this.form.documento) {
         ojb.document = String(this.form.documento);
       }
@@ -254,11 +254,11 @@ export default {
       if (result.success) {
         this.$store.state.alert.status = true;
         this.$store.state.alert.type = "success";
-        this.$store.state.alert.text = "Promotor actualizado";
+        this.$store.state.alert.text = "Cajero actualizado";
 
         this.$router.push({
           name: "Administrador",
-          params: { viewAdmin: "promotores" },
+          params: { viewAdmin: "cajeros" },
         });
       } else {
         this.$store.state.alert.status = true;

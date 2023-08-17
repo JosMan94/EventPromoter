@@ -51,7 +51,9 @@
           view === 'edit-auxiliar' ||
           view === 'admin' ||
           view === 'create-admin' ||
-          view === 'edit-admin'
+          view === 'edit-admin' ||
+          view === 'edit-cajero' ||
+          view === 'edit-mesero'
             ? 'bg-main-green'
             : ''
         "
@@ -106,7 +108,11 @@
         </button>
         <button
           @click.prevent="changeView('cajeros')"
-          :class="view === 'cajeros' || view === 'create-cajero' ? 'bg-main-yellow' : ''"
+          :class="
+            view === 'cajeros' || view === 'create-cajero' || view === 'edit-cajero'
+              ? 'bg-main-yellow'
+              : ''
+          "
           type="button"
           class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
         >
@@ -115,7 +121,11 @@
         </button>
         <button
           @click.prevent="changeView('meseros')"
-          :class="view === 'meseros' || view === 'create-mesero' ? 'bg-main-yellow' : ''"
+          :class="
+            view === 'meseros' || view === 'create-mesero' || view === 'edit-mesero'
+              ? 'bg-main-yellow'
+              : ''
+          "
           type="button"
           class="py-5 pl-8 pr-8 flex gap-2 w-full text-white items-center hover:bg-main-yellow transition-colors"
         >
@@ -239,7 +249,9 @@
             view === 'edit-auxiliar' ||
             view === 'admin' ||
             view === 'create-admin' ||
-            view === 'edit-admin'
+            view === 'edit-admin' ||
+            view === 'edit-cajero' ||
+            view === 'edit-mesero'
               ? 'bg-main-green'
               : ''
           "
@@ -297,7 +309,9 @@
           <button
             @click.prevent="changeView('cajeros')"
             :class="
-              view === 'cajeros' || view === 'create-cajero' ? 'bg-main-yellow' : ''
+              view === 'cajeros' || view === 'create-cajero' || view === 'edit-cajero'
+                ? 'bg-main-yellow'
+                : ''
             "
             type="button"
             class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"
@@ -312,7 +326,9 @@
           <button
             @click.prevent="changeView('meseros')"
             :class="
-              view === 'meseros' || view === 'create-mesero' ? 'bg-main-yellow' : ''
+              view === 'meseros' || view === 'create-mesero' || view === 'edit-mesero'
+                ? 'bg-main-yellow'
+                : ''
             "
             type="button"
             class="py-5 pl-16 pr-40 w-full flex gap-5 text-white items-center hover:bg-main-yellow transition-colors"

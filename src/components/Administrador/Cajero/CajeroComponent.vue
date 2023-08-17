@@ -48,7 +48,7 @@
   <!-- Tabla -->
   <article>
     <div class="rounded-xl overflow-hidden shadow-lg mb-10">
-      <header class="hidden xl:grid grid-cols-12 gap-5 table-head">
+      <header class="hidden xl:grid grid-cols-14 gap-5 table-head">
         <div class="col-span-2 flex items-center gap-5">
           <p class="">NOMBRE Y APELLIDOS</p>
         </div>
@@ -60,9 +60,10 @@
         <p class="col-span-2 flex items-center gap-4">E-MAIL</p>
         <p class="col-span-2 flex items-center gap-4">DNI</p>
         <p class="col-span-2 flex items-center gap-4">CELULAR</p>
+        <p class="col-span-2 flex items-center gap-4">CAJERO</p>
       </header>
       <span v-for="data in cajeros" :key="data">
-        <div class="grid grid-cols-2 xl:grid-cols-12 gap-5 table-row">
+        <div class="grid grid-cols-2 xl:grid-cols-14 gap-5 table-row">
           <div class="xl:col-span-2 xl:flex items-center gap-5">
             <p class="">
               <span class="block xl:hidden text-text-blue mb-2">Nombre y Apellidos:</span>
@@ -91,6 +92,16 @@
           <p class="xl:col-span-2 xl:flex items-center gap-4">
             <span class="block xl:hidden text-text-blue mb-2">Celular:</span>
             {{ data.cellphone }}
+          </p>
+          <p class="xl:col-span-2 xl:flex items-center gap-4">
+            <span class="block xl:hidden text-text-blue mb-6">Editar:</span>
+            <router-link
+              :to="{ name: 'Administrador', params: { viewAdmin: 'edit-cajero' } }"
+              @click.prevent="sendDataEvent(data)"
+              class="rounded-md px-6 py-4 bg-blue-500 text-white ring-2 ring-blue-500 hover:bg-white hover:text-blue-500 transition-colors"
+            >
+              Editar Cajero
+            </router-link>
           </p>
         </div>
       </span>
@@ -177,6 +188,9 @@ export default {
     this.getCajero();
   },
   methods: {
+    sendDataEvent(data) {
+      this.$emit("dataCajero", data);
+    },
     async search() {
       var objPage = new Object();
       objPage.clave = this.clave;

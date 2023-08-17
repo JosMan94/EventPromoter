@@ -198,18 +198,18 @@ export default {
       this.form.fecha = this.auxiliar.date_of_birth;
       this.form.email = this.auxiliar.email;
       this.form.avatar = this.auxiliar.avatar;
-      this.form.pin = this.admin.pin;
+      this.form.pin = this.auxiliar.pin;
 
-      this.form.regalo_type_1 = this.admin.regalo_type_1 === 0 ? false : true;
-      this.form.regalo_type_2 = this.admin.regalo_type_2 === 0 ? false : true;
-      this.form.entrada_ticket = this.admin.entrada_ticket === 0 ? false : true;
+      this.form.regalo_type_1 = this.auxiliar.regalo_type_1 === 0 ? false : true;
+      this.form.regalo_type_2 = this.auxiliar.regalo_type_2 === 0 ? false : true;
+      this.form.entrada_ticket = this.auxiliar.entrada_ticket === 0 ? false : true;
 
       this.updocumento = this.auxiliar.document;
       this.upCelular = this.auxiliar.cellphone;
       this.upAlias = this.auxiliar.alias;
       this.upEmail = this.auxiliar.email;
       this.upAvatar = this.auxiliar.avatar;
-      this.upPin = this.admin.pin;
+      this.upPin = this.auxiliar.pin;
     }
   },
   methods: {

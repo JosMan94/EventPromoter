@@ -30,8 +30,8 @@
       <invitado-component v-if="view === 'invitados'" @dataInvitado="invitado = $event" />
       <ticket-component v-if="view === 'tickets'" />
       <regalo-component v-if="view === 'regalos'" />
-      <cajero-component v-if="view === 'cajeros'" />
-      <mesero-component v-if="view === 'meseros'" />
+      <cajero-component v-if="view === 'cajeros'" @dataCajero="cajero = $event" />
+      <mesero-component v-if="view === 'meseros'" @dataMesero="mesero = $event" />
       <auxiliar-component v-if="view === 'auxiliar'" @dataAuxiliar="auxiliar = $event" />
       <admin-component v-if="view === 'admin'" @dataAdmin="admin = $event" />
       <funcionality-component v-if="view === 'funcionality'" />
@@ -51,7 +51,9 @@
       <edit-client-component v-if="view === 'edit-client'" :cliente="cliente" />
       <edit-invitado-component v-if="view === 'edit-invitado'" :invitado="invitado" />
       <edit-auxiliar-component v-if="view === 'edit-auxiliar'" :auxiliar="auxiliar" />
-      <edit-admin-component v-if="view === 'edit-admin'" :admin="admin"/>
+      <edit-admin-component v-if="view === 'edit-admin'" :admin="admin" />
+      <edit-mesero-component v-if="view === 'edit-mesero'" :mesero="mesero" />
+      <edit-cajero-component v-if="view === 'edit-cajero'" :cajero="cajero" />
 
       <regalo-promotor-component v-if="view === 'regalo-promotor'" :promotor="promotor" />
       <regalo-invitado-component v-if="view === 'regalo-invitado'" :invitado="invitado" />
@@ -87,7 +89,9 @@ import CreateAuxiliarComponent from "../../components/Administrador/Auxiliar/Cre
 import EditAuxiliarComponent from "../../components/Administrador/Auxiliar/EditAuxiliarComponent.vue";
 import AdminComponent from "../../components/Administrador/Administrador/AdministradorComponent.vue";
 import CreateAdminComponent from "../../components/Administrador/Administrador/CreateAdministradorComponent.vue";
-import EditAdminComponent from "../../components/Administrador/Administrador/EditAdministradorComponent.vue"
+import EditAdminComponent from "../../components/Administrador/Administrador/EditAdministradorComponent.vue";
+import EditMeseroComponent from "../../components/Administrador/Mesero/EditMeseroComponent.vue";
+import EditCajeroComponent from "../../components/Administrador/Cajero/EditCajeroComponent.vue";
 export default {
   components: {
     HeaderComponent,
@@ -119,7 +123,9 @@ export default {
     EditAuxiliarComponent,
     AdminComponent,
     CreateAdminComponent,
-    EditAdminComponent
+    EditAdminComponent,
+    EditMeseroComponent,
+    EditCajeroComponent,
   },
   data() {
     return {
@@ -130,6 +136,8 @@ export default {
       invitado: null,
       auxiliar: null,
       admin: null,
+      mesero: null,
+      cajero: null,
     };
   },
   watch: {
