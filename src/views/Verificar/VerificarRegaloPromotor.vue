@@ -166,7 +166,7 @@ export default {
         this.datosRegalo = result.data;
       } else {
         this.verify = 3;
-        this.typeVerify = "Ocurrió un error inesperado";
+        this.typeVerify = "Error";
       }
     },
   },

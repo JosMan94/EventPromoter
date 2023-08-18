@@ -35,7 +35,7 @@
           class="text-main-red text-2xl font-bold text-center mb-14"
           v-if="verify === 2"
         >
-          Cliente no registrado
+          Error
         </h3>
 
         <h3
