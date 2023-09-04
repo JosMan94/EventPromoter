@@ -102,13 +102,13 @@
         alt="Logo"
         style="width: 300px"
       />
-      <p class="text-sm xl:text-lg mb-8 xl:mb-16">
-        Carretera Industrial Km 560 La Encalada del Golf
-      </p>
-      <div class="flex items-center justify-center gap-4 xl:gap-6">
-        <!-- <a href="#">
+       <a href="https://goo.gl/maps/ktsVaFUn8nJwWXLK9" target="_Blank"  class="text-sm xl:text-lg mb-8 xl:mb-16">
+        Euphoria Club, Carretera Industrial - Encalada del Golf, Víctor Larco Herrera
+      </a>
+      <div class="flex items-center justify-center gap-4 xl:gap-6 mt-4">
+        <a href="https://www.facebook.com/euphoriaclubpe/" target="_Blank">
           <img src="../../assets/images/fb-white.png" alt="Facebook" />
-        </a> -->
+        </a>
         <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
           <img src="../../assets/images/ig-white.png" alt="Instagram" />
         </a>

@@ -28,11 +28,7 @@
         aria-label="Eventos"
         class="splide"
       >
-        <SplideSlide
-          class="items-center splide__slide"
-          v-for="data in eventos"
-          :key="data"
-        >
+        <SplideSlide class="splide__slide" v-for="data in eventos" :key="data">
           <img :src="data.banner" alt="Event" style="height: 85%" />
           <router-link
             :to="{
@@ -62,9 +58,16 @@ export default {
         focus: "center",
         type: "loop",
         perMove: "1",
-        perPage: 5,
+        perPage: 4,
+        gap: '5em',
         breakpoints: {
           640: {
+            perPage: 2,
+          },
+          740: {
+            perPage: 2,
+          },
+          840: {
             perPage: 2,
           },
         },
