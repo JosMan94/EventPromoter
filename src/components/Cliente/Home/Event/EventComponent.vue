@@ -29,15 +29,19 @@
         class="splide"
       >
         <SplideSlide class="splide__slide" v-for="data in eventos" :key="data">
-          <img :src="data.banner" alt="Event" style="height: 85%" />
           <router-link
             :to="{
               name: 'RegisterEvent',
               params: { code: data.code_event },
             }"
-            class="py-3 px-6 text-sm font-bold text-white bg-gray-400 rounded-lg block w-max mx-auto"
-            >Entrada gratis</router-link
           >
+            <img :src="data.banner" alt="Event" style="height: 85%" />
+            <div
+              class="main-green py-3 px-6 text-sm font-bold text-white bg-gray-400 rounded-lg block w-max mx-auto"
+            >
+              Entrada gratis
+            </div>
+          </router-link>
         </SplideSlide>
       </Splide>
     </div>
@@ -59,7 +63,7 @@ export default {
         type: "loop",
         perMove: "1",
         perPage: 4,
-        gap: '5em',
+        gap: "5em",
         breakpoints: {
           640: {
             perPage: 2,
