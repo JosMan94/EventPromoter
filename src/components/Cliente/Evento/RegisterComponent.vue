@@ -101,7 +101,7 @@
   <span v-if="viewStatus">
     <section class="u-container">
       <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
-        Ticket emitido
+        Ticket emitido <a href="javascript:window.print()" class="bg-main-green text-white p-2 rounded-full text-lg cursor-pointer">Imprimir</a>
       </h2>
       <div class="xl:grid xl:grid-cols-2 items-start justify-between gap-40">
         <article>
@@ -119,29 +119,33 @@
             ></qrcode-vue>
           </div>
 
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Tu código es: </span>
-            <span class="text-black">{{ registro.ticket }}</span>
-          </h4>
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Evento: </span>
-            <span class="text-black">{{ registro.nameEvento }}</span>
-          </h4>
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Fecha: </span>
-            <span class="text-black">{{ registro.fecha }}</span>
-          </h4>
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Dirección: </span>
-            <span class="text-black">{{ registro.lugar }}</span>
-          </h4>
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Dni: </span>
+          <h3 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Nombre y Apellidos: </span><br />
+            <span class="text-black">{{ registro.nameClient }}</span>
+          </h3>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Documento: </span><br />
             <span class="text-black">{{ registro.dni }}</span>
           </h4>
-          <h4 class="font-bold text-xl xl:text-3xl mb-10">
-            <span class="text-text-blue">Email: </span>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Celular: </span><br />
+            <span class="text-black">{{ registro.celular }}</span>
+          </h4>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">F.Nacimiento: </span><br />
+            <span class="text-black">{{ registro.fechaNacimiento }}</span>
+          </h4>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Email: </span><br />
             <span class="text-black">{{ registro.email }}</span>
+          </h4>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Evento: </span><br />
+            <span class="text-black">{{ registro.nameEvento }} - {{registro.codeEvent}}</span>
+          </h4>
+          <h4 class="font-bold text-xl mb-2">
+            <span class="text-text-blue">Dirección: </span><br />
+            <span class="text-black">{{ registro.lugarEvent }}</span>
           </h4>
         </article>
         <aside class="hidden xl:block">
@@ -189,12 +193,17 @@ export default {
         idPromotor: null,
       },
       registro: {
-        ticket: null,
+        nameClient: null,
+        dni: null,
+        celular: null,
+        fechaNacimiento: null,
+        email: null,
         nameEvento: null,
+        lugarEvent: null,
+        codeEvent:null,
+        ticket: null,
         fecha: null,
         lugar: null,
-        dni: null,
-        email: null,
         banner: null,
       },
     };
@@ -266,12 +275,18 @@ export default {
           this.qrView.idEvent = result.data.idEvent;
           this.qrView.idPromotor = result.data.idPromotor;
 
-          this.registro.ticket = result.data.idTicket;
+          this.registro.nameClient = result.data.nameClient;
+          this.registro.dni = result.data.dni;
+          this.registro.celular = result.data.celular;
+          this.registro.fechaNacimiento = result.data.fechaNacimiento;
+          this.registro.email = result.data.email;
           this.registro.nameEvento = result.data.nameEvent;
+          this.registro.lugarEvent = result.data.lugarEvent;
+          this.registro.codeEvent =  result.data.codeEvent
+
+          this.registro.ticket = result.data.idTicket;
           this.registro.fecha = result.data.fechaEvent;
           this.registro.lugar = result.data.lugarEvent;
-          this.registro.dni = result.data.dni;
-          this.registro.email = result.data.email;
           this.registro.banner = result.data.banner;
 
           //-------------------
