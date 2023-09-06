@@ -13,11 +13,10 @@
         <div class="flex items-center gap-4 mb-10" v-if="statusCodePromotor">
           <img :src="promotor.avatar" alt="Usuario" class="w-20 h-20" />
           <div>
-            <p class="text-sm font-medium">
-              <span class="text-text-blue">{{ promotor.name }} </span>
-              <span class="text-black">({{ promotor.alias }})</span>
+            <p class="">
+              <span class="text-text-blue text-xl font-bold">{{ promotor.alias }} </span>
             </p>
-            <p class="text-sm">{{ promotor.email }}</p>
+            <p class="text-xl font-bold">{{ promotor.name }}</p>
           </div>
         </div>
 
@@ -101,7 +100,12 @@
   <span v-if="viewStatus">
     <section class="u-container">
       <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
-        Ticket emitido <a href="javascript:window.print()" class="bg-main-green text-white p-2 rounded-full text-lg cursor-pointer">Imprimir</a>
+        Ticket emitido
+        <a
+          href="javascript:window.print()"
+          class="bg-main-green text-white p-2 rounded-full text-lg cursor-pointer"
+          >Imprimir</a
+        >
       </h2>
       <div class="xl:grid xl:grid-cols-2 items-start justify-between gap-40">
         <article>
@@ -141,7 +145,9 @@
           </h4>
           <h4 class="font-bold text-xl mb-2">
             <span class="text-text-blue">Evento: </span><br />
-            <span class="text-black">{{ registro.nameEvento }} - {{registro.codeEvent}}</span>
+            <span class="text-black"
+              >{{ registro.nameEvento }} - {{ registro.codeEvent }}</span
+            >
           </h4>
           <h4 class="font-bold text-xl mb-2">
             <span class="text-text-blue">Dirección: </span><br />
@@ -200,7 +206,7 @@ export default {
         email: null,
         nameEvento: null,
         lugarEvent: null,
-        codeEvent:null,
+        codeEvent: null,
         ticket: null,
         fecha: null,
         lugar: null,
@@ -282,7 +288,7 @@ export default {
           this.registro.email = result.data.email;
           this.registro.nameEvento = result.data.nameEvent;
           this.registro.lugarEvent = result.data.lugarEvent;
-          this.registro.codeEvent =  result.data.codeEvent
+          this.registro.codeEvent = result.data.codeEvent;
 
           this.registro.ticket = result.data.idTicket;
           this.registro.fecha = result.data.fechaEvent;

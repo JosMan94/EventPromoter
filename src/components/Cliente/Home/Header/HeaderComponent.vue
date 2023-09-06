@@ -59,9 +59,9 @@
         </ul>
       </nav>
       <div class="hidden xl:flex gap-6">
-        <!-- <a href="#">
+        <a href="https://www.facebook.com/euphoriaclubpe/" target="_Blank">
           <img src="../../../../assets/images/fb.png" alt="Facebook" />
-        </a> -->
+        </a>
 
         <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
           <img src="../../../../assets/images/ig.png" alt="instagram" />
