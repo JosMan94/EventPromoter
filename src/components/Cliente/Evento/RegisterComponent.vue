@@ -47,17 +47,7 @@
               v-model="form.celular"
             />
           </div>
-          <div>
-            <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-              >Nombre y apellidos: <span class="text-red-600"> ( * )</span></label
-            >
-            <input
-              class="w-full py-4 px-5 pr-12 rounded-2xl bg-gray-100 text-black text-base focus:outline-none focus:ring focus:ring-text-blue transition-colors"
-              id="nombres"
-              placeholder="Ingresa nombres y apellidos"
-              v-model="form.name"
-            />
-          </div>
+         
           <div>
             <label for="nacimiento" class="block mb-2 text-text-blue font-bold text-sm"
               >Fecha de nacimiento: <span class="text-red-600"> ( * )</span></label
@@ -70,7 +60,7 @@
               v-model="form.fecha"
             />
           </div>
-          <div class="xl:col-span-2 mb-5">
+          <div >
             <label for="email" class="block mb-2 text-text-blue font-bold text-sm"
               >E-mail: <span class="text-red-600"> ( * )</span></label
             >
@@ -180,7 +170,6 @@ export default {
       form: {
         documento: "",
         celular: "",
-        name: "",
         fecha: "",
         email: "",
         idEvento: null,
@@ -248,7 +237,6 @@ export default {
       if (
         this.form.documento.length !== 0 &&
         this.form.celular.length !== 0 &&
-        this.form.name.length !== 0 &&
         this.form.fecha.length !== 0 &&
         this.form.email.length !== 0 &&
         this.form.idEvento !== null
@@ -256,7 +244,6 @@ export default {
         var ojb = new Object();
         ojb.document = String(this.form.documento);
         ojb.cellphone = String(this.form.celular);
-        ojb.name = this.form.name;
         ojb.date_of_brith = this.form.fecha;
         ojb.email = this.form.email;
         ojb.idEvent = this.form.idEvento;
@@ -272,7 +259,6 @@ export default {
           this.$store.state.alert.text = "Entrada enviada a su correo";
           this.form.documento = "";
           this.form.celular = "";
-          this.form.name = "";
           this.form.fecha = "";
           this.form.email = "";
           //-------------------
@@ -300,7 +286,6 @@ export default {
         } else {
           this.form.documento = "";
           this.form.celular = "";
-          this.form.name = "";
           this.form.fecha = "";
           this.form.email = "";
           this.$store.state.alert.status = true;
