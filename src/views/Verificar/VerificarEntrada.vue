@@ -85,7 +85,11 @@
         alt="Logo"
         style="width: 300px"
       />
-      <a href="https://goo.gl/maps/ktsVaFUn8nJwWXLK9" target="_Blank"  class="text-sm xl:text-lg mb-8 xl:mb-16">
+      <a
+        href="https://goo.gl/maps/ktsVaFUn8nJwWXLK9"
+        target="_Blank"
+        class="text-sm xl:text-lg mb-8 xl:mb-16"
+      >
         Euphoria Club, Carretera Industrial - Encalada del Golf, Víctor Larco Herrera
       </a>
       <div class="flex items-center justify-center gap-4 xl:gap-6 mt-4">
@@ -137,6 +141,16 @@ export default {
         obj.promotor = null;
       }
       obj.pin = this.pin;
+
+      // Obtener la fecha y hora actual
+      var fechaHoraActual = new Date();
+      var fechaActual = fechaHoraActual.toISOString().slice(0, 10);
+      // const horaActual = fechaHoraActual.toISOString().slice(11, 19);
+
+      var horaActual = fechaHoraActual.toLocaleTimeString("es-PE", {
+        timeZone: "America/Lima",
+      });
+      obj.date_scanner = fechaActual + " " + horaActual;
       var result = await verifyService.verifyTicket(obj);
       if (result.success) {
         this.verify = 1;

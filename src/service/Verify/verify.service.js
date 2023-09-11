@@ -6,21 +6,14 @@ export const verifyService = {
         let response
         var url = "";
         if (data.promotor !== null) {
-            url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento + '/' + data.promotor;
+            url = 'https://promotoresback.azurewebsites.net/' + data.cliente + '/' + data.evento + '/' + data.promotor;
         } else {
-            url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento;
+            url = 'https://promotoresback.azurewebsites.net/' + data.cliente + '/' + data.evento;
         }
-        // Obtener la fecha y hora actual
-        var fechaHoraActual = new Date();
-        var fechaActual = fechaHoraActual.toISOString().slice(0, 10);
-        // const horaActual = fechaHoraActual.toISOString().slice(11, 19);
 
-        var horaActual = fechaHoraActual.toLocaleTimeString('es-PE', { timeZone: 'America/Lima' });
 
         response = axios
-            .post(url, {
-                'date_scanner': fechaActual + ' ' + horaActual
-            })
+            .post(url, data)
             .then(response => {
                 store.state.load.status = false;
                 store.state.nav.status = false
