@@ -6,9 +6,9 @@ export const verifyService = {
         let response
         var url = "";
         if (data.promotor !== null) {
-            url = 'https://promotoresback.azurewebsites.net/' + data.cliente + '/' + data.evento + '/' + data.promotor;
+            url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento + '/' + data.promotor;
         } else {
-            url = 'https://promotoresback.azurewebsites.net/' + data.cliente + '/' + data.evento;
+            url = 'https://promotoresback.azurewebsites.net/api/ticket-asist/' + data.cliente + '/' + data.evento;
         }
 
 
