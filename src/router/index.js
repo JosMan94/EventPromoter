@@ -55,6 +55,12 @@ const routes = [{
         component: () =>
             import ('../views/Verificar/VerificarRegaloPromotor.vue'),
     },
+    {
+        path: "/qrexpress/:hora/:numeroAleatorio",
+        name: "qrExpress",
+        component: () =>
+            import ('../views/Verificar/VerificarQrExpress.vue'),
+    },
     { path: "/:pathMatch(.*)*", redirect: "/" },
 ];
 
