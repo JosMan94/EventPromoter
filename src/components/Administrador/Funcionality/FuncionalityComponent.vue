@@ -1,11 +1,13 @@
 <template>
   <article class="xl:col-span-2 order-2 xl:order-1">
-    <h2 class="font-bold text-xl xl:text-3xl mb-4 text-text-blue xl:block">SMS MASIVO</h2>
+    <h2 class="font-bold text-xl xl:text-3xl mb-4 text-text-blue xl:block">
+      SMS MASIVO
+    </h2>
     <form class="grid xl:grid-cols-1 gap-6">
       <div>
-        <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
-          >Confirmar el envío de SMS: <span class="text-red-600"> ( * ) </span></label
-        >
+        <label for="document" class="block mb-2 text-text-blue font-bold text-sm">
+          Confirmar el envío de SMS: <span class="text-red-600"> ( * ) </span>
+        </label>
 
         <label class="switch">
           <input type="checkbox" v-model="form.status" />
@@ -14,9 +16,9 @@
       </div>
 
       <div>
-        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-          >Mensaje: <span class="text-red-600"> ( * ) </span></label
-        >
+        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm">
+          Mensaje: <span class="text-red-600"> ( * ) </span>
+        </label>
 
         <textarea
           type="text"
@@ -40,9 +42,9 @@
     </h2>
     <form class="grid xl:grid-cols-1 gap-6">
       <div>
-        <label for="document" class="block mb-2 text-text-blue font-bold text-sm"
-          >Confirmar el envío de EMAIL: <span class="text-red-600"> ( * ) </span></label
-        >
+        <label for="document" class="block mb-2 text-text-blue font-bold text-sm">
+          Confirmar el envío de EMAIL: <span class="text-red-600"> ( * ) </span>
+        </label>
 
         <label class="switch">
           <input type="checkbox" v-model="formEmail.status" />
@@ -51,9 +53,9 @@
       </div>
 
       <div>
-        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm"
-          >Mensaje: <span class="text-red-600"> ( * ) </span></label
-        >
+        <label for="nombres" class="block mb-2 text-text-blue font-bold text-sm">
+          Mensaje: <span class="text-red-600"> ( * ) </span>
+        </label>
 
         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
       </div>
@@ -84,12 +86,47 @@
         {{ eventos.name }}
       </button>
     </div>
+
+    <!-- Nueva Sección para Carga de Archivos -->
+    <h2 class="font-bold text-xl xl:text-3xl mb-4 mt-4 text-text-blue xl:block">
+      CARGAR ARCHIVO CSV/EXCEL
+    </h2>
+    <form @submit.prevent="uploadFile" class="grid xl:grid-cols-1 gap-6">
+      <div>
+        <label for="file" class="block mb-2 text-text-blue font-bold text-sm">
+          Seleccione un archivo: <span class="text-red-600"> ( * ) </span>
+        </label>
+        <input
+          type="file"
+          @change="onFileChange"
+          accept=".csv, .xls, .xlsx"
+          class="w-full py-2 px-3 bg-gray-100 rounded-2xl text-black focus:outline-none"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        :disabled="!selectedFile || uploading"
+        class="block mt-5 bg-main-green text-base font-bold text-white rounded-2xl p-5 text-center"
+      >
+        {{ uploading ? 'Cargando...' : 'Subir Archivo' }}
+      </button>
+    </form>
+    <div v-if="successMessage" class="text-green-500 font-semibold mt-2">
+      {{ successMessage }}
+    </div>
+    <div v-if="errorMessage" class="text-red-500 font-semibold mt-2">
+      {{ errorMessage }}
+    </div>
   </article>
 </template>
+
 <script>
 import { funcionalityService } from "../../../service/Funcionality/funcionality.service";
 import { clientService } from "../../../service/Cliente/cliente.service";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import axios from 'axios'; // Importa Axios
+
 export default {
   data() {
     return {
@@ -107,8 +144,13 @@ export default {
       editorConfig: {
         // The configuration of the editor.
       },
-      //tickets
+      // tickets
       events: [],
+      // Archivo
+      selectedFile: null,  // Nuevo campo para almacenar el archivo seleccionado
+      uploading: false,    // Estado de carga
+      successMessage: '',  // Mensaje de éxito
+      errorMessage: '',    // Mensaje de error
     };
   },
   mounted() {
@@ -175,7 +217,7 @@ export default {
         if (result.success) {
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "success";
-          this.$store.state.alert.text = "Email masivo enviado";
+          this.$store.state.alert.text = "EMAIL masivo enviado";
           this.formEmail.status = false;
           this.editorData = "";
         } else {
@@ -183,7 +225,7 @@ export default {
           this.editorData = "";
           this.$store.state.alert.status = true;
           this.$store.state.alert.type = "error";
-          this.$store.state.alert.text = "Error al enviar los email";
+          this.$store.state.alert.text = "Error al enviar los EMAILS";
         }
       } else {
         this.$store.state.alert.status = true;
@@ -192,11 +234,41 @@ export default {
           "Recuerde confirmar el envío y el mensaje debe contener más de 10 caractéres";
       }
     },
+    // Nuevo método para manejar el cambio de archivo
+    onFileChange(event) {
+      this.selectedFile = event.target.files[0];
+    },
+    // Nuevo método para cargar el archivo al backend
+    async uploadFile() {
+      if (!this.selectedFile) {
+        this.errorMessage = 'Seleccione un archivo primero';
+        return;
+      }
+      this.uploading = true;
+      this.successMessage = '';
+      this.errorMessage = '';
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+      
+      try {
+        const response = await axios.post('https://promotoresback.azurewebsites.net/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        this.successMessage = 'Archivo subido con éxito';
+        this.selectedFile = null;  // Limpiar el archivo seleccionado
+      } catch (error) {
+        this.errorMessage = 'Error al subir el archivo';
+      } finally {
+        this.uploading = false;
+      }
+    }
   },
 };
 </script>
-<style>
-/* The switch - the box around the slider */
+
+<style scoped>
 .switch {
   position: relative;
   display: inline-block;
@@ -204,14 +276,12 @@ export default {
   height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -220,8 +290,8 @@ export default {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
+  border-radius: 34px;
 }
 
 .slider:before {
@@ -232,30 +302,15 @@ export default {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  background-color: #4caf50;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
 }
 </style>
