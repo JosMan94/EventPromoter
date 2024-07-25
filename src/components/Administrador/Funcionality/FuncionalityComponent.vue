@@ -118,6 +118,15 @@
     <div v-if="errorMessage" class="text-red-500 font-semibold mt-2">
       {{ errorMessage }}
     </div>
+    <!-- Botón de Descarga -->
+    <div>
+    <!-- Botón de Descarga Simple -->
+    <a :href="excelUrl" download="archivo_muestra.xlsx">
+      <button class="download-button">
+        Descargar Archivo Excel de Muestra
+      </button>
+    </a>
+  </div>
   </article>
 </template>
 
@@ -130,6 +139,7 @@ import axios from 'axios'; // Importa Axios
 export default {
   data() {
     return {
+      excelUrl: '/archivo_muestra.xlsx',
       // SMS
       form: {
         status: false,
@@ -312,5 +322,20 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+.download-button {
+  background-color: #4CAF50; /* Color de fondo del botón */
+  color: white;             /* Color del texto */
+  padding: 10px 20px;       /* Espaciado interno del botón */
+  margin: 20px;             /* Espaciado externo */
+  border: none;             /* Sin borde */
+  border-radius: 5px;       /* Bordes redondeados */
+  cursor: pointer;          /* Cursor en forma de mano */
+  font-size: 16px;          /* Tamaño del texto */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.download-button:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
 </style>
