@@ -21,7 +21,7 @@
         </div>
 
         <h2 class="font-bold text-xl xl:text-3xl mb-10 text-text-blue">
-          Regístrate y gana tu entrada
+          {{ codeEvent == "cQw5E" ? 'Regístrate y participa del sorteo' : 'Regístrate y gana tu entrada' }}
         </h2>
         <form class="grid xl:grid-cols-2 gap-6">
           <div>
@@ -90,7 +90,8 @@
   <span v-if="viewStatus">
     <section class="u-container">
       <h2 class="font-bold text-xl xl:text-3xl mb-5 xl:mb-10 text-text-blue">
-        Ticket emitido
+        
+        {{ codeEvent == "cQw5E" ? 'Felicitaciones! Te regístrate en el sorteo :D' : 'Ticket emitido' }}
         <a
           href="javascript:window.print()"
           class="bg-main-green text-white p-2 rounded-full text-lg cursor-pointer"
