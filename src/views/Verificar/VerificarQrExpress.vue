@@ -1,4 +1,3 @@
-<!-- Archivo: src/views/Verificar/VerificarQrExpress.vue -->
 <template>
   <div class="verificar-qr-express">
     <header class="bg-black text-white">
@@ -12,10 +11,10 @@
         </a>
       </div>
     </header>
-    <div class="content">
+    <div class="content flex flex-col items-center justify-center">
       <qrcode-vue :value="qrValue" :size="200"></qrcode-vue>
-      <div class="info">
-        <p><strong>{{ hora }} - {{ numeroAleatorio }}</strong></p>
+      <div class="info bg-black text-white p-4 mt-4 rounded-md">
+        <p class="text-center"><strong>{{ hora }} - {{ numeroAleatorio }}</strong></p>
       </div>
     </div>
   </div>
@@ -72,14 +71,25 @@ export default {
 
 .content {
   position: relative;
-  z-index: 1; /* Asegura que el contenido esté encima del fondo */
+  z-index: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* Espaciado entre el QR y el texto */
+  text-align: center;
+  padding: 1rem; /* Asegura que el contenido esté encima del fondo */
 }
 
 .info {
-  margin-top: 20px;
   font-size: 1.5rem; /* Ajusta este valor para cambiar el tamaño de la fuente */
   font-weight: bold; /* Hace que el texto sea más visible */
+  color: white;
+  background-color: black; /* Asegura el fondo negro */
+  max-width: 300px;
+  padding: 1rem;
+  border-radius: 0.5rem; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
   text-align: center;
-  color:white;
 }
 </style>
