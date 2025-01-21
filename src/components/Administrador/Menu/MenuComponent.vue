@@ -205,7 +205,7 @@
     >
       <div>
         <button type="button" class="block w-full mb-10 pl-12 pr-40">
-          <img src="../../../assets/images/LOGO.png" alt="LOGO" class="mx-auto" />
+          <img src="../../../assets/images/logojangueo.png" alt="LOGO" class="mx-auto" />
         </button>
         <button
           @click.prevent="changeView('clientes')"

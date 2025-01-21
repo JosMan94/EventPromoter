@@ -12,7 +12,7 @@
       </button>
       <router-link :to="{ name: 'Home' }">
         <img
-          src="../../../../assets/images/LOGO.png"
+          src="../../../../assets/images/logojangueo.png"
           alt="Logo"
           class="block w-auto xl:h-auto mx-auto"
           style="width: 300px"
@@ -59,11 +59,11 @@
         </ul>
       </nav>
       <div class="hidden xl:flex gap-6">
-        <a href="https://www.facebook.com/euphoriaclubpe/" target="_Blank">
+        <a href="https://www.facebook.com/profile.php?id=61571628734374" target="_Blank">
           <img src="../../../../assets/images/fb.png" alt="Facebook" />
         </a>
 
-        <a href="https://www.instagram.com/euphoriaclubpe/" target="_Blank">
+        <a href="https://www.instagram.com/jangueo.trx/" target="_Blank">
           <img src="../../../../assets/images/ig.png" alt="instagram" />
         </a>
       </div>
@@ -75,7 +75,7 @@
     class="fixed top-0 bottom-0 left-0 right-0 py-14 bg-main-blue-black min-h-screen transition-transform z-10"
   >
     <button type="button" class="block w-full mb-10 pl-12 pr-40">
-      <img src="../../../../assets/images/LOGO.png" alt="LOGO" class="mx-auto" />
+      <img src="../../../../assets/images/logojangueo.png" alt="LOGO" class="mx-auto" />
     </button>
     <!-- <button
       href="#eventos"

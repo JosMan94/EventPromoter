@@ -4,7 +4,7 @@
       <div class="u-container py-5 flex items-center justify-center relative">
         <a href="#">
           <img
-            src="../../assets/images/LOGO.png"
+            src="../../assets/images/logojangueo.png"
             alt="Logo"
             class="block h-12 w-auto xl:h-auto mx-auto"
           />

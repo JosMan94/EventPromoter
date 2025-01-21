@@ -8,7 +8,7 @@
       </button>
       <a href="#">
         <img
-          src="../../../assets/images/LOGO.png"
+          src="../../../assets/images/logojangueo.png"
           alt="Logo"
           class="block h-6 w-auto xl:h-auto mx-auto"
         />
