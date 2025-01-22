@@ -1,20 +1,21 @@
 <template>
   <div class="verificar-qr-express">
-    <header class="bg-black text-white">
+    <header class=" text-white">
       <div class="u-container py-5 flex items-center justify-center relative">
         <a href="#">
           <img
-            src="../../assets/images/logojangueo.png"
+            src="../../assets/images/qrExpresslogo.png"
             alt="Logo"
-            class="block h-12 w-auto xl:h-auto mx-auto"
+            class="block w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 h-auto mx-auto"
           />
         </a>
       </div>
     </header>
-    <div class="content flex flex-col items-center justify-center">
-      <qrcode-vue :value="qrValue" :size="200"></qrcode-vue>
-      <div class="info bg-black text-white p-4 mt-4 rounded-md">
-        <p class="text-center"><strong>{{ hora }} - {{ numeroAleatorio }}</strong></p>
+    
+    <div class="content flex flex-col items-center justify-center px-4">
+      <qrcode-vue :value="qrValue" :size="qrSize"></qrcode-vue>
+      <div class="info  text-white p-4 mt-4 rounded-md max-w-xs md:max-w-sm">
+        <p class="text-center text-lg md:text-xl"><strong>{{ hora }} - {{ numeroAleatorio }}</strong></p>
       </div>
     </div>
   </div>
@@ -31,12 +32,26 @@ export default {
   data() {
     return {
       hora: this.$route.params.hora,
-      numeroAleatorio: this.$route.params.numeroAleatorio
+      numeroAleatorio: this.$route.params.numeroAleatorio,
+      qrSize: 200 // Tamaño inicial del QR
     };
   },
   computed: {
     qrValue() {
       return `${window.location.origin}/qrexpress/${this.hora}/${this.numeroAleatorio}`;
+    }
+  },
+  mounted() {
+    this.updateQrSize();
+    window.addEventListener('resize', this.updateQrSize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.updateQrSize);
+  },
+  methods: {
+    updateQrSize() {
+      const screenWidth = window.innerWidth;
+      this.qrSize = screenWidth < 400 ? 150 : screenWidth < 768 ? 180 : 200;
     }
   }
 };
@@ -52,6 +67,7 @@ export default {
   height: 100vh;
   text-align: center;
   overflow: hidden;
+  padding: 1rem; /* Asegura que no se pegue a los bordes en móviles */
 }
 
 .verificar-qr-express::before {
@@ -61,35 +77,33 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../../assets/images/mosaicoEuphoria.png');
+  background-image: url('../../assets/images/fondoQr.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.5; /* Ajusta este valor para cambiar la transparencia */
-  z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+  opacity: 0.5;
+  z-index: -1;
 }
 
 .content {
   position: relative;
-  z-index: 1; 
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem; /* Espaciado entre el QR y el texto */
+  gap: 1rem;
   text-align: center;
-  padding: 1rem; /* Asegura que el contenido esté encima del fondo */
+  padding: 1rem;
 }
 
 .info {
-  font-size: 1.5rem; /* Ajusta este valor para cambiar el tamaño de la fuente */
-  font-weight: bold; /* Hace que el texto sea más visible */
+  font-size: 1.25rem;
+  font-weight: bold;
   color: white;
-  background-color: black; /* Asegura el fondo negro */
-  max-width: 300px;
   padding: 1rem;
-  border-radius: 0.5rem; /* Bordes redondeados */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para resaltar */
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 </style>

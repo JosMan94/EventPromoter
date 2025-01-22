@@ -9,7 +9,7 @@
       />
 
       <a href="https://goo.gl/maps/ktsVaFUn8nJwWXLK9" target="_Blank"  class="text-sm xl:text-lg mb-8 xl:mb-16">
-        Euphoria Club, Carretera Industrial - Encalada del Golf, Víctor Larco Herrera
+        JANGUEP Club, Carretera Industrial - Encalada del Golf, Víctor Larco Herrera
       </a>
       <div class="flex items-center justify-center gap-4 xl:gap-6 mt-4">
         <a href="https://www.facebook.com/profile.php?id=61571628734374" target="_Blank">
